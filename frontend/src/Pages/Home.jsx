@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import CategoryCard from "../components/CategoryCard"
+import CategoryCard from "../Components/CategoryCard"
 import {
   FaPhoneAlt,
   FaEnvelope,

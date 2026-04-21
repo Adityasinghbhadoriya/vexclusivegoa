@@ -18,9 +18,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/restaurants" element={<Restaurant />} />
         <Route path="/clubs" element={<Clubs />} />
-        <Route path="/experiences" element={<Experiences />} />
-        <Route path="/shopping" element={<Shopping />} />
-        <Route path="/view-all" element={<ViewAll />} />
         <Route path="/restaurant/:id" element={<RestaurantDetails />} />
         <Route path="/club/:id" element={<ClubsDetails />} />
         <Route path="/admin" element={<Admin />} />
