@@ -171,9 +171,9 @@ const trending = [
 
 const experiences = [
   { label: "Sunset Cruise", icon: "🛥️", color: "#fff7ed" },
-  { label: "Beach Party",   icon: "🎉", color: "#fef9c3" },
-  { label: "Water Sports",  icon: "🏄", color: "#ecfdf5" },
-  { label: "Casino Night",  icon: "🎰", color: "#fdf4ff" },
+  { label: "Beach Party", icon: "🎉", color: "#fef9c3" },
+  { label: "Water Sports", icon: "🏄", color: "#ecfdf5" },
+  { label: "Casino Night", icon: "🎰", color: "#fdf4ff" },
 ]
 
 const WaveDivider = ({ flip = false, fill = "#ffffff" }) => (
@@ -305,9 +305,9 @@ const Home = () => {
 
         <div className="space-y-4">
           {[
-            { name: "Da Luna",  sub: "Italian vibes + perfect sunset dining", emoji: "🌙" },
-            { name: "Thalassa", sub: "Greek food + nightlife experience",      emoji: "🏛️" },
-            { name: "Elephant Beach Cafe & Bar", sub: "Peaceful vibes + Fresh Food",      emoji: "🏛️" },
+            { name: "Da Luna", sub: "Italian vibes + perfect sunset dining", emoji: "🌙" },
+            { name: "Thalassa", sub: "Greek food + nightlife experience", emoji: "🏛️" },
+            { name: "Elephant Beach Cafe & Bar", sub: "Peaceful vibes + Fresh Food", emoji: "🏛️" },
           ].map((v, i) => (
             <div
               key={i}
@@ -413,59 +413,76 @@ const Home = () => {
       </div>
 
       {/* ===== FOOTER ===== */}
-      <div style={{
-        background: "#fbbf24",
-        borderTop: "1px solid rgba(0,0,0,.06)",
-        padding: "40px 24px",
-        textAlign: "center",
-      }}>
-        <h1 className="vex-font-display" style={{ fontSize: "1.4rem", fontWeight: 700 }}>
-          VExclusive Goa
-        </h1>
-        <p style={{ fontSize: 13, color: "#374151", marginTop: 4 }}>Your personal Goa guide</p>
-
-        <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 10, alignItems: "center" }}>
-          {[
-            { icon: <FaPhoneAlt />, text: "+91 91583 06507" },
-            { icon: <FaEnvelope />, text: "vkyrental@gmail.com" },
-            { icon: <FaMapMarkerAlt />, text: "Panaji, Goa" },
-          ].map((item, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#374151" }}>
-              <span style={{ opacity: .7 }}>{item.icon}</span>
-              {item.text}
-            </div>
-          ))}
-        </div>
-
-        <div style={{ marginTop: 28, display: "flex", justifyContent: "center", gap: 12 }}>
-          {[
-            { icon: <FaLinkedin />,   label: "LinkedIn" },
-            { icon: <FaInstagram />,  label: "Instagram" },
-            { icon: <FaFacebookF />,  label: "Facebook" },
-            { icon: <FaXTwitter />,   label: "X / Twitter" },
-          ].map((s, i) => (
+      <div style={{ marginTop: 28, display: "flex", justifyContent: "center", gap: 12 }}>
+        {[
+          {
+            icon: <FaLinkedin />,
+            label: "LinkedIn",
+            link: null,
+          },
+          {
+            icon: <FaInstagram />,
+            label: "Instagram",
+            link: "https://www.instagram.com/vexclusivegoa/",
+          },
+          {
+            icon: <FaFacebookF />,
+            label: "Facebook",
+            link: "https://www.facebook.com/V.Exclusive/",
+          },
+          {
+            icon: <FaXTwitter />,
+            label: "X / Twitter",
+            link: null,
+          },
+        ].map((s, i) =>
+          s.link ? (
+            <a
+              key={i}
+              href={s.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              className="vex-social-btn"
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 10,
+                background: "rgba(0,0,0,.07)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 16,
+                color: "#000",
+                textDecoration: "none",
+              }}
+            >
+              {s.icon}
+            </a>
+          ) : (
             <button
               key={i}
               aria-label={s.label}
               className="vex-social-btn"
               style={{
-                width: 40, height: 40, borderRadius: 10,
+                width: 40,
+                height: 40,
+                borderRadius: 10,
                 background: "rgba(0,0,0,.07)",
-                border: "none", cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 16, color: "#000",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 16,
+                color: "#000",
               }}
             >
               {s.icon}
             </button>
-          ))}
-        </div>
-
-        <p style={{ fontSize: 11, color: "rgba(0,0,0,.4)", marginTop: 28, letterSpacing: ".04em" }}>
-          © 2026 VExclusive Goa
-        </p>
+          )
+        )}
       </div>
-
     </div>
   )
 }
