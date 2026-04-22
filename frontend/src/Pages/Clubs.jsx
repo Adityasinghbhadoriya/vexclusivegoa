@@ -60,7 +60,7 @@ const Clubs = () => {
                     </div>
 
                     {/* Buttons */}
-                    <div className="grid grid-cols-3 border-t text-[#1f2937] bg-white/60">
+                    <div className="grid grid-cols-2 border-t text-[#1f2937] bg-white/60">
 
                         <button className="flex flex-col items-center py-3 text-sm bg-white text-black hover:bg-pink-50 transition">
                             <FaDirections className="mb-1" />
@@ -71,12 +71,6 @@ const Clubs = () => {
                             <FaPhoneAlt className="mb-1" />
                             Call Now
                         </button>
-
-                        <button className="flex flex-col items-center py-3 text-sm bg-white text-black hover:bg-pink-50 transition">
-                            <FaGlassCheers className="mb-1" />
-                            Book Entry
-                        </button>
-
                     </div>
                 </div>
             </div>
@@ -117,14 +111,6 @@ const Clubs = () => {
                 ))}
 
             </div>
-
-            {/* CTA */}
-            <div className="mt-6 text-center">
-                <button className="bg-white text-black px-6 py-2 rounded-lg font-semibold shadow-md hover:scale-105 transition border border-white/50">
-                    See More →
-                </button>
-            </div>
-
         </div>
     )
 }

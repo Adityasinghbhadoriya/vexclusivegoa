@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
 import CategoryCard from "../Components/CategoryCard"
 import {
   FaPhoneAlt,
@@ -10,6 +11,10 @@ import {
   FaFacebookF,
 } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
+import dalunaImage from "../assets/DaLunaRes.webp"
+import dalunaOffer1 from "../assets/da-luna-offer1.webp"
+import dalunaOffer2 from "../assets/da-luna-offer3.webp"
+import dalunaOffer3 from "../assets/DaLunaOffers.jpeg"
 
 /* ─── Google Fonts injected once ─────────────────────────────────── */
 if (!document.getElementById("vex-fonts")) {
@@ -189,6 +194,25 @@ const WaveDivider = ({ flip = false, fill = "#ffffff" }) => (
 )
 
 const Home = () => {
+
+  const offerImages = [dalunaOffer1, dalunaOffer2, dalunaOffer3]
+
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true)
+
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % offerImages.length)
+        setIsAnimating(false)
+      }, 800) // slide duration
+    }, 3000) // total cycle
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <div className="vex-font-body w-full overflow-x-hidden bg-yellow-300 text-black">
       <style>{globalStyle}</style>
@@ -196,8 +220,8 @@ const Home = () => {
       {/* ===== HERO ===== */}
       <div className="relative w-full min-h-screen rounded-b-4xl overflow-hidden">
         <img
-          className="absolute inset-0 w-full h-full object-cover"
-          src="https://www.resortdecoracao.com/images/blog/ee41530da08320a16a8846624f8339f5.jpg"
+          className="absolute inset-0 w-60 h-full object-cover"
+          src={dalunaImage}
           alt="Goa"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90" />
@@ -254,6 +278,72 @@ const Home = () => {
 
           <div className="vex-scroll-hint mt-10" style={{ color: "rgba(255,255,255,.4)", fontSize: 22 }}>↓</div>
         </div>
+      </div>
+
+      {/* ===== OFFERS SLIDER ===== */}
+      <div style={{ background: "#fff7ed" }}>
+        <WaveDivider fill="#fff7ed" />
+
+        <div className="px-5 py-8">
+          <h2 className="vex-section-title mb-6">
+            Exclusive Offers at Da Luna 🌙
+          </h2>
+
+          <div
+            className="relative overflow-hidden rounded-2xl"
+            style={{
+              height: "220px",
+              border: "1px solid rgba(251,191,36,.4)",
+              boxShadow: "0 6px 20px rgba(0,0,0,.08)",
+            }}
+          >
+            <div
+              className="flex h-full"
+              style={{
+                transform: `translateX(-${currentSlide * 100}%)`,
+                transition: isAnimating ? "transform 0.8s ease-in-out" : "none",
+              }}
+            >
+              {offerImages.map((img, index) => (
+                <div key={index} className="min-w-full h-full relative">
+                  <img
+                    src={img}
+                    alt={`offer-${index}`}
+                    className="w-full h-full object-cover"
+                  />
+
+                  {/* Overlay for premium look */}
+                  <div className="absolute inset-0 bg-black/20" />
+
+                  {/* Optional text overlay */}
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <p className="text-sm font-medium">
+                      Special Offer #{index + 1}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dots indicator */}
+          <div className="flex justify-center gap-2 mt-4">
+            {offerImages.map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: currentSlide === i ? 18 : 8,
+                  height: 8,
+                  borderRadius: 999,
+                  background: currentSlide === i ? "#f97316" : "#fde68a",
+                  transition: "all .3s ease",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <WaveDivider fill="#fefce8" flip />
       </div>
 
       {/* ===== TRENDING ===== */}

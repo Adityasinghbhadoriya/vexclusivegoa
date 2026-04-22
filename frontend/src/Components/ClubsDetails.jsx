@@ -13,11 +13,30 @@ const ClubsDetails = () => {
   const navigate = useNavigate()
   const { id } = useParams()
 
-  // Find selected club
   const club = clubs.find((c) => c.id === Number(id))
 
   if (!club) {
     return <div className="p-4">Club not found</div>
+  }
+
+  // 🔥 Handlers
+  const handleDirections = () => {
+    window.open(club.googleLink, "_blank")
+  }
+
+  const handleCall = () => {
+    window.open(`tel:${club.phone}`)
+  }
+
+  const handleInstagram = () => {
+    if (club.instagram) {
+      window.open(club.instagram, "_blank")
+    }
+  }
+
+  const handleBooking = () => {
+    // You can replace this with your booking page route later
+    alert("Booking feature coming soon 🚀")
   }
 
   return (
@@ -50,7 +69,6 @@ const ClubsDetails = () => {
 
         {/* Offer */}
         <div className="bg-white/70 backdrop-blur-md border border-white/50 rounded-xl p-5 text-center shadow-md">
-
           <p className="text-[#1f2937] font-medium text-sm">
             Show this screen & Get
           </p>
@@ -62,28 +80,39 @@ const ClubsDetails = () => {
           <p className="text-sm text-gray-600 mt-1">
             on your entry / table booking
           </p>
-
         </div>
 
         {/* Buttons */}
         <div className="space-y-3">
 
-          <button className="w-full flex items-center gap-3 bg-white text-black px-4 py-3 rounded-xl shadow-sm hover:bg-pink-50 transition">
+          <button
+            onClick={handleDirections}
+            className="w-full flex items-center gap-3 bg-white text-black px-4 py-3 rounded-xl shadow-sm hover:bg-pink-50 transition"
+          >
             <FaDirections />
             Get Directions
           </button>
 
-          <button className="w-full flex items-center gap-3 bg-white text-black px-4 py-3 rounded-xl shadow-sm hover:bg-pink-50 transition">
+          <button
+            onClick={handleCall}
+            className="w-full flex items-center gap-3 bg-white text-black px-4 py-3 rounded-xl shadow-sm hover:bg-pink-50 transition"
+          >
             <FaPhoneAlt />
             Call Now
           </button>
 
-          <button className="w-full flex items-center gap-3 bg-white text-black px-4 py-3 rounded-xl shadow-sm hover:bg-pink-50 transition">
+          <button
+            onClick={handleInstagram}
+            className="w-full flex items-center gap-3 bg-white text-black px-4 py-3 rounded-xl shadow-sm hover:bg-pink-50 transition"
+          >
             <FaInstagram />
             Follow on Instagram
           </button>
 
-          <button className="w-full flex items-center gap-3 bg-white text-black px-4 py-3 rounded-xl shadow-sm hover:bg-pink-50 transition">
+          <button
+            onClick={handleBooking}
+            className="w-full flex items-center gap-3 bg-white text-black px-4 py-3 rounded-xl shadow-sm hover:bg-pink-50 transition"
+          >
             <FaGlassCheers />
             Book Entry
           </button>
@@ -92,7 +121,10 @@ const ClubsDetails = () => {
 
         {/* CTA */}
         <div className="pt-2 flex justify-center">
-          <button className="bg-white text-black px-6 py-3 rounded-lg font-semibold shadow-md hover:scale-105 transition">
+          <button
+            onClick={handleBooking}
+            className="bg-white text-black px-6 py-3 rounded-lg font-semibold shadow-md hover:scale-105 transition"
+          >
             Reserve Now →
           </button>
         </div>
