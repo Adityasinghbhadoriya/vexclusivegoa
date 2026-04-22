@@ -1,12 +1,12 @@
 const BASE_URL = "https://vexclusivegoa.onrender.com"
 
-export const trackQRScan = async () => {
-  await fetch(`${BASE_URL}/api/analytics/scan`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ source: "daluna_qr" })
-  })
-}
+// export const trackQRScan = async () => {
+//   await fetch(`${BASE_URL}/api/analytics/scan`, {
+//     method: "GET",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ source: "daluna_qr" })
+//   })
+// }
 
 export const trackRestaurantClick = async (id) => {
   try {

@@ -6,7 +6,7 @@ export const trackQRScan = async (req, res) => {
 
         await db.collection("qr_scans").insertOne({
             scannedAt: new Date(),
-            source: "daluna_qr"
+            source: req.query.source || "qr"
         })
 
         res.redirect("https://www.vexclusivegoa.online/")
