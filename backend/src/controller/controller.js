@@ -9,7 +9,7 @@ export const trackQRScan = async (req, res) => {
             source: "daluna_qr"
         })
 
-        res.redirect("http://localhost:5173/")
+        res.redirect("https://www.vexclusivegoa.online/")
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
