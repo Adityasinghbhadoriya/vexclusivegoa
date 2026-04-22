@@ -18,7 +18,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/analytics/admin")
+        const res = await fetch("https://vexclusivegoa.onrender.com/api/analytics/admin")
         const result = await res.json()
         setData(result)
       } catch (err) {
