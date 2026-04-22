@@ -7,7 +7,7 @@ import {
 
 const router = express.Router()
 
-router.get("/scan", trackQRScan)
+router.post("/scan", trackQRScan)
 router.post("/restaurant-click", trackRestaurantClick)
 router.get("/admin", getAnalytics)
 
