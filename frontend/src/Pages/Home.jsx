@@ -307,6 +307,7 @@ const Home = () => {
           {[
             { name: "Da Luna",  sub: "Italian vibes + perfect sunset dining", emoji: "🌙" },
             { name: "Thalassa", sub: "Greek food + nightlife experience",      emoji: "🏛️" },
+            { name: "Elephant Beach Cafe & Bar", sub: "Peaceful vibes + Fresh Food",      emoji: "🏛️" },
           ].map((v, i) => (
             <div
               key={i}
