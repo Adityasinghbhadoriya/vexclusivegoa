@@ -48,12 +48,13 @@ const globalStyle = `
   .vex-font-body    { font-family: 'DM Sans', sans-serif; }
 
   .vex-hero-title {
-    background: linear-gradient(90deg, #fbbf24 0%, #f97316 40%, #fbbf24 80%, #f97316 100%);
-    background-size: 200% auto;
+    background: linear-gradient(90deg, #ffffff 0%, #f7ead1 30%, #fffefc 70%, #f8e9d1 100%);
+    background-size: 220% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: shimmer 3s linear infinite;
+    text-shadow: 0 0 18px rgba(255,255,255,.55), 0 0 28px rgba(255,245,220,.18);
+    animation: shimmer 3.2s linear infinite;
   }
 
   .vex-fade-up {
@@ -143,34 +144,32 @@ const categories = [
 
 const trending = [
   {
-    name: "Baga Beach",
-    desc: "Perfect for nightlife & beach vibes",
-    tag: "🔥 Hot",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-k5mcIV18-jsdTvrucV7H1Fp0DDMd9III6A&s",
+    name: "Parra Road",
+    desc: "Scenic coconut-lined road for peaceful drives",
+    tag: "🌴 Scenic",
+    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+    path: "/parra-road",
   },
   {
-    name: "Calangute Beach",
-    desc: "The queen of beaches, always lively",
-    tag: "⭐ Popular",
-    img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944",
+    name: "Hilltop Market",
+    desc: "Night market with music, shopping & party vibes",
+    tag: "🎶 Vibrant",
+    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5",
+    path: "/hilltop-market",
   },
   {
-    name: "Anjuna Flea Market",
-    desc: "Shopping, food & hippie culture",
-    tag: "🛍 Must-do",
-    img: "https://c8.alamy.com/comp/EAN7TJ/anjuna-flea-market-anjuna-goa-india-EAN7TJ.jpg",
+    name: "Chapora Lane",
+    desc: "Quiet village lanes with cafés & local charm",
+    tag: "🏘️ Peaceful",
+    img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96",
+    path: "/chapora-lane",
   },
   {
-    name: "Fort Aguada",
-    desc: "Sunset views & Portuguese history",
-    tag: "📸 Scenic",
-    img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
-  },
-  {
-    name: "Vagator Beach",
-    desc: "Cliffs + sunsets + peaceful vibe",
-    tag: "🌅 Sunset",
-    img: "https://images.unsplash.com/photo-1627894483216-2138af692e32",
+    name: "Mandrem Beach",
+    desc: "Calm beach for relaxation & yoga sessions",
+    tag: "🏖️ Serene",
+    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    path: "/mandrem-beach",
   },
 ]
 
@@ -214,69 +213,73 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="vex-font-body w-full overflow-x-hidden bg-yellow-300 text-black">
+    <div className="vex-font-body w-full overflow-x-hidden bg-white text-black">
       <style>{globalStyle}</style>
 
       {/* ===== HERO ===== */}
-      <div className="relative w-full min-h-screen rounded-b-4xl overflow-hidden">
+      <div className="relative w-full h-[700px] rounded-b-4xl overflow-hidden">
         <img
-          className="absolute inset-0 w-60 h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
           src={dalunaImage}
           alt="Goa"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90" />
 
-        <div className="relative z-10 flex flex-col justify-center min-h-screen px-6 py-12 text-center">
+        <div className="relative z-10 flex h-full flex-col justify-between px-6 py-12 text-center">
 
-          <div className="vex-fade-up" style={{ animationDelay: ".1s" }}>
-            <span style={{
-              display: "inline-block",
-              border: "1px solid rgba(251,191,36,.5)",
-              borderRadius: 999,
-              padding: "4px 16px",
-              fontSize: 11,
-              letterSpacing: ".12em",
-              textTransform: "uppercase",
-              color: "#fbbf24",
-              marginBottom: 16,
-            }}>
-              Goa's #1 Discovery Platform
-            </span>
+          <div className="space-y-6">
+            <div className="vex-fade-up" style={{ animationDelay: ".1s" }}>
+              <span style={{
+                display: "inline-block",
+                border: "1px solid rgba(251,191,36,.5)",
+                borderRadius: 999,
+                padding: "4px 16px",
+                fontSize: 11,
+                letterSpacing: ".12em",
+                textTransform: "uppercase",
+                color: "#fbbf24",
+                marginBottom: 16,
+              }}>
+                Goa's #1 Discovery Platform
+              </span>
+            </div>
+
+            <h1
+              className="vex-font-display vex-hero-title vex-fade-up"
+              style={{ fontSize: "clamp(2.4rem, 12vw, 4rem)", animationDelay: ".25s" }}
+            >
+              V Exclusive Goa
+            </h1>
           </div>
 
-          <h1
-            className="vex-font-display vex-hero-title vex-fade-up"
-            style={{ fontSize: "clamp(2.4rem, 12vw, 4rem)", animationDelay: ".25s" }}
-          >
-            V Exclusive
-          </h1>
+          <div className="space-y-6">
+            <h2
+              className="vex-fade-up text-white"
+              style={{ marginTop: 12, fontSize: "1.2rem", fontWeight: 500, animationDelay: ".4s" }}
+            >
+              Discover Goa Like Never Before
+            </h2>
 
-          <h2
-            className="vex-fade-up text-white"
-            style={{ marginTop: 12, fontSize: "1.2rem", fontWeight: 500, animationDelay: ".4s" }}
-          >
-            Discover Goa Like Never Before
-          </h2>
+            <p
+              className="vex-fade-up"
+              style={{ marginTop: 8, fontSize: 13, color: "#d1d5db", letterSpacing: ".08em", textTransform: "uppercase", animationDelay: ".55s" }}
+            >
+              Restaurants · Nightlife · Experiences
+            </p>
 
-          <p
-            className="vex-fade-up"
-            style={{ marginTop: 8, fontSize: 13, color: "#d1d5db", letterSpacing: ".08em", textTransform: "uppercase", animationDelay: ".55s" }}
-          >
-            Restaurants · Nightlife · Experiences
-          </p>
+            <div
+              className="vex-fade-up mt-10 grid grid-cols-2 gap-4"
+              style={{ animationDelay: ".7s" }}
+            >
+              {categories.map((cat) => (
+                <Link key={cat.title} to={cat.path}>
+                  <CategoryCard title={cat.title} />
+                </Link>
+              ))}
+            </div>
 
-          <div
-            className="vex-fade-up mt-10 grid grid-cols-2 gap-4"
-            style={{ animationDelay: ".7s" }}
-          >
-            {categories.map((cat) => (
-              <Link key={cat.title} to={cat.path}>
-                <CategoryCard title={cat.title} />
-              </Link>
-            ))}
+            <div className="vex-scroll-hint mt-10" style={{ color: "rgba(255,255,255,.4)", fontSize: 22 }}>↓</div>
           </div>
-
-          <div className="vex-scroll-hint mt-10" style={{ color: "rgba(255,255,255,.4)", fontSize: 22 }}>↓</div>
         </div>
       </div>
 
@@ -286,7 +289,7 @@ const Home = () => {
 
         <div className="px-5 py-8">
           <h2 className="vex-section-title mb-6">
-            Exclusive Offers at Da Luna 🌙
+            Exclusive Offers at Da Luna 
           </h2>
 
           <div
@@ -311,16 +314,6 @@ const Home = () => {
                     alt={`offer-${index}`}
                     className="w-full h-full object-cover"
                   />
-
-                  {/* Overlay for premium look */}
-                  <div className="absolute inset-0 bg-black/20" />
-
-                  {/* Optional text overlay */}
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <p className="text-sm font-medium">
-                      Special Offer #{index + 1}
-                    </p>
-                  </div>
                 </div>
               ))}
             </div>
@@ -349,40 +342,41 @@ const Home = () => {
       {/* ===== TRENDING ===== */}
       <div style={{ background: "#fefce8" }}>
         <WaveDivider fill="#fefce8" />
-        <div className="px-5 py-8">
+        <div className="px-5 py-3 ">
           <h2 className="vex-section-title mb-8">Trending in Goa</h2>
 
-          <div className="space-y-4">
+          <div className="space-y-4 ">
             {trending.map((place, i) => (
-              <div
-                key={i}
-                className="vex-trending-item vex-card-hover flex gap-4 items-center bg-white p-3 rounded-2xl"
-                style={{
-                  animationDelay: `${i * 0.1}s`,
-                  border: "1px solid rgba(251,191,36,.3)",
-                  boxShadow: "0 2px 12px rgba(0,0,0,.05)",
-                }}
-              >
-                <div style={{ position: "relative", flexShrink: 0 }}>
-                  <img
-                    src={place.img}
-                    alt={place.name}
-                    className="w-28 h-24 object-cover rounded-xl"
-                    style={{ display: "block" }}
-                  />
-                  <span style={{
-                    position: "absolute", top: 6, right: 6,
-                    width: 8, height: 8, borderRadius: "50%",
-                    background: "#f97316",
-                    boxShadow: "0 0 0 2px white",
-                  }} />
+              <Link key={i} to={place.path} className="block" style={{ textDecoration: 'none' }}>
+                <div
+                  className="vex-trending-item vex-card-hover flex gap-4 items-center bg-white p-3 rounded-2xl"
+                  style={{
+                    animationDelay: `${i * 0.1}s`,
+                    border: "1px solid rgba(251,191,36,.3)",
+                    boxShadow: "0 2px 12px rgba(0,0,0,.05)",
+                  }}
+                >
+                  <div style={{ position: "relative", flexShrink: 0 }}>
+                    <img
+                      src={place.img}
+                      alt={place.name}
+                      className="w-28 h-24 object-cover rounded-xl"
+                      style={{ display: "block" }}
+                    />
+                    <span style={{
+                      position: "absolute", top: 6, right: 6,
+                      width: 8, height: 8, borderRadius: "50%",
+                      background: "#f97316",
+                      boxShadow: "0 0 0 2px white",
+                    }} />
+                  </div>
+                  <div>
+                    <span className="vex-badge" style={{ marginBottom: 6 }}>{place.tag}</span>
+                    <h3 className="vex-font-display" style={{ fontSize: "1.05rem", fontWeight: 700, lineHeight: 1.2 }}>{place.name}</h3>
+                    <p style={{ fontSize: 13, color: "#6b7280", marginTop: 3 }}>{place.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <span className="vex-badge" style={{ marginBottom: 6 }}>{place.tag}</span>
-                  <h3 className="vex-font-display" style={{ fontSize: "1.05rem", fontWeight: 700, lineHeight: 1.2 }}>{place.name}</h3>
-                  <p style={{ fontSize: 13, color: "#6b7280", marginTop: 3 }}>{place.desc}</p>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
