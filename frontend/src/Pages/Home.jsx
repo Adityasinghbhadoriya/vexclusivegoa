@@ -1,7 +1,8 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import CategoryCard from "../Components/CategoryCard"
+import { restaurants } from "../Data/restaurant"
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -15,6 +16,11 @@ import dalunaImage from "../assets/DaLunaRes.webp"
 import dalunaOffer1 from "../assets/da-luna-offer1.webp"
 import dalunaOffer2 from "../assets/da-luna-offer3.webp"
 import dalunaOffer3 from "../assets/DaLunaOffers.jpeg"
+import parraRoadGoa from "../assets/Parra-Road-Goa.jpg.webp"
+import hilltopMarketImage from "../assets/Hiltopmarket.jpg"
+import chaporaLaneImage from "../assets/chaporaLane.jpeg"
+
+const BASE_URL = "https://vexclusivegoa.onrender.com"
 
 /* ─── Google Fonts injected once ─────────────────────────────────── */
 if (!document.getElementById("vex-fonts")) {
@@ -147,21 +153,21 @@ const trending = [
     name: "Parra Road",
     desc: "Scenic coconut-lined road for peaceful drives",
     tag: "🌴 Scenic",
-    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+    img: parraRoadGoa,
     path: "/parra-road",
   },
   {
     name: "Hilltop Market",
     desc: "Night market with music, shopping & party vibes",
     tag: "🎶 Vibrant",
-    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5",
+    img: hilltopMarketImage,
     path: "/hilltop-market",
   },
   {
     name: "Chapora Lane",
     desc: "Quiet village lanes with cafés & local charm",
     tag: "🏘️ Peaceful",
-    img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96",
+    img: chaporaLaneImage,
     path: "/chapora-lane",
   },
   {
@@ -174,10 +180,10 @@ const trending = [
 ]
 
 const experiences = [
-  { label: "Sunset Cruise", icon: "🛥️", color: "#fff7ed" },
-  { label: "Beach Party", icon: "🎉", color: "#fef9c3" },
-  { label: "Water Sports", icon: "🏄", color: "#ecfdf5" },
-  { label: "Casino Night", icon: "🎰", color: "#fdf4ff" },
+  { label: "Sunset Cruise", icon: "🛥️", color: "#fff7ed", link: "https://www.google.com/search?q=Santa+Monica+Jetty+Terminal+Goa+sunset+cruise" },
+  { label: "Beach Party", icon: "🎉", color: "#fef9c3", link: "https://www.google.com/search?q=Shiva+Valley+Beach+Party+Goa" },
+  { label: "Water Sports", icon: "🏄", color: "#ecfdf5", link: "https://www.google.com/search?q=Goa+Water+Sports+Activities+and+Boat+Tours" },
+  { label: "Casino Night", icon: "🎰", color: "#fdf4ff", link: "https://www.google.com/search?q=Big+Daddy+Casino+Goa" },
 ]
 
 const WaveDivider = ({ flip = false, fill = "#ffffff" }) => (
@@ -193,7 +199,7 @@ const WaveDivider = ({ flip = false, fill = "#ffffff" }) => (
 )
 
 const Home = () => {
-
+  const navigate = useNavigate()
   const offerImages = [dalunaOffer1, dalunaOffer2, dalunaOffer3]
 
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -210,6 +216,17 @@ const Home = () => {
     }, 3000) // total cycle
 
     return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const source = params.get("source")
+
+    if (source) {
+      fetch(`${BASE_URL}/api/analytics/scan?source=${source}`)
+        .then(() => console.log("QR tracked"))
+        .catch((err) => console.error("QR tracking failed", err))
+    }
   }, [])
 
   return (
@@ -312,7 +329,7 @@ const Home = () => {
                   <img
                     src={img}
                     alt={`offer-${index}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
               ))}
@@ -342,7 +359,7 @@ const Home = () => {
       {/* ===== TRENDING ===== */}
       <div style={{ background: "#fefce8" }}>
         <WaveDivider fill="#fefce8" />
-        <div className="px-5 py-3 ">
+        <div className="px-5 space-y-4">
           <h2 className="vex-section-title mb-8">Trending in Goa</h2>
 
           <div className="space-y-4 ">
@@ -388,37 +405,47 @@ const Home = () => {
         <h2 className="vex-section-title mb-6">Must Visit</h2>
 
         <div className="space-y-4">
-          {[
-            { name: "Da Luna", sub: "Italian vibes + perfect sunset dining", emoji: "🌙" },
-            { name: "Thalassa", sub: "Greek food + nightlife experience", emoji: "🏛️" },
-            { name: "Elephant Beach Cafe & Bar", sub: "Peaceful vibes + Fresh Food", emoji: "🏛️" },
-          ].map((v, i) => (
-            <div
-              key={i}
-              className="vex-card-hover"
-              style={{
-                background: "white",
-                borderRadius: 16,
-                padding: "16px 20px",
-                border: "1px solid rgba(251,191,36,.4)",
-                display: "flex",
-                alignItems: "center",
-                gap: 16,
-                boxShadow: "0 2px 12px rgba(0,0,0,.04)",
-              }}
-            >
-              <div style={{
-                width: 48, height: 48, borderRadius: 12,
-                background: "#fef3c7",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 22, flexShrink: 0,
-              }}>{v.emoji}</div>
-              <div>
-                <h3 style={{ fontWeight: 600, fontSize: "1rem" }}>{v.name}</h3>
-                <p style={{ fontSize: 13, color: "#6b7280", marginTop: 2 }}>{v.sub}</p>
+          {restaurants.map((restaurant) => {
+            const descriptions = {
+              "Da Luna Restaurant": "Italian vibes + perfect sunset dining",
+              "Elephant Beach Cafe & Bar": "Peaceful vibes + Fresh Food",
+              "Thalassa": "Greek food + nightlife experience",
+            };
+            const emojis = {
+              "Da Luna Restaurant": "🌙",
+              "Elephant Beach Cafe & Bar": "🏛️",
+              "Thalassa": "🏛️",
+            };
+            return (
+              <div
+                key={restaurant.id}
+                className="vex-card-hover"
+                onClick={() => navigate(`/restaurant/${restaurant.id}`)}
+                style={{
+                  background: "white",
+                  borderRadius: 16,
+                  padding: "16px 20px",
+                  border: "1px solid rgba(251,191,36,.4)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  boxShadow: "0 2px 12px rgba(0,0,0,.04)",
+                  cursor: "pointer",
+                }}
+              >
+                <div style={{
+                  width: 48, height: 48, borderRadius: 12,
+                  background: "#fef3c7",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 22, flexShrink: 0,
+                }}>{emojis[restaurant.name]}</div>
+                <div>
+                  <h3 style={{ fontWeight: 600, fontSize: "1rem" }}>{restaurant.name}</h3>
+                  <p style={{ fontSize: 13, color: "#6b7280", marginTop: 2 }}>{descriptions[restaurant.name]}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -431,6 +458,7 @@ const Home = () => {
             <div
               key={i}
               className="vex-exp-card"
+              onClick={() => window.open(item.link, "_blank")}
               style={{
                 background: item.color,
                 borderRadius: 16,

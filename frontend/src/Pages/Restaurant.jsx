@@ -7,6 +7,7 @@ import DaLunaImage2 from "../assets/DaLuna3.jpg"
 import offerImage1 from "../assets/DaLunaOffers.jpeg"
 import offerImage2 from "../assets/DaLunaOffer2.jpeg"
 import offerImage3 from "../assets/DaLunaOffer3.jpeg"
+import elephantBeachImage from "../assets/Elephant-beach.webp"
 import { trackRestaurantClick } from "../api"
 
 const Restaurant = () => {
@@ -212,9 +213,9 @@ const Restaurant = () => {
                     >
 
                         <img
-                            src={res.image}
+                            src={res.name === "Elephant Beach Cafe & Bar" ? elephantBeachImage : res.image}
                             alt={res.name}
-                            className="w-[30%] h-28 object-cover"
+                            className="w-[30%] h-30 object-cover"
                         />
 
                         <div className="p-3 flex flex-col justify-center">

@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import chaporaLaneImage from "../assets/chaporaLane.jpeg"
 
 /* ─── Google Fonts injected once ─────────────────────────────────── */
 if (!document.getElementById("vex-fonts")) {
@@ -123,19 +124,19 @@ const globalStyle = `
 
 const ChaporaLane = () => {
   return (
-    <div className="vex-font-body w-full overflow-x-hidden bg-yellow-300 text-black">
+    <div className="vex-font-body w-full overflow-x-hidden bg-white text-black">
       <style>{globalStyle}</style>
 
       {/* Hero Image */}
-      <div className="relative w-full min-h-screen rounded-b-4xl overflow-hidden">
+      <div className="relative w-full h-120 rounded-b-4xl overflow-hidden">
         <img
           className="absolute inset-0 w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96"
+          src={chaporaLaneImage}
           alt="Chapora Lane"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90" />
 
-        <div className="relative z-10 flex flex-col justify-center min-h-screen px-6 py-12 text-center">
+        <div className="relative z-10 flex flex-col mt-25 min-h-screen px-6 py-12 text-center">
           <h1
             className="vex-font-display vex-hero-title"
             style={{ fontSize: "clamp(2.4rem, 12vw, 4rem)" }}

@@ -13,6 +13,18 @@ export const restaurants = [
 
   {
     id: 2,
+    name: "Elephant Beach Cafe & Bar",
+    cuisine: "Multicuisine • Café",
+    rating: 4.4,
+    image: "https://d2kihw5e8drjh5.cloudfront.net/eyJidWNrZXQiOiJ1dGEtaW1hZ2VzIiwia2V5IjoicGxhY2VfaW1nL0hxc0hmVW9DVG9DX1JSWnlNa2V5aFEiLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjY0MCwiaGVpZ2h0Ijo2NDAsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsInRvRm9ybWF0IjogIndlYnAifX0=",
+    location: "Vagator, Goa",
+    phone: "+919123456789",
+    googleLink: "https://www.google.com/search?q=Elephant+Beach+Cafe+Bar+Goa",
+    instagram: "https://www.instagram.com/elephantbeachcafe/",
+  },
+
+  {
+    id: 3,
     name: "Thalassa",
     cuisine: "Greek • Mediterranean",
     rating: 4.6,
