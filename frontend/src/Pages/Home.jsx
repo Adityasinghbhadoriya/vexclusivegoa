@@ -19,6 +19,8 @@ import dalunaOffer3 from "../assets/DaLunaOffers.jpeg"
 import parraRoadGoa from "../assets/Parra-Road-Goa.jpg.webp"
 import hilltopMarketImage from "../assets/Hiltopmarket.jpg"
 import chaporaLaneImage from "../assets/chaporaLane.jpeg"
+import daLunaLogo from "../assets/DaLuna1.avif"
+import elephantBeachLogo from "../assets/Elephant-beach.webp"
 
 const BASE_URL = "https://vexclusivegoa.onrender.com"
 
@@ -411,10 +413,10 @@ const Home = () => {
               "Elephant Beach Cafe & Bar": "Peaceful vibes + Fresh Food",
               "Thalassa": "Greek food + nightlife experience",
             };
-            const emojis = {
-              "Da Luna Restaurant": "🌙",
-              "Elephant Beach Cafe & Bar": "🏛️",
-              "Thalassa": "🏛️",
+            const logos = {
+              "Da Luna Restaurant": daLunaLogo,
+              "Elephant Beach Cafe & Bar": elephantBeachLogo,
+              "Thalassa": "https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg",
             };
             return (
               <div
@@ -433,12 +435,17 @@ const Home = () => {
                   cursor: "pointer",
                 }}
               >
-                <div style={{
-                  width: 48, height: 48, borderRadius: 12,
-                  background: "#fef3c7",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 22, flexShrink: 0,
-                }}>{emojis[restaurant.name]}</div>
+                <img
+                  src={logos[restaurant.name]}
+                  alt={restaurant.name}
+                  style={{
+                    width: 72,
+                    height: 72,
+                    borderRadius: 12,
+                    objectFit: "cover",
+                    flexShrink: 0,
+                  }}
+                />
                 <div>
                   <h3 style={{ fontWeight: 600, fontSize: "1rem" }}>{restaurant.name}</h3>
                   <p style={{ fontSize: 13, color: "#6b7280", marginTop: 2 }}>{descriptions[restaurant.name]}</p>
