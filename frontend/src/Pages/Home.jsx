@@ -223,7 +223,7 @@ const Home = () => {
     const source = params.get("source")
 
     if (source) {
-      fetch(`${BASE_URL}/api/analytics/scan?source=${source}`)
+      fetch(`${BASE_URL}/api/analytics/scan?source=${source || "direct"}`)
         .then(() => console.log("QR tracked"))
         .catch((err) => console.error("QR tracking failed", err))
     }
