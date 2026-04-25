@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from "react"
 import { FaQrcode, FaUtensils, FaGlassCheers, FaSync, FaChartBar } from "react-icons/fa"
-import { useNavigate } from "react-router-dom"
 
 const Admin = () => {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
-  const navigate = useNavigate()
-  const [authorized, setAuthorized] = useState(false)
 
   // 🔐 Simple Password Protection
-
   useEffect(() => {
-    const enteredPassword = prompt("Enter Admin Password")
+    const password = prompt("Enter Admin Password")
 
-    if (enteredPassword === "admin123") {
-      setAuthorized(true)
-    } else {
+    if (password !== "admin123") {
       alert("Access Denied")
-      navigate("/")
+      window.location.href = "/"
     }
-  }, [navigate])
-
-  if (!authorized)  return null
-
+  }, [])
 
   // 📡 Fetch Analytics
   const fetchData = async () => {
@@ -65,7 +56,7 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#1f2937] to-black text-white p-6">
-
+      
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
@@ -84,7 +75,7 @@ const Admin = () => {
 
       {/* ===== TOP OVERVIEW CARDS ===== */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-
+        
         {/* QR Scans */}
         <div className="bg-gradient-to-br from-purple-600 to-purple-900 rounded-lg p-6 shadow-lg">
           <div className="flex items-center justify-between">
@@ -209,9 +200,9 @@ const Admin = () => {
       {/* ===== DETAILED STATS TABLE ===== */}
       <div className="mt-10">
         <h2 className="text-2xl font-bold mb-4">📈 Detailed Statistics</h2>
-
+        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
+          
           {/* Stats Summary */}
           <div className="bg-white/5 backdrop-blur-md rounded-lg p-6 border border-white/10">
             <h3 className="text-lg font-semibold mb-4 text-blue-400">Summary Stats</h3>
@@ -249,7 +240,7 @@ const Admin = () => {
                   <span className="text-sm text-gray-400">{totalQRScans}</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-purple-500 h-2 rounded-full" style={{ width: '33%' }} />
+                  <div className="bg-purple-500 h-2 rounded-full" style={{width: '33%'}} />
                 </div>
               </div>
 
@@ -259,7 +250,7 @@ const Admin = () => {
                   <span className="text-sm text-gray-400">{restaurantCategoryClicks + clubCategoryClicks}</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-blue-500 h-2 rounded-full" style={{ width: '33%' }} />
+                  <div className="bg-blue-500 h-2 rounded-full" style={{width: '33%'}} />
                 </div>
               </div>
 
@@ -269,7 +260,7 @@ const Admin = () => {
                   <span className="text-sm text-gray-400">{totalClubClicks + totalRestaurantClicks}</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-green-500 h-2 rounded-full" style={{ width: '33%' }} />
+                  <div className="bg-green-500 h-2 rounded-full" style={{width: '33%'}} />
                 </div>
               </div>
             </div>
