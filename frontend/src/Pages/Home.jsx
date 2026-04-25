@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import CategoryCard from "../Components/CategoryCard"
@@ -12,6 +12,7 @@ import {
   FaFacebookF,
 } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
+import { trackCategoryClick, trackRestaurantClick } from "../api.js"
 import dalunaImage from "../assets/DaLunaRes.webp"
 import dalunaOffer1 from "../assets/da-luna-offer1.webp"
 import dalunaOffer2 from "../assets/da-luna-offer3.webp"
@@ -202,10 +203,15 @@ const WaveDivider = ({ flip = false, fill = "#ffffff" }) => (
 
 const Home = () => {
   const navigate = useNavigate()
+  const trendingRef = useRef(null)
   const offerImages = [dalunaOffer1, dalunaOffer2, dalunaOffer3]
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+
+  const scrollToTrending = () => {
+    trendingRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -236,71 +242,153 @@ const Home = () => {
       <style>{globalStyle}</style>
 
       {/* ===== HERO ===== */}
-      <div className="relative w-full h-[700px] rounded-b-4xl overflow-hidden">
+      {/* ===== PREMIUM HERO UI ===== */}
+      <section className="relative min-h-screen overflow-hidden bg-[#08101d] text-white">
+
+        {/* Background Image */}
         <img
-          className="absolute inset-0 w-full h-full object-cover"
           src={dalunaImage}
-          alt="Goa"
+          alt="Goa Hero"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90" />
 
-        <div className="relative z-10 flex h-full flex-col justify-between px-6 py-12 text-center">
+        {/* Dark luxury overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-[#f6f1e9]" />
 
-          <div className="space-y-6">
-            <div className="vex-fade-up" style={{ animationDelay: ".1s" }}>
-              <span style={{
-                display: "inline-block",
-                border: "1px solid rgba(251,191,36,.5)",
-                borderRadius: 999,
-                padding: "4px 16px",
-                fontSize: 11,
-                letterSpacing: ".12em",
-                textTransform: "uppercase",
-                color: "#fbbf24",
-                marginBottom: 16,
-              }}>
-                Goa's #1 Discovery Platform
-              </span>
+        {/* Top Navbar */}
+        <div className="relative z-20 flex items-center px-6 pt-8">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-yellow-400 rounded-md flex items-center justify-center text-2xl font-bold border-2 border-yellow-300">
+              🌴
             </div>
-
-            <h1
-              className="vex-font-display vex-hero-title vex-fade-up"
-              style={{ fontSize: "clamp(2.4rem, 12vw, 4rem)", animationDelay: ".25s" }}
-            >
-              V Exclusive Goa
-            </h1>
-          </div>
-
-          <div className="space-y-6">
-            <h2
-              className="vex-fade-up text-white"
-              style={{ marginTop: 12, fontSize: "1.2rem", fontWeight: 500, animationDelay: ".4s" }}
-            >
-              Discover Goa Like Never Before
-            </h2>
-
-            <p
-              className="vex-fade-up"
-              style={{ marginTop: 8, fontSize: 13, color: "#d1d5db", letterSpacing: ".08em", textTransform: "uppercase", animationDelay: ".55s" }}
-            >
-              Restaurants · Nightlife · Experiences
-            </p>
-
-            <div
-              className="vex-fade-up mt-10 grid grid-cols-2 gap-4"
-              style={{ animationDelay: ".7s" }}
-            >
-              {categories.map((cat) => (
-                <Link key={cat.title} to={cat.path}>
-                  <CategoryCard title={cat.title} />
-                </Link>
-              ))}
+            <div className="leading-tight">
+              <h2 className="text-xs tracking-[0.2em] font-semibold">
+                V EXCLUSIVE GOA
+              </h2>
+            
             </div>
-
-            <div className="vex-scroll-hint mt-10" style={{ color: "rgba(255,255,255,.4)", fontSize: 22 }}>↓</div>
           </div>
         </div>
-      </div>
+
+
+        {/* Hero Content */}
+        <div className="relative z-20 px-7 pt-20">
+          <p className="text-[#f6c337] text-xs tracking-[0.35em] font-semibold mb-6">
+            GOA'S #1 DISCOVERY PLATFORM
+          </p>
+
+          <h1
+            className="vex-font-display leading-none"
+            style={{
+              fontSize: "clamp(1rem,10vw,5rem)"
+            }}
+          >
+            Discover Goa
+          </h1>
+
+          <h2
+            className="vex-font-display italic mt-1"
+            style={{
+              fontSize: "clamp(1.5rem,6vw,3.2rem)"
+            }}
+          >
+            Like Never Before
+          </h2>
+
+          <p className="mt-6 text-[12px] leading-6 max-w-[180px] text-gray-200">
+            Your ultimate guide to the best restaurants,
+            nightlife, beaches & experiences across Goa.
+          </p>
+
+          <button
+            onClick={scrollToTrending}
+            className="mt-10 bg-[#f6be18] text-black font-semibold px-4 py-2 rounded-full
+       flex items-center gap-3 shadow-xl hover:scale-105 transition"
+          >
+            Explore Now
+            <span className="text-xl">›</span>
+          </button>
+        </div>
+
+
+
+        {/* Floating Category Glass Card */}
+        <div className="relative z-30 mt-24 px-5">
+          <div
+            className="bg-[#f8f4ec] rounded-[36px] shadow-2xl p-4
+       grid grid-cols-2 gap-3"
+          >
+
+            {/* Restaurants */}
+            <Link 
+              to="/restaurants"
+              onClick={() => trackCategoryClick("restaurants")}
+            >
+              <div className="text-center border-r border-gray-300 pr-4">
+                <div
+                  className="w-12 h-12 mx-auto rounded-full
+               bg-[#f4b617] flex items-center justify-center
+               text-3xl mb-2"
+                >
+                  🍽
+                </div>
+
+                <h3 className="text-[#111] font-semibold text-sm">
+                  Top Restaurants
+                </h3>
+
+                <p className="text-gray-600 mt-1 text-[12px] leading-5">
+                  Curated dining experience
+                </p>
+              </div>
+            </Link>
+
+
+            {/* Nightlife */}
+            <Link 
+              to="/clubs"
+              onClick={() => trackCategoryClick("clubs")}
+            >
+              <div className="text-center pl-4">
+                <div
+                  className="w-12 h-12 mx-auto rounded-full
+               bg-purple-500 flex items-center justify-center
+               text-3xl mb-2"
+                >
+                  🍸
+                </div>
+
+                <h3 className="text-[#111] font-semibold text-sm">
+                  Nightlife & Clubs
+                </h3>
+
+                <p className="text-gray-600 mt-1 text-[12 px] leading-5">
+                  Best parties & beach clubs
+                </p>
+              </div>
+            </Link>
+
+          </div>
+        </div>
+
+
+        {/* Curved transition into next section */}
+        <div className="relative z-20 mt-[-30px]">
+          <svg
+            viewBox="0 0 1440 180"
+            className="w-full h-28 block"
+            preserveAspectRatio="none"
+          >
+            <path
+              fill="#f6f1e9"
+              d="M0,80 C240,170 520,10 740,80
+              C1000,160 1220,40 1440,90
+              L1440,180 L0,180Z"
+            />
+          </svg>
+        </div>
+
+      </section>
 
       {/* ===== OFFERS SLIDER ===== */}
       <div style={{ background: "#fff7ed" }}>
@@ -308,7 +396,7 @@ const Home = () => {
 
         <div className="px-5 py-8">
           <h2 className="vex-section-title mb-6">
-            Exclusive Offers at Da Luna 
+            Exclusive Offers at Da Luna
           </h2>
 
           <div
@@ -359,7 +447,7 @@ const Home = () => {
       </div>
 
       {/* ===== TRENDING ===== */}
-      <div style={{ background: "#fefce8" }}>
+      <div style={{ background: "#fefce8" }} ref={trendingRef}>
         <WaveDivider fill="#fefce8" />
         <div className="px-5 space-y-4">
           <h2 className="vex-section-title mb-8">Trending in Goa</h2>
@@ -422,7 +510,10 @@ const Home = () => {
               <div
                 key={restaurant.id}
                 className="vex-card-hover"
-                onClick={() => navigate(`/restaurant/${restaurant.id}`)}
+                onClick={() => {
+                  trackRestaurantClick(restaurant.id, restaurant.name)
+                  navigate(`/restaurant/${restaurant.id}`)
+                }}
                 style={{
                   background: "white",
                   borderRadius: 16,

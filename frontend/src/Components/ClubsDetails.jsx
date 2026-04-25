@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import {
   FaArrowLeft,
@@ -8,6 +8,7 @@ import {
   FaGlassCheers,
 } from "react-icons/fa"
 import { clubs } from "../Data/clubs"
+import { trackClubClick } from "../api.js"
 
 const ClubsDetails = () => {
   const navigate = useNavigate()
@@ -18,6 +19,11 @@ const ClubsDetails = () => {
   if (!club) {
     return <div className="p-4">Club not found</div>
   }
+
+  // Track club click when component mounts
+  useEffect(() => {
+    trackClubClick(club.id, club.name)
+  }, [club.id, club.name])
 
   // 🔥 Handlers
   const handleDirections = () => {

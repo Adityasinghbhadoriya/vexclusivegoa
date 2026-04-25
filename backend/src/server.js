@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
 import { connectDB } from "./config/db.js"
+import { initializeAnalytics } from "./models/analytics.js"
 import analyticsRoutes from "./routes/analyticsRoutes.js"
 
 dotenv.config()
@@ -20,7 +21,8 @@ app.use("/api/analytics", analyticsRoutes)
 
 const PORT = process.env.PORT || 5000
 
-connectDB().then(() => {
+connectDB().then(async () => {
+    await initializeAnalytics()
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`)
     })

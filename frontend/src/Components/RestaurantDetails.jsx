@@ -8,6 +8,7 @@ import {
   FaUtensils,
 } from "react-icons/fa"
 import { restaurants } from "../Data/restaurant"
+import { trackRestaurantClick } from "../api.js"
 
 // 🔥 (OPTIONAL) extra images for Da Luna
 import DaLunaImage1 from "../assets/DaLuna2.jpg"
@@ -22,6 +23,11 @@ const RestaurantDetails = () => {
   if (!restaurant) {
     return <div className="p-4 text-lg">Restaurant not found</div>
   }
+
+  // Track restaurant click when component mounts
+  useEffect(() => {
+    trackRestaurantClick(restaurant.id, restaurant.name)
+  }, [restaurant.id, restaurant.name])
 
   // 🔥 Slider images (dynamic)
   const sliderImages =
