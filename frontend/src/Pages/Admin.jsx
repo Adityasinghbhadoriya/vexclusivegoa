@@ -22,9 +22,8 @@ const Admin = () => {
     }
   }, [navigate])
 
-  if (!authorized) {
-    return null
-  }
+  if (!authorized)  return null
+
 
   // 📡 Fetch Analytics
   const fetchData = async () => {
