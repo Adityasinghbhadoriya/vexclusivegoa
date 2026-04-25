@@ -13,7 +13,9 @@ import {
 } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 import { trackCategoryClick, trackRestaurantClick } from "../api.js"
+import logo from "../assets/logo.webp"
 import dalunaImage from "../assets/DaLunaRes.webp"
+
 import dalunaOffer1 from "../assets/da-luna-offer1.webp"
 import dalunaOffer2 from "../assets/da-luna-offer3.webp"
 import dalunaOffer3 from "../assets/DaLunaOffers.jpeg"
@@ -158,6 +160,7 @@ const trending = [
     tag: "🌴 Scenic",
     img: parraRoadGoa,
     path: "/parra-road",
+    location: "Parra, Goa",
   },
   {
     name: "Hilltop Market",
@@ -165,6 +168,7 @@ const trending = [
     tag: "🎶 Vibrant",
     img: hilltopMarketImage,
     path: "/hilltop-market",
+    location: "Arpora, Goa",
   },
   {
     name: "Chapora Lane",
@@ -172,6 +176,7 @@ const trending = [
     tag: "🏘️ Peaceful",
     img: chaporaLaneImage,
     path: "/chapora-lane",
+    location: "Chapora, Goa",
   },
   {
     name: "Mandrem Beach",
@@ -179,6 +184,7 @@ const trending = [
     tag: "🏖️ Serene",
     img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
     path: "/mandrem-beach",
+    location: "Mandrem, Goa",
   },
 ]
 
@@ -192,7 +198,7 @@ const experiences = [
 const WaveDivider = ({ flip = false, fill = "#ffffff" }) => (
   <div style={{ lineHeight: 0, transform: flip ? "scaleX(-1)" : "none" }}>
     <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-      style={{ display: "block", width: "100%", height: 48 }}>
+      style={{ display: "block", width: "100%", height: 32 }}>
       <path
         d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z"
         fill={fill}
@@ -258,8 +264,8 @@ const Home = () => {
         {/* Top Navbar */}
         <div className="relative z-20 flex items-center px-6 pt-8">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-yellow-400 rounded-md flex items-center justify-center text-2xl font-bold border-2 border-yellow-300">
-              🌴
+            <div className="w-10 h-10 rounded-full flex items-center justify-center text-2xl font-bold">
+              <img src={logo} alt="V Exclusive Goa" className="rounded-full" />
             </div>
             <div className="leading-tight">
               <h2 className="text-xs tracking-[0.2em] font-semibold">
@@ -373,7 +379,7 @@ const Home = () => {
 
 
         {/* Curved transition into next section */}
-        <div className="relative z-20 mt-[-30px]">
+        <div className="relative z-20 mt-[-20px]">
           <svg
             viewBox="0 0 1440 180"
             className="w-full h-28 block"
@@ -394,7 +400,7 @@ const Home = () => {
       <div style={{ background: "#fff7ed" }}>
         <WaveDivider fill="#fff7ed" />
 
-        <div className="px-5 py-8">
+        <div className="px-5 py-5">
           <h2 className="vex-section-title mb-6">
             Exclusive Offers at Da Luna
           </h2>
@@ -456,31 +462,34 @@ const Home = () => {
             {trending.map((place, i) => (
               <Link key={i} to={place.path} className="block" style={{ textDecoration: 'none' }}>
                 <div
-                  className="vex-trending-item vex-card-hover flex gap-4 items-center bg-white p-3 rounded-2xl"
+                  className="vex-trending-item vex-card-hover flex gap-3 items-center rounded-2xl"
                   style={{
+                    background: "#fef59e",
                     animationDelay: `${i * 0.1}s`,
-                    border: "1px solid rgba(251,191,36,.3)",
+                    border: "1px solid rgba(251,191,36,.5)",
                     boxShadow: "0 2px 12px rgba(0,0,0,.05)",
+                    padding: "12px",
                   }}
                 >
                   <div style={{ position: "relative", flexShrink: 0 }}>
                     <img
                       src={place.img}
                       alt={place.name}
-                      className="w-28 h-24 object-cover rounded-xl"
+                      className="w-24 h-20 object-cover rounded-lg"
                       style={{ display: "block" }}
                     />
                     <span style={{
-                      position: "absolute", top: 6, right: 6,
-                      width: 8, height: 8, borderRadius: "50%",
+                      position: "absolute", top: 4, right: 4,
+                      width: 6, height: 6, borderRadius: "50%",
                       background: "#f97316",
                       boxShadow: "0 0 0 2px white",
                     }} />
                   </div>
                   <div>
-                    <span className="vex-badge" style={{ marginBottom: 6 }}>{place.tag}</span>
-                    <h3 className="vex-font-display" style={{ fontSize: "1.05rem", fontWeight: 700, lineHeight: 1.2 }}>{place.name}</h3>
-                    <p style={{ fontSize: 13, color: "#6b7280", marginTop: 3 }}>{place.desc}</p>
+                    <span className="vex-badge" style={{ marginBottom: 4, fontSize: "12px" }}>{place.tag}</span>
+                    <h3 className="vex-font-display" style={{ fontSize: "0.95rem", fontWeight: 700, lineHeight: 1.2 }}>{place.name}</h3>
+                    <p style={{ fontSize: 12, color: "#6b7280", marginTop: 2 }}>{place.desc}</p>
+                    <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 3, display: "flex", alignItems: "center", gap: 3 }}>📍 {place.location}</p>
                   </div>
                 </div>
               </Link>
@@ -560,14 +569,14 @@ const Home = () => {
               style={{
                 background: item.color,
                 borderRadius: 16,
-                padding: "24px 12px",
+                padding: "20px 12px",
                 textAlign: "center",
                 border: "1px solid rgba(0,0,0,.06)",
                 cursor: "pointer",
               }}
             >
-              <div style={{ fontSize: 32, marginBottom: 10 }}>{item.icon}</div>
-              <p style={{ fontSize: 13, fontWeight: 600 }}>{item.label}</p>
+              <div style={{ fontSize: 28, marginBottom: 8, whiteSpace: "nowrap" }}>{item.icon}</div>
+              <p style={{ fontSize: 13, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.label}</p>
             </div>
           ))}
         </div>
@@ -609,17 +618,51 @@ const Home = () => {
                 boxShadow: "0 4px 20px rgba(0,0,0,.05)",
               }}
             >
-              <div style={{
-                width: 48, height: 48, borderRadius: 12,
-                background: "#fef3c7",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 22, marginBottom: 14,
-              }}>{f.icon}</div>
+              <img
+                src={logo}
+                alt="V Exclusive Logo"
+                style={{
+                  width: 60,
+                  height: 60,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  marginBottom: 14,
+                }}
+              />
               <h3 style={{ fontWeight: 600, fontSize: "0.95rem", marginBottom: 8 }}>{f.title}</h3>
               <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.65 }}>{f.body}</p>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* ===== GOOGLE REVIEWS ===== */}
+      <div className="px-6 py-10 text-center" style={{ background: "#fef9c3" }}>
+        <h2 className="vex-font-display" style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: 8 }}>
+          ⭐ Share Your Experience
+        </h2>
+        <p style={{ fontSize: 14, color: "#374151", marginBottom: 16 }}>
+          Help us improve! Share your V Exclusive experience and let fellow travelers know what makes your Goa journey special.
+        </p>
+        <button
+          onClick={() => window.open("https://www.google.com/search?q=v+exclusive+car+rental+goa&oq=V+Exclusive+goa&gs_lcrp=EgZjaHJvbWUqCAgBEAAYFhgeMgYIABBFGDkyCAgBEAAYFhgeMggIAhAAGBYYHjINCAMQABiGAxiABBiKBTINCAQQABiGAxiABBiKBTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDc0OTNqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x3bbfebdc071fd29f:0x4db28d24cb48f996,3,,,,", "_blank")}
+          style={{
+            background: "linear-gradient(135deg, #4285f4 0%, #34a853 25%, #fbbc04 50%, #ea4335 100%)",
+            color: "white",
+            border: "none",
+            borderRadius: 12,
+            padding: "12px 24px",
+            fontSize: 14,
+            fontWeight: 600,
+            cursor: "pointer",
+            boxShadow: "0 4px 12px rgba(0,0,0,.15)",
+            transition: "transform .2s ease",
+          }}
+          onMouseEnter={(e) => e.target.style.transform = "scale(1.05)"}
+          onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
+        >
+          ✍️ Write a Review on Google
+        </button>
       </div>
 
       {/* ===== FOOTER ===== */}
