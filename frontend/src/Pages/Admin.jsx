@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { FaQrcode, FaUtensils, FaGlassCheers, FaSync, FaChartBar } from "react-icons/fa"
 
 const Admin = () => {
+  const [authed, setAuthed] = useState(false)
+  const [input, setInput] = useState("")
+  const [error, setError] = useState(false)
   const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
-  // 🔐 Simple Password Protection
-  useEffect(() => {
-    const password = prompt("Enter Admin Password")
-
-    if (password !== "admin123") {
-      alert("Access Denied")
-      window.location.href = "/"
-    }
-  }, [])
-
-  // 📡 Fetch Analytics
   const fetchData = async () => {
     try {
       setRefreshing(true)
+      setLoading(true)
       const res = await fetch("https://vexclusivegoa.onrender.com/api/analytics/admin")
       const result = await res.json()
       setData(result)
@@ -32,10 +25,54 @@ const Admin = () => {
     }
   }
 
-  useEffect(() => {
-    fetchData()
-  }, [])
+  const handleLogin = () => {
+    if (input === "admin123") {
+      setAuthed(true)
+      fetchData()
+    } else {
+      setError(true)
+      setInput("")
+    }
+  }
 
+  // ── 1. Login Screen ──────────────────────────────────────────
+  if (!authed) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#1f2937] to-black text-white flex items-center justify-center">
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl w-80 flex flex-col gap-4 shadow-2xl">
+          <div className="text-center">
+            <div className="text-5xl mb-3">📊</div>
+            <h2 className="text-2xl font-bold">Admin Panel</h2>
+            <p className="text-gray-400 text-sm mt-1">V-Exclusive Analytics</p>
+          </div>
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={input}
+            onChange={e => {
+              setInput(e.target.value)
+              setError(false)
+            }}
+            onKeyDown={e => e.key === "Enter" && handleLogin()}
+            className="bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white outline-none focus:border-blue-500 transition placeholder-gray-500"
+          />
+          {error && (
+            <p className="text-red-400 text-sm text-center -mt-2">
+              ❌ Wrong password. Try again.
+            </p>
+          )}
+          <button
+            onClick={handleLogin}
+            className="bg-blue-600 hover:bg-blue-700 py-2 rounded-lg transition font-semibold"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // ── 2. Loading Screen ────────────────────────────────────────
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#1f2937] to-black text-white flex items-center justify-center">
@@ -47,16 +84,17 @@ const Admin = () => {
     )
   }
 
-  // Calculate totals
+  // ── 3. Calculate Totals ──────────────────────────────────────
   const totalQRScans = data?.qrScans || 0
   const restaurantCategoryClicks = data?.categories?.find(c => c._id === "restaurants")?.count || 0
   const clubCategoryClicks = data?.categories?.find(c => c._id === "clubs")?.count || 0
   const totalClubClicks = data?.clubs?.total || 0
   const totalRestaurantClicks = data?.restaurants?.total || 0
 
+  // ── 4. Dashboard ─────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#1f2937] to-black text-white p-6">
-      
+
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
@@ -75,7 +113,7 @@ const Admin = () => {
 
       {/* ===== TOP OVERVIEW CARDS ===== */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        
+
         {/* QR Scans */}
         <div className="bg-gradient-to-br from-purple-600 to-purple-900 rounded-lg p-6 shadow-lg">
           <div className="flex items-center justify-between">
@@ -200,9 +238,9 @@ const Admin = () => {
       {/* ===== DETAILED STATS TABLE ===== */}
       <div className="mt-10">
         <h2 className="text-2xl font-bold mb-4">📈 Detailed Statistics</h2>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          
+
           {/* Stats Summary */}
           <div className="bg-white/5 backdrop-blur-md rounded-lg p-6 border border-white/10">
             <h3 className="text-lg font-semibold mb-4 text-blue-400">Summary Stats</h3>
@@ -230,7 +268,7 @@ const Admin = () => {
             </div>
           </div>
 
-          {/* Breakdown */}
+          {/* Engagement Breakdown */}
           <div className="bg-white/5 backdrop-blur-md rounded-lg p-6 border border-white/10">
             <h3 className="text-lg font-semibold mb-4 text-green-400">Engagement Breakdown</h3>
             <div className="space-y-4">
@@ -240,7 +278,7 @@ const Admin = () => {
                   <span className="text-sm text-gray-400">{totalQRScans}</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-purple-500 h-2 rounded-full" style={{width: '33%'}} />
+                  <div className="bg-purple-500 h-2 rounded-full" style={{ width: "33%" }} />
                 </div>
               </div>
 
@@ -250,7 +288,7 @@ const Admin = () => {
                   <span className="text-sm text-gray-400">{restaurantCategoryClicks + clubCategoryClicks}</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-blue-500 h-2 rounded-full" style={{width: '33%'}} />
+                  <div className="bg-blue-500 h-2 rounded-full" style={{ width: "33%" }} />
                 </div>
               </div>
 
@@ -260,7 +298,7 @@ const Admin = () => {
                   <span className="text-sm text-gray-400">{totalClubClicks + totalRestaurantClicks}</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
-                  <div className="bg-green-500 h-2 rounded-full" style={{width: '33%'}} />
+                  <div className="bg-green-500 h-2 rounded-full" style={{ width: "33%" }} />
                 </div>
               </div>
             </div>
