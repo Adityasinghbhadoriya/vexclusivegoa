@@ -214,22 +214,47 @@ const Home = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const autoAdvanceRef = useRef(null)
+  const timeoutRef = useRef(null)
+  const dragStartX = useRef(null)
+  const hasDragged = useRef(false)
 
   const scrollToTrending = () => {
     trendingRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const setSlide = (index) => {
+    const normalized = ((index % offerImages.length) + offerImages.length) % offerImages.length
+    setCurrentSlide(normalized)
+    setIsAnimating(true)
+    clearTimeout(timeoutRef.current)
+    timeoutRef.current = setTimeout(() => setIsAnimating(false), 800)
+  }
+
+  const nextSlide = () => setSlide(currentSlide + 1)
+  const prevSlide = () => setSlide(currentSlide - 1)
+  const goToSlide = (index) => setSlide(index)
+
+  const restartAutoAdvance = () => {
+    clearInterval(autoAdvanceRef.current)
+    autoAdvanceRef.current = setInterval(() => {
+      setCurrentSlide((prev) => {
+        const next = (prev + 1) % offerImages.length
+        setIsAnimating(true)
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = setTimeout(() => setIsAnimating(false), 800)
+        return next
+      })
+    }, 3000)
+  }
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(true)
+    restartAutoAdvance()
 
-      setTimeout(() => {
-        setCurrentSlide((prev) => (prev + 1) % offerImages.length)
-        setIsAnimating(false)
-      }, 800) // slide duration
-    }, 3000) // total cycle
-
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(autoAdvanceRef.current)
+      clearTimeout(timeoutRef.current)
+    }
   }, [])
 
   useEffect(() => {
@@ -411,6 +436,34 @@ const Home = () => {
               height: "220px",
               border: "1px solid rgba(251,191,36,.4)",
               boxShadow: "0 6px 20px rgba(0,0,0,.08)",
+              touchAction: "pan-y",
+            }}
+            onPointerDown={(e) => {
+              dragStartX.current = e.clientX
+              hasDragged.current = false
+            }}
+            onPointerMove={(e) => {
+              if (dragStartX.current === null) return
+              if (Math.abs(e.clientX - dragStartX.current) > 30) {
+                hasDragged.current = true
+              }
+            }}
+            onPointerUp={(e) => {
+              if (!hasDragged.current || dragStartX.current === null) {
+                dragStartX.current = null
+                return
+              }
+
+              const delta = e.clientX - dragStartX.current
+              if (delta > 40) {
+                prevSlide()
+              } else if (delta < -40) {
+                nextSlide()
+              }
+              dragStartX.current = null
+            }}
+            onPointerLeave={() => {
+              dragStartX.current = null
             }}
           >
             <div
@@ -430,13 +483,17 @@ const Home = () => {
                 </div>
               ))}
             </div>
+
           </div>
 
           {/* Dots indicator */}
           <div className="flex justify-center gap-2 mt-4">
             {offerImages.map((_, i) => (
-              <div
+              <button
                 key={i}
+                type="button"
+                onClick={() => { goToSlide(i); restartAutoAdvance() }}
+                className="rounded-full focus:outline-none"
                 style={{
                   width: currentSlide === i ? 18 : 8,
                   height: 8,
@@ -444,6 +501,7 @@ const Home = () => {
                   background: currentSlide === i ? "#f97316" : "#fde68a",
                   transition: "all .3s ease",
                 }}
+                aria-label={`Go to offer ${i + 1}`}
               />
             ))}
           </div>
