@@ -218,6 +218,7 @@ const Home = () => {
   const timeoutRef = useRef(null)
   const dragStartX = useRef(null)
   const hasDragged = useRef(false)
+  const AUTO_DELAY = 5000
 
   const scrollToTrending = () => {
     trendingRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -231,13 +232,22 @@ const Home = () => {
     timeoutRef.current = setTimeout(() => setIsAnimating(false), 800)
   }
 
-  const nextSlide = () => setSlide(currentSlide + 1)
-  const prevSlide = () => setSlide(currentSlide - 1)
-  const goToSlide = (index) => setSlide(index)
+  const nextSlide = () => {
+    setSlide(currentSlide + 1)
+    restartAutoAdvance()
+  }
+  const prevSlide = () => {
+    setSlide(currentSlide - 1)
+    restartAutoAdvance()
+  }
+  const goToSlide = (index) => {
+    setSlide(index)
+    restartAutoAdvance()
+  }
 
   const restartAutoAdvance = () => {
-    clearInterval(autoAdvanceRef.current)
-    autoAdvanceRef.current = setInterval(() => {
+    clearTimeout(autoAdvanceRef.current)
+    autoAdvanceRef.current = setTimeout(() => {
       setCurrentSlide((prev) => {
         const next = (prev + 1) % offerImages.length
         setIsAnimating(true)
@@ -245,14 +255,15 @@ const Home = () => {
         timeoutRef.current = setTimeout(() => setIsAnimating(false), 800)
         return next
       })
-    }, 3000)
+      restartAutoAdvance()
+    }, AUTO_DELAY)
   }
 
   useEffect(() => {
     restartAutoAdvance()
 
     return () => {
-      clearInterval(autoAdvanceRef.current)
+      clearTimeout(autoAdvanceRef.current)
       clearTimeout(timeoutRef.current)
     }
   }, [])
