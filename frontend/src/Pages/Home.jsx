@@ -7,11 +7,8 @@ import {
   FaPhoneAlt,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaLinkedin,
   FaInstagram,
-  FaFacebookF,
 } from "react-icons/fa"
-import { FaXTwitter } from "react-icons/fa6"
 import { trackCategoryClick, trackRestaurantClick } from "../api.js"
 import logo from "../assets/logo.webp"
 import dalunaImage from "../assets/DaLunaRes.webp"
@@ -762,24 +759,9 @@ const Home = () => {
         <div style={{ marginTop: 28, display: "flex", justifyContent: "center", gap: 12 }}>
           {[
             {
-              icon: <FaLinkedin />,
-              label: "LinkedIn",
-              link: null,
-            },
-            {
               icon: <FaInstagram />,
               label: "Instagram",
               link: "https://www.instagram.com/vexclusivegoa/",
-            },
-            {
-              icon: <FaFacebookF />,
-              label: "Facebook",
-              link: "https://www.facebook.com/V.Exclusive/",
-            },
-            {
-              icon: <FaXTwitter />,
-              label: "X / Twitter",
-              link: null,
             },
           ].map((s, i) =>
             s.link ? (
