@@ -32,7 +32,7 @@ const Restaurant = () => {
   }, [featuredRestaurant.gallery.length]);
 
   const goToRestaurant = (restaurant) => {
-    trackRestaurantClick(restaurant.id);
+    trackRestaurantClick(restaurant.id, restaurant.name);
     navigate(`/restaurant/${restaurant.id}`);
   };
 

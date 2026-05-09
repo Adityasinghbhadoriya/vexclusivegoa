@@ -31,7 +31,7 @@ const Clubs = () => {
   }, [featuredClub.gallery.length]);
 
   const goToClub = (club) => {
-    trackClubClick(club.id);
+    trackClubClick(club.id, club.name);
     navigate(`/club/${club.id}`);
   };
 

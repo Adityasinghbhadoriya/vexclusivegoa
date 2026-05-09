@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { FaQrcode, FaUtensils, FaGlassCheers, FaSync, FaChartBar } from "react-icons/fa"
+import { clubs } from "../Data/clubs"
+import { restaurants } from "../Data/restaurant"
 
 const Admin = () => {
   const [authed, setAuthed] = useState(false)
@@ -91,6 +93,9 @@ const Admin = () => {
   const totalClubClicks = data?.clubs?.total || 0
   const totalRestaurantClicks = data?.restaurants?.total || 0
 
+  const getClubName = (club) => club.clubName || clubs.find(c => c.id === club._id)?.name || `Club #${club._id}`
+  const getRestaurantName = (restaurant) => restaurant.restaurantName || restaurants.find(r => r.id === restaurant._id)?.name || `Restaurant #${restaurant._id}`
+
   // ── 4. Dashboard ─────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#1f2937] to-black text-white p-6">
@@ -176,7 +181,7 @@ const Admin = () => {
               <div key={index} className="bg-white/5 backdrop-blur-md border border-pink-500/30 rounded-lg p-5 hover:bg-white/10 transition">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-semibold text-lg text-pink-300">{club.clubName || `Club #${club._id}`}</h3>
+                    <h3 className="font-semibold text-lg text-pink-300">{getClubName(club)}</h3>
                     <p className="text-xs text-gray-400 mt-1">ID: {club._id}</p>
                   </div>
                   <span className="text-3xl font-bold text-pink-400">{club.count}</span>
@@ -212,7 +217,7 @@ const Admin = () => {
               <div key={index} className="bg-white/5 backdrop-blur-md border border-orange-500/30 rounded-lg p-5 hover:bg-white/10 transition">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-semibold text-lg text-orange-300">{restaurant.restaurantName || `Restaurant #${restaurant._id}`}</h3>
+                    <h3 className="font-semibold text-lg text-orange-300">{getRestaurantName(restaurant)}</h3>
                     <p className="text-xs text-gray-400 mt-1">ID: {restaurant._id}</p>
                   </div>
                   <span className="text-3xl font-bold text-orange-400">{restaurant.count}</span>
