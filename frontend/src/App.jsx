@@ -5,6 +5,7 @@ import Clubs from "./Pages/Clubs"
 import Restaurant from "./Pages/Restaurant"
 import RestaurantDetails from "./Components/RestaurantDetails"
 import ClubsDetails from "./Components/ClubsDetails"
+import SpaDetails from "./Components/SpaDetails"
 import Admin from "./Pages/Admin"
 import ParraRoad from "./Pages/ParraRoad"
 import HilltopMarket from "./Pages/HilltopMarket"
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/restaurants" element={<Restaurant />} />
         <Route path="/clubs" element={<Clubs />} />
+        <Route path="/spa/:id" element={<SpaDetails />} />
         <Route path="/restaurant/:id" element={<RestaurantDetails />} />
         <Route path="/club/:id" element={<ClubsDetails />} />
         <Route path="/admin" element={<Admin />} />

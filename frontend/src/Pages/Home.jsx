@@ -441,7 +441,7 @@ const Home = () => {
           maxWidth: 720, margin: "0 auto",
           padding: "0 22px 110px",
         }}>
-          <div className="vex-fade-up" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, animationDelay: ".85s" }}>
+          <div className="vex-fade-up" style={{ display: "grid", gridTemplateColumns: "repeat(2,minmax(180px,1fr))", gap: 14, animationDelay: ".85s" }}>
             {/* Restaurants */}
             <Link
               to="/restaurants"
@@ -479,6 +479,27 @@ const Home = () => {
                 <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Best parties & beach clubs</div>
               </div>
             </Link>
+
+            <div style={{ gridColumn: "1 / -1", display: "flex", justifyContent: "center" }}>
+              {/* Spa & Wellness */}
+              <Link
+                to="/spa/1"
+                onClick={() => trackCategoryClick("spa")}
+                className="vex-glass vex-tilt"
+                style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", maxWidth: 320 }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  <div style={{
+                    width: 42, height: 42, borderRadius: 12,
+                    background: "linear-gradient(135deg,#14b8a6,#06b6d4)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 22, marginBottom: 6,
+                  }}>🧖</div>
+                  <div className="vex-font-display" style={{ fontSize: 16, fontWeight: 700 }}>Spa & Wellness</div>
+                  <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Relaxation and rejuvenation</div>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
 
