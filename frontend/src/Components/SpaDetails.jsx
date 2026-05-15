@@ -19,6 +19,8 @@ const SpaDetails = () => {
   const spa = spas.find((s) => s.id === parseInt(id))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [liked, setLiked] = useState(false)
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
 
   if (!spa) {
     return (
@@ -26,6 +28,31 @@ const SpaDetails = () => {
         <p className="text-stone-600 text-lg">Spa not found</p>
       </div>
     )
+  }
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+    if (isLeftSwipe) {
+      // Swipe left - next image
+      setCurrentIndex((prev) => (prev + 1) % spa.gallery.length)
+    }
+    if (isRightSwipe) {
+      // Swipe right - previous image
+      setCurrentIndex((prev) => (prev - 1 + spa.gallery.length) % spa.gallery.length)
+    }
   }
 
   useEffect(() => {
@@ -79,7 +106,12 @@ const SpaDetails = () => {
         .scrollbar-none{scrollbar-width:none}
       `}</style>
 
-      <div className="relative h-[68vh] w-full overflow-hidden">
+      <div 
+        className="relative h-[68vh] w-full overflow-hidden"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {spa.gallery.map((img, i) => (
           <img
             key={i}

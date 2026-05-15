@@ -12,7 +12,7 @@ export const spas = [
     category: "Spa & Wellness",
     rating: 4.8,
     reviews: 210,
-    location: "Calangute, Goa",
+    location: "Anjuna, Goa",
     hours: "9:00 AM - 10:00 PM",
     phone: "+918123456789",
     googleLink: "https://www.google.com/search?q=GoAsian+Wellness+Spa+Goa",

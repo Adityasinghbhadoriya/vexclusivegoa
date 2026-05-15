@@ -398,7 +398,7 @@ const Home = () => {
             lineHeight: 1.05, fontWeight: 700,
             animationDelay: ".25s",
           }}>
-            <span className="vex-hero-title">Discover Goa</span>
+            <span className="vex-hero-title">Experience Goa</span>
           </h1>
 
           <h2 className="vex-font-serif vex-fade-up" style={{
@@ -441,52 +441,56 @@ const Home = () => {
           maxWidth: 720, margin: "0 auto",
           padding: "0 22px 110px",
         }}>
-          <div className="vex-fade-up" style={{ display: "grid", gridTemplateColumns: "repeat(2,minmax(180px,1fr))", gap: 14, animationDelay: ".85s" }}>
-            {/* Restaurants */}
-            <Link
-              to="/restaurants"
-              onClick={() => trackCategoryClick("restaurants")}
-              className="vex-glass vex-tilt"
-              style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block" }}
-            >
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                <div style={{
-                  width: 42, height: 42, borderRadius: 12,
-                  background: "linear-gradient(135deg,#fbbf24,#f97316)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 22, marginBottom: 6,
-                }}>🍽</div>
-                <div className="vex-font-display" style={{ fontSize: 16, fontWeight: 700 }}>Top Restaurants</div>
-                <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Curated dining experience</div>
-              </div>
-            </Link>
+          <div className="vex-fade-up" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, animationDelay: ".85s" }}>
+            {/* Top row - Restaurants and Nightlife */}
+            <div style={{ display: "flex", gap: 14, justifyContent: "center", width: "100%" }}>
+              {/* Restaurants */}
+              <Link
+                to="/restaurants"
+                onClick={() => trackCategoryClick("restaurants")}
+                className="vex-glass vex-tilt"
+                style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, flex: 1, maxWidth: 320 }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  <div style={{
+                    width: 42, height: 42, borderRadius: 12,
+                    background: "linear-gradient(135deg,#fbbf24,#f97316)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 22, marginBottom: 6,
+                  }}>🍽</div>
+                  <div className="vex-font-display" style={{ fontSize: 16, fontWeight: 700 }}>Top Restaurants</div>
+                  <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Curated dining experience</div>
+                </div>
+              </Link>
 
-            {/* Nightlife */}
-            <Link
-              to="/clubs"
-              onClick={() => trackCategoryClick("clubs")}
-              className="vex-glass vex-tilt"
-              style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block" }}
-            >
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                <div style={{
-                  width: 42, height: 42, borderRadius: 12,
-                  background: "linear-gradient(135deg,#a78bfa,#ec4899)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 22, marginBottom: 6,
-                }}>🍸</div>
-                <div className="vex-font-display" style={{ fontSize: 16, fontWeight: 700 }}>Nightlife & Clubs</div>
-                <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Best parties & beach clubs</div>
-              </div>
-            </Link>
+              {/* Nightlife */}
+              <Link
+                to="/clubs"
+                onClick={() => trackCategoryClick("clubs")}
+                className="vex-glass vex-tilt"
+                style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, flex: 1, maxWidth: 320 }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  <div style={{
+                    width: 42, height: 42, borderRadius: 12,
+                    background: "linear-gradient(135deg,#a78bfa,#ec4899)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 22, marginBottom: 6,
+                  }}>🍸</div>
+                  <div className="vex-font-display" style={{ fontSize: 16, fontWeight: 700 }}>Nightlife & Clubs</div>
+                  <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Best parties & beach clubs</div>
+                </div>
+              </Link>
+            </div>
 
-            <div style={{ gridColumn: "1 / -1", display: "flex", justifyContent: "center" }}>
+            {/* Bottom row - Spa & Wellness centered */}
+            <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
               {/* Spa & Wellness */}
               <Link
                 to="/spa/1"
                 onClick={() => trackCategoryClick("spa")}
                 className="vex-glass vex-tilt"
-                style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", maxWidth: 320 }}
+                style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, maxWidth: 320 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <div style={{
