@@ -29,7 +29,7 @@ if (typeof document !== "undefined" && !document.getElementById("vex-fonts")) {
   link.id = "vex-fonts"
   link.rel = "stylesheet"
   link.href =
-    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Bebas+Neue&display=swap"
   document.head.appendChild(link)
 }
 
@@ -192,6 +192,220 @@ const globalStyle = `
   .vex-luna-ring {
     background: conic-gradient(from 180deg at 50% 50%, #fbbf24, #f97316, #fde68a, #fbbf24);
     padding: 2px; border-radius: 999px;
+  }
+
+  /* ── Mario Miranda "Why Us" section ── */
+  .mm-section {
+    background: #f5c800;
+    position: relative;
+    padding: 64px 24px 72px;
+    overflow: hidden;
+  }
+  .mm-bg-halftone {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+  }
+  .mm-border-frame {
+    position: absolute;
+    inset: 12px;
+    border: 3px solid #1a1200;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .mm-border-frame::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1.5px solid rgba(0,0,0,0.22);
+  }
+  .mm-corner {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-color: #1a1200;
+    border-style: solid;
+    z-index: 2;
+  }
+  .mm-corner.tl { top: 6px; left: 6px; border-width: 4px 0 0 4px; }
+  .mm-corner.tr { top: 6px; right: 6px; border-width: 4px 4px 0 0; }
+  .mm-corner.bl { bottom: 6px; left: 6px; border-width: 0 0 4px 4px; }
+  .mm-corner.br { bottom: 6px; right: 6px; border-width: 0 4px 4px 0; }
+  .mm-inner {
+    position: relative;
+    z-index: 5;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .mm-promise-tag {
+    display: inline-block;
+    background: #1a1200;
+    color: #f5c800;
+    font-family: 'Bebas Neue', 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  .mm-stamp-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .mm-stamp-line {
+    flex: 1;
+    max-width: 80px;
+    height: 2.5px;
+    background: #1a1200;
+  }
+  .mm-eyebrow-dark {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #1a1200;
+  }
+  .mm-heading {
+    font-family: 'Bebas Neue', 'Playfair Display', Georgia, serif;
+    font-size: clamp(1rem, 9vw, 5.2rem);
+    line-height: 0.93;
+    color: #1a1200;
+    letter-spacing: 0.03em;
+    margin: 10px 0 6px;
+    text-transform: uppercase;
+  }
+  .mm-subheading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    font-style: italic;
+    color: #3a2900;
+    margin: 0 0 0;
+    letter-spacing: 0.01em;
+  }
+  .mm-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0 24px;
+  }
+  .mm-divider-line {
+    height: 1.5px;
+    background: #1a1200;
+    flex: 1;
+    max-width: 120px;
+  }
+  .mm-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: #2a1800;
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+  .mm-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .mm-card {
+    background: #1a1200;
+    border-radius: 4px;
+    padding: 24px 20px 22px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #1a1200;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .mm-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.35);
+  }
+  .mm-card::after {
+    content: '';
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 10px; height: 10px;
+    border-top: 2px solid #f5c800;
+    border-right: 2px solid #f5c800;
+  }
+  .mm-card-icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .mm-card-title {
+    font-family: 'Bebas Neue', 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.07em;
+    color: #f5c800;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+  .mm-card-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: rgba(245,200,0,0.7);
+  }
+  .mm-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 34px;
+  }
+  .mm-badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .mm-badge-circle {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #1a1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    position: relative;
+    transition: transform .25s ease;
+  }
+  .mm-badge-circle:hover { transform: scale(1.1); }
+  .mm-badge-circle::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    border: 1px dashed rgba(245,200,0,0.45);
+  }
+  .mm-badge-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1a1200;
+  }
+  .mm-ink-blob {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.05);
+    pointer-events: none;
   }
 `
 
@@ -791,70 +1005,74 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ===== WHY US ===== */}
-      <section style={{
-        padding: "60px 20px",
-        background: "linear-gradient(135deg, #1a0f00 0%, #2a1a08 50%, #1a0f00 100%)",
-        color: "#fff", position: "relative", overflow: "hidden",
-      }}>
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(circle at 50% 0%, rgba(251,191,36,.18), transparent 60%)",
-        }} />
-        <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 2 }}>
-          <div className="vex-eyebrow" style={{ color: "#fbbf24", marginBottom: 12 }}>The Vex Promise</div>
-          <h2 className="vex-font-display" style={{ fontSize: "clamp(1.8rem, 5vw, 2.6rem)", fontWeight: 700, margin: 0 }}>
-            <span className="vex-hero-title">✨ Why VExclusive?</span>
-          </h2>
-          <p style={{ marginTop: 18, fontSize: 15, lineHeight: 1.7, color: "rgba(255,255,255,.78)" }}>
-            No searching. No confusion. Just scan and instantly discover the best places around you.
+      {/* ===== WHY US — Mario Miranda Goa Style ===== */}
+      <section className="mm-section">
+        {/* Halftone dot texture */}
+        <div className="mm-bg-halftone" />
+
+        {/* Decorative ink blobs */}
+        <div className="mm-ink-blob" style={{ width: 320, height: 320, top: -90, right: -90 }} />
+        <div className="mm-ink-blob" style={{ width: 220, height: 220, bottom: -70, left: -70 }} />
+
+        {/* Ornamental border frame */}
+        <div className="mm-border-frame" />
+        <div className="mm-corner tl" />
+        <div className="mm-corner tr" />
+        <div className="mm-corner bl" />
+        <div className="mm-corner br" />
+
+        <div className="mm-inner">
+          {/* Top tag */}
+          <span className="mm-promise-tag">The Vex Promise</span>
+
+          {/* Eyebrow with rules */}
+          <div className="mm-stamp-row">
+            <div className="mm-stamp-line" />
+            <span className="mm-eyebrow-dark">Goa's #1 Discovery Platform</span>
+            <div className="mm-stamp-line" />
+          </div>
+
+          {/* Big display heading */}
+          <h3 className="mm-heading">
+            Why V Exclusive?
+          </h3>
+
+          <p className="mm-subheading">No searching. No confusion. Just Experience.</p>
+
+          {/* Ornamental divider */}
+          <div className="mm-divider">
+            <div className="mm-divider-line" />
+            <span style={{ fontSize: 20, lineHeight: 1, color: "#1a1200" }}>✦</span>
+            <div className="mm-divider-line" />
+          </div>
+
+          <p className="mm-body">
+            Instantly discover the best places around you — curated by locals, trusted by thousands of travellers exploring the pearl of the Arabian Sea.
           </p>
+
+          {/* Feature cards */}
+          <div className="mm-cards">
+            <div className="mm-card">
+              <span className="mm-card-icon">📱</span>
+              <h3 className="mm-card-title">In-Car QR Experience</h3>
+              <p className="mm-card-body">
+                Through our in-car QR experience, tourists can instantly explore trusted restaurants, cafés, clubs, beaches, and local businesses without wasting time searching across multiple platforms.
+              </p>
+            </div>
+            <div className="mm-card">
+              <span className="mm-card-icon">📍</span>
+              <h3 className="mm-card-title">Trusted Partners</h3>
+              <p className="mm-card-body">
+                We partner with selected venues and brands across Goa to bring useful information directly to our audience — including menus, directions, highlights, and exclusive offers.
+              </p>
+            </div>
+          </div>
+
+          
         </div>
       </section>
 
-      {/* ===== FEATURES ===== */}
-      <section style={{ background: "#fffaf0", padding: "60px 20px" }}>
-        <div style={{
-          maxWidth: 1000, margin: "0 auto",
-          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))",
-          gap: 20,
-        }}>
-          {[
-            {
-              icon: "📱",
-              title: "In-Car QR Experience",
-              body: "Through our in-car QR experience, tourists can instantly explore trusted restaurants, cafés, clubs, beaches, and local businesses without wasting time searching across multiple platforms.",
-            },
-            {
-              icon: "📍",
-              title: "Trusted Partners",
-              body: "We partner with selected venues and brands across Goa to bring useful information directly to our audience inside the ride itself — including menus, directions, highlights, and exclusive offers.",
-            },
-          ].map((f, i) => (
-            <div
-              key={i}
-              className="vex-card-hover"
-              style={{
-                background: "white",
-                borderRadius: 22,
-                padding: 26,
-                border: "1px solid rgba(180,140,60,.2)",
-                boxShadow: "0 8px 28px -14px rgba(120,80,20,.2)",
-              }}
-            >
-              <div style={{
-                width: 52, height: 52, borderRadius: 14,
-                background: "linear-gradient(135deg, #fbbf24, #f97316)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 24, marginBottom: 14,
-                boxShadow: "0 8px 20px -6px rgba(249,115,22,.45)",
-              }}>{f.icon}</div>
-              <h3 className="vex-font-display" style={{ fontSize: 18, fontWeight: 700, margin: "0 0 8px" }}>{f.title}</h3>
-              <p style={{ fontSize: 13.5, color: "#6b5128", lineHeight: 1.65, margin: 0 }}>{f.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+ 
 
       {/* ===== GOOGLE REVIEWS ===== */}
       <section style={{ background: "#fffaf0", padding: "20px 20px 70px" }}>
