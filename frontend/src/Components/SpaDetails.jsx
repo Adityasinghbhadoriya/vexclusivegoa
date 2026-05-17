@@ -85,7 +85,7 @@ const SpaDetails = () => {
       icon: FaSpa,
       label: "Wellness",
       sub: "View treatments",
-      onClick: () => window.open(spa.googleLink, "_blank"),
+      onClick: () => window.open(spa.websiteLink, "_blank"),
     },
   ]
 
