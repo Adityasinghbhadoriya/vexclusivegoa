@@ -36,10 +36,21 @@ const ClubsDetails = () => {
     return () => clearInterval(interval);
   }, [club.gallery.length]);
 
+  const getInstagramHandle = (url) => {
+    try {
+      const pathname = new URL(url).pathname
+      const parts = pathname.split("/").filter(Boolean)
+      return parts.length ? parts.pop() : "Follow us"
+    } catch (e) {
+      const parts = url.split("/").filter(Boolean)
+      return parts.length ? parts.pop().split("?")[0] : "Follow us"
+    }
+  }
+
   const actions = [
     { icon: FaDirections, label: "Directions", sub: "Open in Maps", onClick: () => window.open(club.googleLink, "_blank") },
     { icon: FaPhoneAlt, label: "Call", sub: "Reserve a table", onClick: () => (window.location.href = `tel:${club.phone}`) },
-    { icon: FaInstagram, label: "Instagram", sub: club.instagram ? club.instagram.split('/').pop() : "Follow us", onClick: () => window.open(club.instagram, "_blank") },
+    { icon: FaInstagram, label: "Instagram", sub: club.instagram ? getInstagramHandle(club.instagram) : "Follow us", onClick: () => window.open(club.instagram, "_blank") },
     { icon: FaGlassCheers, label: "Vibe", sub: "Live music", onClick: () => window.open(club.googleLink, "_blank") },
   ];
 

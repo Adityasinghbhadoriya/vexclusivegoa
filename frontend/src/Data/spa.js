@@ -17,7 +17,7 @@ export const spas = [
     phone: "+919074817607",
     googleLink: "https://www.google.com/search?q=GoAsian+Wellness+Spa+Goa",
     websiteLink: "https://goasianspa.com/",
-    instagram: "https://www.instagram.com/goasianwellnessspa/",
+    instagram: "https://www.instagram.com/goasianwellness?igsh=MWF5NXF1YXE3ZmwweQ==",
     offer: "10% OFF",
     image: spaImg1,
     gallery: [spaImg6, spaImg1, spaImg2, spaImg3, spaImg4, spaImg5],

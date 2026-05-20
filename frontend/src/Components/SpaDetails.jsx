@@ -62,6 +62,17 @@ const SpaDetails = () => {
     return () => clearInterval(interval)
   }, [spa.gallery.length])
 
+  const getInstagramHandle = (url) => {
+    try {
+      const pathname = new URL(url).pathname
+      const parts = pathname.split("/").filter(Boolean)
+      return parts.length ? parts.pop() : "Follow us"
+    } catch (e) {
+      const parts = url.split("/").filter(Boolean)
+      return parts.length ? parts.pop().split("?")[0] : "Follow us"
+    }
+  }
+
   const actions = [
     {
       icon: FaDirections,
@@ -78,7 +89,7 @@ const SpaDetails = () => {
     {
       icon: FaInstagram,
       label: "Instagram",
-      sub: spa.instagram ? spa.instagram.split("/").pop() : "Follow us",
+      sub: spa.instagram ? getInstagramHandle(spa.instagram) : "Follow us",
       onClick: () => window.open(spa.instagram, "_blank"),
     },
     {
