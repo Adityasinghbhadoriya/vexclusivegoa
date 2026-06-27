@@ -18,6 +18,7 @@ import dalunaOffer3 from "../assets/DaLunaOffers.jpeg"
 import parraRoadGoa from "../assets/Parra-Road-Goa.jpg.webp"
 import hilltopMarketImage from "../assets/Hiltopmarket.jpg"
 import chaporaLaneImage from "../assets/chaporaLane.jpeg"
+import morjimImage from "../assets/morjimImage.jpg"
 import daLunaLogo from "../assets/DaLuna1.avif"
 import elephantBeachLogo from "../assets/Elephant-beach.webp"
 
@@ -446,6 +447,14 @@ const trending = [
     img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
     path: "/mandrem-beach",
     location: "Mandrem, Goa",
+  },
+  {
+    name: "Morjim",
+    desc: "Quiet coastal paradise with turtles, sunsets & peaceful beaches",
+    tag: "🌊 Tranquil",
+    img: morjimImage,
+    path: "/morjim",
+    location: "Morjim, Goa",
   },
 ]
 

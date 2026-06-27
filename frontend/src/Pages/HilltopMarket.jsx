@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import hilltopMarketImage from "../assets/Hiltopmarket.jpg"
 
@@ -122,101 +122,124 @@ const globalStyle = `
   }
 `
 
+const highlights = [
+  {
+    icon: "🎶",
+    title: "Not Your Regular Market",
+    text: "Hilltop Market isn’t like your usual flea markets. It sits up in Vagator, surrounded by trees, open sky, and that raw Goa energy, with stalls buzzing as evening settles in.",
+  },
+  {
+    icon: "🔊",
+    title: "The Real Scene – Music & Energy",
+    text: "Right next to the market is the legendary Hilltop Goa, known for its psychedelic trance parties and deep bass that fills the air as the night rolls in.",
+  },
+  {
+    icon: "🌅",
+    title: "When to Go",
+    text: "Hilltop Market usually kicks off on Sundays, especially during season. The sweet spot is around 5 PM for browsing and 7 PM onward for the full high-energy vibe.",
+  },
+  {
+    icon: "👀",
+    title: "What Locals Will Tell You",
+    text: "We don’t go there just to buy stuff. We go because it feels free, creative and a little wild, with people from all over the world coming together for the night.",
+  },
+  {
+    icon: "⚠️",
+    title: "Small Heads-Up",
+    text: "It gets crowded during peak season, prices can be touristy, and it’s best to keep your belongings safe while you soak in the energy.",
+  },
+  {
+    icon: "💛",
+    title: "Why It’s Special",
+    text: "Goa has many markets, but Hilltop is different. It is not just shopping—it is music, lights, movement, and a feeling that stays with you long after you leave.",
+  },
+]
+
 const HilltopMarket = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
-    <div className="vex-font-body w-full overflow-x-hidden bg-white text-black">
+    <div className="vex-font-body w-full overflow-x-hidden bg-[#fcf6e8] text-black">
       <style>{globalStyle}</style>
 
-      {/* Hero Image */}
-      <div className="relative w-full h-120 rounded-b-4xl overflow-hidden">
+      <div className="relative h-[78vh] min-h-[560px] w-full overflow-hidden">
         <img
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
           src={hilltopMarketImage}
           alt="Hilltop Market"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/45 to-[#1b1408]/90" />
 
-        <div className="relative z-10 flex flex-col mt-25 min-h-screen px-6 py-12 text-center">
-          <h1
-            className="vex-font-display vex-hero-title"
-            style={{ fontSize: "clamp(2.4rem, 12vw, 4rem)" }}
-          >
-            Hilltop Market
-          </h1>
-          <h2
-            className="text-white"
-            style={{ marginTop: 12, fontSize: "1.2rem", fontWeight: 500 }}
-          >
-            Goa’s Night Bazaar Above the Chaos
-          </h2>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div style={{ background: "#fefce8", padding: "40px 24px" }}>
-        <div className="max-w-4xl mx-auto">
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            If you’ve been around North Goa long enough, someone’s definitely told you:
-            “Sunday ko Hilltop jaana, bro… full vibe milega.”
-            They’re talking about the famous Hilltop Market—a place that’s not just a market, not just a party… but a proper Goan Sunday ritual.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>🎶 Not Your Regular Market</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Hilltop Market isn’t like your usual flea markets. It sits up in Vagator, surrounded by trees, open sky, and that raw Goa energy.
-            By evening, the place slowly comes alive—music starts building, lights come on, and stalls begin buzzing.
-            You’ll find: Boho clothes & festival outfits, handmade jewelry, dreamcatchers, crystals, art pieces, street food from all over.
-            But honestly, people don’t just come here to shop. They come for the vibe.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>🔊 The Real Scene – Music & Energy</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Right next to the market is the legendary Hilltop Goa, known for its psychedelic trance parties.
-            So while you’re walking through the stalls, you’ll hear: Deep bass, psytrance beats, live DJ sets in the background.
-            It’s like shopping inside a music festival.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>🌅 When to Go (Local Timing)</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Hilltop Market usually kicks off on Sundays (especially during season).
-            Best time? 5 PM onwards → Chill browsing, 7 PM to late → Full power vibe.
-            After sunset, the lights, music, and crowd hit differently.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>👀 What Locals Will Tell You</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            We don’t go there just to “buy stuff.” We go because: It’s a good pre-party scene, you meet interesting people from all over the world, the energy feels free, creative, and a little wild.
-            It’s one of those places where nobody cares who you are—just enjoy.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>⚠️ Small Heads-Up</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            It gets crowded during peak season, prices can be touristy (don’t hesitate to bargain a bit), keep your belongings safe, and yeah… wear something comfortable. You’ll end up walking, dancing, and chilling all in one go.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>💛 Why Hilltop Market is Special</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Goa has many markets… But Hilltop is different. It’s not about buying things—it’s about feeling something.
-            Music in the air, lights in the trees, strangers becoming friends for a night… That’s Hilltop.
-          </p>
-
-          <div style={{ background: "#fef3c7", padding: 20, borderRadius: 12, marginTop: 30 }}>
-            <h4 style={{ fontWeight: 600, marginBottom: 10 }}>📍 Quick Local Summary</h4>
-            <p><strong>Location:</strong> Vagator</p>
-            <p><strong>Day:</strong> Mostly Sundays</p>
-            <p><strong>Vibe:</strong> Night market + party energy</p>
-            <p><strong>Best for:</strong> Shopping, music, meeting people</p>
-            <p style={{ marginTop: 10 }}>
-              If you’re scanning this on your way there… Don’t rush. Walk slow, feel the music, and just go with the flow.
-              That’s how Hilltop is meant to be experienced 🔊🌴
+        <div className="relative z-10 flex h-full items-center justify-center px-6 py-12 text-center">
+          <div className="max-w-3xl">
+            <p className="mb-4 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1 text-[0.7rem] uppercase tracking-[0.3em] text-[#fde68a]">
+              Vagator • Sunday Ritual
+            </p>
+            <h1 className="vex-font-display vex-hero-title" style={{ fontSize: "clamp(2.6rem, 9vw, 4.4rem)" }}>
+              Hilltop Market
+            </h1>
+            <h2 className="mt-4 text-lg font-medium text-white/90 sm:text-xl">
+              Goa’s Night Bazaar Above the Chaos
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
+              If you’ve been around North Goa long enough, someone’s probably told you that Sunday at Hilltop is a full-on Goa ritual.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Back Button */}
-      <div style={{ background: "#fbbf24", padding: "20px 24px", textAlign: "center" }}>
-        <Link to="/" style={{ textDecoration: 'none', color: '#000', fontWeight: 600 }}>← Back to Home</Link>
+      <div className="px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8">
+          <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
+            <div className="rounded-[28px] border border-[#f1dfb2] bg-white p-8 shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
+              <div className="mb-6 flex flex-wrap gap-2">
+                <span className="rounded-full bg-[#fff7d6] px-3 py-1 text-sm font-medium text-[#8a5a00]">Boho Finds</span>
+                <span className="rounded-full bg-[#fff7d6] px-3 py-1 text-sm font-medium text-[#8a5a00]">Live Music</span>
+                <span className="rounded-full bg-[#fff7d6] px-3 py-1 text-sm font-medium text-[#8a5a00]">Night Vibes</span>
+              </div>
+              <h3 className="vex-section-title" style={{ fontSize: "1.35rem", marginBottom: 12 }}>
+                A market that turns into a memory
+              </h3>
+              <p style={{ fontSize: 16, lineHeight: 1.8, color: "#4b4b4b" }}>
+                Hilltop Market is not just about shopping. It is about the mood, the music, the lights in the trees and the feeling of being in the middle of Goa after sunset.
+              </p>
+            </div>
+
+            <div className="rounded-[28px] border border-[#f1dfb2] bg-[#fff7e6] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.05)]">
+              <h4 style={{ fontWeight: 700, fontSize: "1.05rem", marginBottom: 14 }}>Quick local snapshot</h4>
+              <div className="space-y-3 text-sm text-[#4b4b4b]">
+                <p><strong>Location:</strong> Vagator</p>
+                <p><strong>Day:</strong> Mostly Sundays</p>
+                <p><strong>Vibe:</strong> Night market + party energy</p>
+                <p><strong>Best for:</strong> Shopping, music, meeting people</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {highlights.map((item) => (
+              <div key={item.title} className="rounded-[24px] border border-[#efe0b8] bg-white p-7 shadow-[0_16px_45px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.08)]">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff2c8] text-2xl">{item.icon}</div>
+                <h3 className="vex-section-title" style={{ fontSize: "1.15rem", marginBottom: 10 }}>{item.title}</h3>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: "#5b5b5b" }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 pb-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl rounded-[28px] border border-[#edd9a9] bg-[#fffdf7] p-8 text-center shadow-[0_16px_45px_rgba(0,0,0,0.04)]">
+          <h4 style={{ fontWeight: 700, fontSize: "1.2rem", marginBottom: 10 }}>Why Hilltop feels special</h4>
+          <p style={{ fontSize: 15, lineHeight: 1.8, color: "#5b5b5b", maxWidth: 760, margin: "0 auto" }}>
+            Walk slow, feel the music and let the night unfold. That is the best way to experience Hilltop — not as a stop, but as a moment.
+          </p>
+          <div className="mt-6">
+            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>← Back to Home</Link>
+          </div>
+        </div>
       </div>
     </div>
   )

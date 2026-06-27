@@ -11,6 +11,7 @@ import ParraRoad from "./Pages/ParraRoad"
 import HilltopMarket from "./Pages/HilltopMarket"
 import ChaporaLane from "./Pages/ChaporaLane"
 import MandremBeach from "./Pages/MandremBeach"
+import Morjim from "./Pages/Morjim"
 // import RestaurantDetails from "./Pages/RestaurantDetails"
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/hilltop-market" element={<HilltopMarket />} />
         <Route path="/chapora-lane" element={<ChaporaLane />} />
         <Route path="/mandrem-beach" element={<MandremBeach />} />
+        <Route path="/morjim" element={<Morjim />} />
       </Routes>
     </div>
   )

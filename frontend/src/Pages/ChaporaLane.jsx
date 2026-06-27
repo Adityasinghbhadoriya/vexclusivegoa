@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import chaporaLaneImage from "../assets/chaporaLane.jpeg"
 
@@ -122,102 +122,116 @@ const globalStyle = `
   }
 `
 
+const highlights = [
+  {
+    icon: "🚶‍♂️",
+    title: "It’s Not a Spot – It’s a Feeling",
+    text: "Chapora Lane is a quiet stretch of village roads, old houses and greenery where the pace slows down and the day feels softer.",
+  },
+  {
+    icon: "☕",
+    title: "Hidden Cafés & Slow Evenings",
+    text: "Some cozy cafés and small spots have quietly blended into the lane, creating the perfect setting for long conversations and unhurried evenings.",
+  },
+  {
+    icon: "🌅",
+    title: "Best Time to Explore",
+    text: "Late afternoon to sunset is perfect, with soft golden light and a gentle breeze. Early morning is lovely if you want the lane to feel completely yours.",
+  },
+  {
+    icon: "🏰",
+    title: "Close to the Famous, But Still Quiet",
+    text: "Chapora Lane sits near the fort, yet it retains a calm, rooted character that many visitors never get to experience.",
+  },
+  {
+    icon: "👀",
+    title: "What Locals Know",
+    text: "We don’t come here for attractions. We come here when we want a break from everything else and a slow ride or walk through the village.",
+  },
+  {
+    icon: "💛",
+    title: "Why It Stays With You",
+    text: "Goa isn’t always loud. Sometimes it is quiet roads, old walls and time moving a little slower. Chapora Lane reminds you of that.",
+  },
+]
+
 const ChaporaLane = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
-    <div className="vex-font-body w-full overflow-x-hidden bg-white text-black">
+    <div className="vex-font-body w-full overflow-x-hidden bg-[#fcf6e8] text-black">
       <style>{globalStyle}</style>
 
-      {/* Hero Image */}
-      <div className="relative w-full h-120 rounded-b-4xl overflow-hidden">
-        <img
-          className="absolute inset-0 w-full h-full object-cover"
-          src={chaporaLaneImage}
-          alt="Chapora Lane"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90" />
+      <div className="relative h-[78vh] min-h-[560px] w-full overflow-hidden">
+        <img className="absolute inset-0 h-full w-full object-cover" src={chaporaLaneImage} alt="Chapora Lane" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/45 to-[#1b1408]/90" />
 
-        <div className="relative z-10 flex flex-col mt-25 min-h-screen px-6 py-12 text-center">
-          <h1
-            className="vex-font-display vex-hero-title"
-            style={{ fontSize: "clamp(2.4rem, 12vw, 4rem)" }}
-          >
-            Chapora Lane
-          </h1>
-          <h2
-            className="text-white"
-            style={{ marginTop: 12, fontSize: "1.2rem", fontWeight: 500 }}
-          >
-            Where Goa Slows Down
-          </h2>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div style={{ background: "#fefce8", padding: "40px 24px" }}>
-        <div className="max-w-4xl mx-auto">
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Most people come to North Goa chasing beaches and parties… but the real ones? They end up wandering into places like Chapora Lane without even planning it.
-            And that’s the beauty of it.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>🚶‍♂️ It’s Not a “Spot” – It’s a Feeling</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Chapora Lane isn’t some big tourist attraction with boards and tickets. It’s just a quiet stretch in the village of Chapora—narrow roads, old houses, greenery, and that peaceful silence you won’t find in Baga or Calangute.
-            You’ll see: Portuguese-style homes with faded colors, locals sitting outside, just watching the day go by, dogs napping in the middle of the road like they own it (they do 😄). No rush. No noise. Just Goa being Goa.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>☕ Hidden Cafés & Slow Evenings</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            What makes Chapora Lane interesting now is the mix of old and new. Some really nice cafés and small spots have quietly come up around here—nothing too flashy, just cozy places where: Coffee turns into long conversations, work laptops open… but rarely get used, time kind of disappears.
-            It’s the kind of place where you say “just 10 minutes” and end up staying for hours.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>🌅 Best Time to Explore (Local Style)</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Late afternoon to sunset is perfect. Soft golden light hitting the houses, slight breeze coming in from the river side, less heat, more vibe.
-            Or go early morning if you want it completely empty—just you and the sound of birds.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>🏰 Close to the Famous, But Still Quiet</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Funny thing is, Chapora Lane is just minutes away from the very popular Chapora Fort. Thousands of people go up to the fort every day… but very few take the time to explore the lanes below.
-            That’s why it still feels untouched.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>👀 What Locals Know</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            We don’t come here for “attractions.” We come here when we want a break from everything else. A slow bike ride, a peaceful walk, or just to clear the head.
-            It’s one of those places you don’t post about too much… you just enjoy it.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>⚠️ Respect the Vibe</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Chapora is still a living village. So if you’re visiting: Keep noise low, don’t treat it like a party street, respect people’s homes and space.
-            That’s the only way places like this stay special.
-          </p>
-
-          <h3 className="vex-section-title" style={{ fontSize: "1.4rem", marginBottom: 16 }}>💛 Why Chapora Lane Stays With You</h3>
-          <p style={{ fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
-            Goa isn’t always loud. Sometimes, it’s just quiet roads, old walls, and time moving a little slower.
-            Chapora Lane reminds you of that.
-          </p>
-
-          <div style={{ background: "#fef3c7", padding: 20, borderRadius: 12, marginTop: 30 }}>
-            <h4 style={{ fontWeight: 600, marginBottom: 10 }}>📍 Quick Local Summary</h4>
-            <p><strong>Location:</strong> Chapora village</p>
-            <p><strong>Vibe:</strong> Calm, artsy, slow</p>
-            <p><strong>Best time:</strong> Evening or early morning</p>
-            <p><strong>Best for:</strong> Walks, cafés, peaceful breaks</p>
-            <p style={{ marginTop: 10 }}>
-              If you ended up here by accident… good. That’s usually how the best parts of Goa are found 🌿
+        <div className="relative z-10 flex h-full items-center justify-center px-6 py-12 text-center">
+          <div className="max-w-3xl">
+            <p className="mb-4 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1 text-[0.7rem] uppercase tracking-[0.3em] text-[#fde68a]">
+              Chapora • Slow Living
+            </p>
+            <h1 className="vex-font-display vex-hero-title" style={{ fontSize: "clamp(2.6rem, 9vw, 4.4rem)" }}>
+              Chapora Lane
+            </h1>
+            <h2 className="mt-4 text-lg font-medium text-white/90 sm:text-xl">Where Goa Slows Down</h2>
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
+              Most people come to North Goa chasing beaches and parties, but the real magic often appears a little later in places like Chapora Lane.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Back Button */}
-      <div style={{ background: "#fbbf24", padding: "20px 24px", textAlign: "center" }}>
-        <Link to="/" style={{ textDecoration: 'none', color: '#000', fontWeight: 600 }}>← Back to Home</Link>
+      <div className="px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8">
+          <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
+            <div className="rounded-[28px] border border-[#f1dfb2] bg-white p-8 shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
+              <div className="mb-6 flex flex-wrap gap-2">
+                <span className="rounded-full bg-[#fff7d6] px-3 py-1 text-sm font-medium text-[#8a5a00]">Village Charm</span>
+                <span className="rounded-full bg-[#fff7d6] px-3 py-1 text-sm font-medium text-[#8a5a00]">Café Stops</span>
+                <span className="rounded-full bg-[#fff7d6] px-3 py-1 text-sm font-medium text-[#8a5a00]">Quiet Walks</span>
+              </div>
+              <h3 className="vex-section-title" style={{ fontSize: "1.35rem", marginBottom: 12 }}>A lane that feels unhurried</h3>
+              <p style={{ fontSize: 16, lineHeight: 1.8, color: "#4b4b4b" }}>
+                Chapora Lane is one of those places that makes you slow down without even trying. It is old-world, gentle and lived-in, with the kind of calm that feels rare in North Goa.
+              </p>
+            </div>
+
+            <div className="rounded-[28px] border border-[#f1dfb2] bg-[#fff7e6] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.05)]">
+              <h4 style={{ fontWeight: 700, fontSize: "1.05rem", marginBottom: 14 }}>Quick local snapshot</h4>
+              <div className="space-y-3 text-sm text-[#4b4b4b]">
+                <p><strong>Location:</strong> Chapora village</p>
+                <p><strong>Vibe:</strong> Calm, artsy, slow</p>
+                <p><strong>Best time:</strong> Evening or early morning</p>
+                <p><strong>Best for:</strong> Walks, cafés, peaceful breaks</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {highlights.map((item) => (
+              <div key={item.title} className="rounded-[24px] border border-[#efe0b8] bg-white p-7 shadow-[0_16px_45px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.08)]">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff2c8] text-2xl">{item.icon}</div>
+                <h3 className="vex-section-title" style={{ fontSize: "1.15rem", marginBottom: 10 }}>{item.title}</h3>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: "#5b5b5b" }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 pb-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl rounded-[28px] border border-[#edd9a9] bg-[#fffdf7] p-8 text-center shadow-[0_16px_45px_rgba(0,0,0,0.04)]">
+          <h4 style={{ fontWeight: 700, fontSize: "1.2rem", marginBottom: 10 }}>Why Chapora Lane stays with you</h4>
+          <p style={{ fontSize: 15, lineHeight: 1.8, color: "#5b5b5b", maxWidth: 760, margin: "0 auto" }}>
+            If you ended up here by accident, good. That is usually how the best parts of Goa are found — quietly, and without needing a big announcement.
+          </p>
+          <div className="mt-6">
+            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>← Back to Home</Link>
+          </div>
+        </div>
       </div>
     </div>
   )
