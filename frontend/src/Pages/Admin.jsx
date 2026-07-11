@@ -93,8 +93,25 @@ const Admin = () => {
   const totalClubClicks = data?.clubs?.total || 0
   const totalRestaurantClicks = data?.restaurants?.total || 0
 
+  const restaurantStats = data?.restaurants?.byRestaurant || []
+  const restaurantClickMap = new Map(restaurantStats.map(item => [Number(item._id), item.count || 0]))
+  const restaurantCatalog = [
+    ...(restaurants.some((restaurant) => restaurant.name === "Piccola Roma Pizza")
+      ? []
+      : [{ id: 999, name: "Piccola Roma Pizza", cuisine: "Pizza • Italian", location: "Vagator, Goa", rating: 4.2, reviews: 2207 }]),
+    ...restaurants,
+  ]
+
+  const restaurantList = restaurantCatalog
+    .filter((restaurant, index, list) => list.findIndex((item) => item.name === restaurant.name) === index)
+    .map((restaurant) => ({
+      ...restaurant,
+      count: restaurantClickMap.get(restaurant.id) || 0,
+    }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))
+
   const getClubName = (club) => club.clubName || clubs.find(c => c.id === club._id)?.name || `Club #${club._id}`
-  const getRestaurantName = (restaurant) => restaurant.restaurantName || restaurants.find(r => r.id === restaurant._id)?.name || `Restaurant #${restaurant._id}`
+  const getRestaurantName = (restaurant) => restaurant?.name || restaurant?.restaurantName || restaurants.find(r => r.id === restaurant?._id)?.name || `Restaurant #${restaurant?._id}`
 
   // ── 4. Dashboard ─────────────────────────────────────────────
   return (
@@ -211,14 +228,14 @@ const Admin = () => {
           <span className="text-sm font-normal text-gray-400">({data?.restaurants?.byRestaurant?.length || 0} restaurants)</span>
         </h2>
 
-        {data?.restaurants?.byRestaurant && data.restaurants.byRestaurant.length > 0 ? (
+        {restaurantList.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {data.restaurants.byRestaurant.map((restaurant, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-md border border-orange-500/30 rounded-lg p-5 hover:bg-white/10 transition">
+            {restaurantList.map((restaurant, index) => (
+              <div key={restaurant.id || index} className="bg-white/5 backdrop-blur-md border border-orange-500/30 rounded-lg p-5 hover:bg-white/10 transition">
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3 className="font-semibold text-lg text-orange-300">{getRestaurantName(restaurant)}</h3>
-                    <p className="text-xs text-gray-400 mt-1">ID: {restaurant._id}</p>
+                    <p className="text-xs text-gray-400 mt-1">ID: {restaurant.id}</p>
                   </div>
                   <span className="text-3xl font-bold text-orange-400">{restaurant.count}</span>
                 </div>
@@ -226,7 +243,7 @@ const Admin = () => {
                   <div
                     className="bg-gradient-to-r from-orange-500 to-red-500 h-2 rounded-full"
                     style={{
-                      width: `${Math.min((restaurant.count / Math.max(...data.restaurants.byRestaurant.map(r => r.count))) * 100, 100)}%`
+                      width: `${Math.min((restaurant.count / Math.max(...restaurantList.map(r => r.count), 1)) * 100, 100)}%`
                     }}
                   />
                 </div>
@@ -235,7 +252,7 @@ const Admin = () => {
           </div>
         ) : (
           <div className="bg-white/5 rounded-lg p-8 text-center text-gray-400">
-            No restaurant clicks yet
+            No restaurants available
           </div>
         )}
       </div>

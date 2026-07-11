@@ -42,6 +42,45 @@ export const restaurants = [
 
   {
     id: 2,
+    name: "Piccola Roma Pizza",
+    cuisine: "Pizza • Italian",
+    rating: 4.2,
+    reviews: 2207,
+    location: "Vagator, Goa",
+    hours: "9:00 AM - 11:00 PM",
+    phone: "+917507806821",
+
+    googleLink:
+      "https://www.google.com/search?q=picola+pizza+roma+place+in+vegator+goa&oq=picola+pizza+roma+place+in+vegator+goa&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCAgCEAAYFhgeMggIAxAAGBYYHjIICAQQABgWGB4yCAgFEAAYFhgeMggIBhAAGBYYHjIICAcQABgWGB4yCAgIEAAYFhgeMggICRAAGBYYHtIBCDcwMjNqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8",
+
+    instagram:
+      "https://www.instagram.com/popular/piccola-roma-vagator/",
+
+    offer: "10% OFF",
+
+    image:
+      "/src/assets/piccolo.webp",
+
+    gallery: [
+      "/src/assets/piccolo.webp",
+      "/src/assets/piccolodish.webp",
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=80",
+    ],
+
+    description:
+      "A popular pizza spot in Vagator serving fresh Roman-style slices, handmade pies, and casual Italian comfort food for a relaxed beach-town meal.",
+
+    tags: [
+      "Pizza",
+      "Italian",
+      "Casual Dining",
+      "Vagator",
+      "Family Friendly"
+    ]
+  },
+
+  {
+    id: 3,
     name: "Elephant Beach Cafe & Bar",
     cuisine: "Multicuisine • Café",
     rating: 4.4,
@@ -82,7 +121,7 @@ export const restaurants = [
 
 
   {
-    id: 3,
+    id: 4,
     name: "Thalassa",
     cuisine: "Greek • Mediterranean",
     rating: 4.6,
@@ -118,5 +157,6 @@ export const restaurants = [
       "Luxury",
       "Live Entertainment"
     ]
-  }
+  },
+
 ]

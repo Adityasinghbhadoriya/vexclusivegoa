@@ -17,7 +17,13 @@ import { trackRestaurantClick } from "../api";
 const Restaurant = () => {
   const navigate = useNavigate();
   const featuredRestaurant = restaurants[0];
-  const otherRestaurants = restaurants.slice(1);
+  const otherRestaurants = restaurants
+    .filter((restaurant) => restaurant.id !== featuredRestaurant.id)
+    .sort((a, b) => {
+      if (a.name === "Piccola Roma Pizza") return -1;
+      if (b.name === "Piccola Roma Pizza") return 1;
+      return 0;
+    });
 
   const [currentIndex, setCurrentIndex] = useState(0);
 

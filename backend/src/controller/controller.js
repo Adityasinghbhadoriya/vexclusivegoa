@@ -130,7 +130,7 @@ export const trackRestaurantClick = async (req, res) => {
         const db = getDB()
 
         await db.collection("restaurant_clicks").insertOne({
-            restaurantId,
+            restaurantId: Number(restaurantId),
             restaurantName: restaurantName || "",
             clickedAt: new Date(),
             timestamp: Date.now()
