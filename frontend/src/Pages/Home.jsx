@@ -21,6 +21,7 @@ import chaporaLaneImage from "../assets/chaporaLane.jpeg"
 import morjimImage from "../assets/morjimImage.jpg"
 import daLunaLogo from "../assets/DaLuna1.avif"
 import elephantBeachLogo from "../assets/Elephant-beach.webp"
+import piccoloLogo from "../assets/piccolo.webp"
 
 const BASE_URL = "https://vexclusivegoa.onrender.com"
 
@@ -922,11 +923,13 @@ const Home = () => {
                 "Da Luna Restaurant": "Italian vibes + perfect sunset dining",
                 "Elephant Beach Cafe & Bar": "Peaceful vibes + Fresh Food",
                 "Thalassa": "Greek food + nightlife experience",
+                "Piccola Roma Pizza": "Pizza cravings + cozy Vagator dining",
               }
               const logos = {
                 "Da Luna Restaurant": daLunaLogo,
                 "Elephant Beach Cafe & Bar": elephantBeachLogo,
                 "Thalassa": "https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg",
+                "Piccola Roma Pizza": piccoloLogo,
               }
               const isLuna = restaurant.name === "Da Luna Restaurant"
               return (
