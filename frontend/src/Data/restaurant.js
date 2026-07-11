@@ -1,3 +1,6 @@
+import piccolo from "../assets/piccolo.webp";
+import piccolodish from "../assets/piccolodish.webp";
+
 export const restaurants = [
   {
     id: 1,
@@ -58,12 +61,11 @@ export const restaurants = [
 
     offer: "10% OFF",
 
-    image:
-      "/src/assets/piccolo.webp",
+    image: piccolo,
 
     gallery: [
-      "/src/assets/piccolo.webp",
-      "/src/assets/piccolodish.webp",
+      piccolo,
+      piccolodish,
       "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=80",
     ],
 
