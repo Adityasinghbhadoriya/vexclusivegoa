@@ -7,6 +7,12 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaInstagram,
+  FaBeer,
+  FaPizzaSlice,
+  FaMusic,
+  FaMicrophoneAlt,
+  FaClock,
+  FaGift,
 } from "react-icons/fa"
 import { trackCategoryClick, trackRestaurantClick } from "../api.js"
 import logo from "../assets/logo.webp"
@@ -22,6 +28,8 @@ import morjimImage from "../assets/morjimImage.jpg"
 import daLunaLogo from "../assets/DaLuna1.avif"
 import elephantBeachLogo from "../assets/Elephant-beach.webp"
 import piccoloLogo from "../assets/piccolo.webp"
+import basilicaImage from "../assets/Basilica Church.webp"
+import wildlifeImage from "../assets/MahavirWildlife.webp"
 
 const BASE_URL = "https://vexclusivegoa.onrender.com"
 
@@ -457,6 +465,22 @@ const trending = [
     path: "/morjim",
     location: "Morjim, Goa",
   },
+  {
+    name: "Basilica of Bom Jesus",
+    desc: "Historic church with sacred relics and timeless heritage in Old Goa",
+    tag: "⛪ Heritage",
+    img: basilicaImage,
+    path: "/basilica-bom-jesus",
+    location: "Old Goa",
+  },
+  {
+    name: "Bhagwan Mahavir Wildlife Sanctuary",
+    desc: "Lush forests, waterfalls and wild trails in the heart of South Goa",
+    tag: "🌿 Nature",
+    img: wildlifeImage,
+    path: "/bhagwan-mahavir-wildlife",
+    location: "Mollem, Goa",
+  },
 ]
 
 const experiences = [
@@ -737,112 +761,137 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ===== OFFERS SLIDER (DA LUNA — Featured Partner) ===== */}
-      <section style={{ background: "#fffaf0", padding: "20px 0 50px" }}>
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px" }}>
-          <div style={{ textAlign: "center", marginBottom: 22 }}>
+      {/* ===== PREMIUM WEEKEND EXPERIENCE (DA LUNA) ===== */}
+      <section style={{ background: "#fffaf0", padding: "20px 0 60px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+          <div style={{ textAlign: "center", marginBottom: 24 }}>
             <div className="vex-eyebrow" style={{ marginBottom: 8 }}>★ Featured Partner</div>
-            <h2 className="vex-section-title" style={{ marginBottom: 4 }}>Exclusive Offers at Da Luna</h2>
-            <p style={{ marginTop: 18, fontSize: 13.5, color: "#7a5a2a" }}>
-              Hand-picked deals from Goa's most loved Italian sunset spot.
+            <h2 className="vex-section-title" style={{ marginBottom: 8 }}>Weekend Experience at Da Luna</h2>
+            <p style={{ marginTop: 10, fontSize: 14, color: "#7a5a2a", maxWidth: 680, margin: "0 auto" }}>
+              A refined evening of music, indulgence and elevated hospitality designed for the perfect Goa weekend.
             </p>
           </div>
 
-          <div
-            style={{
-              position: "relative",
-              borderRadius: 24,
-              overflow: "hidden",
-              boxShadow: "0 30px 60px -25px rgba(120,60,0,.35), 0 8px 24px -8px rgba(120,60,0,.15)",
-              border: "1px solid rgba(251,191,36,.35)",
-              background: "#000",
-              userSelect: "none",
-              touchAction: "pan-y",
-            }}
-            onPointerDown={(e) => { dragStartX.current = e.clientX; hasDragged.current = false }}
-            onPointerMove={(e) => {
-              if (dragStartX.current === null) return
-              if (Math.abs(e.clientX - dragStartX.current) > 30) hasDragged.current = true
-            }}
-            onPointerUp={(e) => {
-              if (!hasDragged.current || dragStartX.current === null) { dragStartX.current = null; return }
-              const delta = e.clientX - dragStartX.current
-              if (delta > 40) prevSlide()
-              else if (delta < -40) nextSlide()
-              dragStartX.current = null
-            }}
-            onPointerLeave={() => { dragStartX.current = null }}
-          >
-            <div style={{
-              display: "flex",
-              transform: `translateX(-${currentSlide * 100}%)`,
-              transition: isAnimating ? "transform .8s cubic-bezier(.2,.7,.2,1)" : "transform .8s cubic-bezier(.2,.7,.2,1)",
-            }}>
-              {offerImages.map((img, index) => (
-                <div key={index} style={{ minWidth: "100%", position: "relative", aspectRatio: "16/9", maxHeight: 360, background: "#000" }}>
-                  <img
-                    src={img}
-                    alt={`Da Luna Offer ${index + 1}`}
-                    draggable={false}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                  />
-                  <div style={{
-                    position: "absolute", inset: 0,
-                    background: "linear-gradient(180deg, rgba(0,0,0,.0) 55%, rgba(0,0,0,.55) 100%)",
-                    pointerEvents: "none",
-                  }} />
-                  <div style={{
-                    position: "absolute", top: 14, left: 14,
-                    display: "flex", alignItems: "center", gap: 8,
-                  }}>
-                    <span className="vex-badge">DA LUNA</span>
-                    <span className="vex-eyebrow" style={{ color: "#fde68a", fontSize: 10 }}>EXCLUSIVE</span>
+          <div style={{
+            position: "relative",
+            borderRadius: 28,
+            overflow: "hidden",
+            border: "1px solid rgba(234,179,8,.4)",
+            background: "linear-gradient(135deg, #140f07 0%, #24180c 45%, #0f0b05 100%)",
+            boxShadow: "0 30px 80px -24px rgba(80,45,10,.55)",
+            padding: "30px 28px",
+          }}>
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at top left, rgba(251,191,36,.16), transparent 34%), radial-gradient(circle at bottom right, rgba(180,83,9,.16), transparent 36%), linear-gradient(120deg, rgba(255,255,255,.03), transparent 70%)" }} />
+
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: 24 }}>
+                <div className="vex-font-display" style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "#fef3c7", letterSpacing: "0.06em", fontWeight: 700 }}>
+                  DA LUNA GOA
+                </div>
+                <div className="vex-eyebrow" style={{ color: "#fbbf24", marginTop: 8, letterSpacing: "0.3em" }}>
+                  WEEKEND EXPERIENCE
+                </div>
+                <div style={{ marginTop: 12, color: "#f7e2ba", fontSize: 15, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><FaClock /> Friday • Saturday • Sunday</span>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><FaClock /> Happy Hours 6:00 PM – 9:00 PM</span>
+                </div>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1.25fr 0.95fr", gap: 16, alignItems: "stretch" }}>
+                <div style={{
+                  borderRadius: 22,
+                  padding: "22px 20px",
+                  background: "rgba(255,255,255,.05)",
+                  border: "1px solid rgba(251,191,36,.2)",
+                  backdropFilter: "blur(10px)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,.04)",
+                }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", color: "#111", background: "linear-gradient(135deg, #f59e0b, #fde68a)", marginBottom: 12 }}>
+                    <FaBeer size={18} />
+                  </div>
+                  <div className="vex-font-display" style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Beer Bucket</div>
+                  <div style={{ color: "#f7e2ba", fontSize: 14, lineHeight: 1.6 }}>Buy 1 Bucket</div>
+                  <div style={{ color: "#fbbf24", fontWeight: 700, fontSize: 15, marginTop: 4 }}>Get 1 FREE</div>
+                </div>
+
+                <div style={{
+                  borderRadius: 22,
+                  padding: "22px 20px",
+                  background: "linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(120,53,15,.16) 100%)",
+                  border: "1px solid rgba(251,191,36,.24)",
+                  backdropFilter: "blur(10px)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,.06), 0 14px 30px -18px rgba(0,0,0,.7)",
+                }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", color: "#111", background: "linear-gradient(135deg, #fbbf24, #fde68a)", marginBottom: 12 }}>
+                    <FaGift size={18} />
+                  </div>
+                  <div className="vex-font-display" style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Premium Sheesha</div>
+                  <div style={{ color: "#f7e2ba", fontSize: 14, lineHeight: 1.6 }}>Book 2</div>
+                  <div style={{ color: "#fbbf24", fontWeight: 700, fontSize: 15, marginTop: 4 }}>Get 25% OFF</div>
+                </div>
+
+                <div style={{
+                  borderRadius: 22,
+                  padding: "22px 20px",
+                  background: "linear-gradient(145deg, rgba(255,255,255,.08) 0%, rgba(120,53,15,.2) 100%)",
+                  border: "1px solid rgba(251,191,36,.24)",
+                  backdropFilter: "blur(10px)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,.06), 0 14px 30px -18px rgba(0,0,0,.7)",
+                  gridColumn: "1 / -1",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 16,
+                }}>
+                  <div style={{ width: 50, height: 50, minWidth: 50, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", color: "#111", background: "linear-gradient(135deg, #f97316, #fde68a)" }}>
+                    <FaPizzaSlice size={20} />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div className="vex-font-display" style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Pizza Special</div>
+                    <div style={{ color: "#f7e2ba", fontSize: 14, lineHeight: 1.6 }}>Order Any Pizza</div>
+                    <div style={{ color: "#fbbf24", fontWeight: 700, fontSize: 15, marginTop: 4 }}>Get 1 Beer FREE</div>
                   </div>
                 </div>
-              ))}
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12, marginTop: 18 }}>
+                {[
+                  { icon: <FaMusic />, label: "Live Music" },
+                  { icon: <FaMicrophoneAlt />, label: "Karaoke Night" },
+                  { icon: <FaBeer />, label: "DJ Experience" },
+                ].map((item) => (
+                  <div key={item.label} style={{ borderRadius: 16, padding: "12px 14px", background: "rgba(255,255,255,.05)", border: "1px solid rgba(251,191,36,.16)", color: "#f7e2ba", display: "flex", alignItems: "center", gap: 10, fontSize: 14 }}>
+                    <span style={{ color: "#fbbf24" }}>{item.icon}</span>
+                    {item.label}
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ marginTop: 24, textAlign: "center" }}>
+                <a
+                  href="https://www.google.com/search?q=Da+Luna+Goa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 8,
+                    padding: "12px 20px",
+                    borderRadius: 999,
+                    background: "linear-gradient(135deg, #c77d13 0%, #fbbf24 45%, #fde68a 100%)",
+                    color: "#1b1208",
+                    fontWeight: 700,
+                    textDecoration: "none",
+                    boxShadow: "0 12px 30px -10px rgba(199,125,19,.45)",
+                  }}
+                >
+                  <FaPhoneAlt /> Reserve Your Table
+                </a>
+                <div style={{ marginTop: 10, color: "#d7c08b", fontSize: 13 }}>
+                  Seats are limited. Book early to avoid disappointment.
+                </div>
+              </div>
             </div>
-
-            {/* Arrow controls */}
-            <button
-              onClick={prevSlide}
-              aria-label="Previous offer"
-              style={{
-                position: "absolute", top: "50%", left: 10, transform: "translateY(-50%)",
-                width: 38, height: 38, borderRadius: 999,
-                background: "rgba(0,0,0,.45)", color: "#fff", border: "1px solid rgba(255,255,255,.25)",
-                cursor: "pointer", backdropFilter: "blur(6px)", fontSize: 18,
-              }}
-            >‹</button>
-            <button
-              onClick={nextSlide}
-              aria-label="Next offer"
-              style={{
-                position: "absolute", top: "50%", right: 10, transform: "translateY(-50%)",
-                width: 38, height: 38, borderRadius: 999,
-                background: "rgba(0,0,0,.45)", color: "#fff", border: "1px solid rgba(255,255,255,.25)",
-                cursor: "pointer", backdropFilter: "blur(6px)", fontSize: 18,
-              }}
-            >›</button>
-          </div>
-
-          {/* Dots indicator */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 18 }}>
-            {offerImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => { goToSlide(i); restartAutoAdvance() }}
-                className="rounded-full focus:outline-none"
-                style={{
-                  width: currentSlide === i ? 24 : 8, height: 8, borderRadius: 999,
-                  background: currentSlide === i
-                    ? "linear-gradient(90deg,#f97316,#fbbf24)"
-                    : "#fde68a",
-                  transition: "all .35s ease",
-                  border: "none", cursor: "pointer",
-                }}
-                aria-label={`Go to offer ${i + 1}`}
-              />
-            ))}
           </div>
         </div>
 

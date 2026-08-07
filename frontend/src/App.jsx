@@ -12,6 +12,8 @@ import HilltopMarket from "./Pages/HilltopMarket"
 import ChaporaLane from "./Pages/ChaporaLane"
 import MandremBeach from "./Pages/MandremBeach"
 import Morjim from "./Pages/Morjim"
+import BasilicaBomJesus from "./Pages/BasilicaBomJesus"
+import BhagwanMahavirWildlife from "./Pages/BhagwanMahavirWildlife"
 // import RestaurantDetails from "./Pages/RestaurantDetails"
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
         <Route path="/chapora-lane" element={<ChaporaLane />} />
         <Route path="/mandrem-beach" element={<MandremBeach />} />
         <Route path="/morjim" element={<Morjim />} />
+        <Route path="/basilica-bom-jesus" element={<BasilicaBomJesus />} />
+        <Route path="/bhagwan-mahavir-wildlife" element={<BhagwanMahavirWildlife />} />
       </Routes>
     </div>
   )
