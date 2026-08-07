@@ -173,13 +173,16 @@ const BhagwanMahavirWildlife = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                display: "inline-block",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
                 padding: "10px 18px",
                 borderRadius: 999,
                 background: "linear-gradient(135deg, #16a34a 0%, #4ade80 100%)",
                 color: "#052e16",
                 fontWeight: 700,
                 textDecoration: "none",
+                whiteSpace: "nowrap",
               }}
             >
               🗺️ View on Google Maps →

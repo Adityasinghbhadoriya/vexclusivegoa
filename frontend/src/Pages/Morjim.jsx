@@ -219,6 +219,33 @@ const Morjim = () => {
             From golden beaches and wildlife to quiet village roads and stunning sunsets,
             Morjim offers a softer, more intimate side of Goa that stays with you long after the trip ends.
           </p>
+          <div className="mx-auto mt-8 max-w-2xl rounded-[24px] border border-[#edd9a9] bg-[#fff7e6] p-6">
+            <h5 className="vex-font-display" style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: 8 }}>
+              📍 Find It Easily
+            </h5>
+            <p style={{ fontSize: 15, lineHeight: 1.8, color: "#5b5b5b", marginBottom: 14 }}>
+              Ready to explore? Open the location in Google Maps and start your journey with turn-by-turn directions.
+            </p>
+            <a
+              href="https://share.google/yKVzPumagVCJQfSJp"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                padding: "10px 18px",
+                borderRadius: 999,
+                background: "linear-gradient(135deg, #f97316 0%, #fbbf24 100%)",
+                color: "#1a0f00",
+                fontWeight: 700,
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+              }}
+            >
+              🗺️ View on Google Maps →
+            </a>
+          </div>
           <div className="mt-6">
             <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>
               ← Back to Home
