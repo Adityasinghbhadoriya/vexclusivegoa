@@ -1,5 +1,7 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useRef, useState, useEffect, useMemo } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
+import L from "leaflet"
 import CategoryCard from "../Components/CategoryCard"
 import { restaurants } from "../Data/restaurant"
 import {
@@ -15,8 +17,10 @@ import {
   FaGift,
 } from "react-icons/fa"
 import { trackCategoryClick, trackRestaurantClick } from "../api.js"
+import { calculateDistance, formatDistance } from "../utils/location"
 import logo from "../assets/logo.webp"
 import dalunaImage from "../assets/DaLunaRes.webp"
+import sakanaLogo from "../assets/sakana1.webp"
 
 import dalunaOffer1 from "../assets/da-luna-offer1.webp"
 import dalunaOffer2 from "../assets/da-luna-offer3.webp"
@@ -202,6 +206,50 @@ const globalStyle = `
   .vex-luna-ring {
     background: conic-gradient(from 180deg at 50% 50%, #fbbf24, #f97316, #fde68a, #fbbf24);
     padding: 2px; border-radius: 999px;
+  }
+
+  .vex-live-shell {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .vex-live-panel {
+    background: rgba(255,255,255,.8);
+    border: 1px solid rgba(233,201,142,.7);
+    border-radius: 24px;
+    padding: 16px;
+  }
+  .vex-live-map {
+    background: rgba(255,255,255,.82);
+    border: 1px solid rgba(233,201,142,.7);
+    border-radius: 24px;
+    padding: 16px;
+  }
+  .vex-live-map-frame {
+    height: 360px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(249,115,22,.15);
+  }
+
+  @media (max-width: 900px) {
+    .vex-live-shell {
+      grid-template-columns: 1fr;
+    }
+    .vex-live-map-frame {
+      height: 280px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .vex-live-panel, .vex-live-map {
+      padding: 12px;
+      border-radius: 18px;
+    }
+    .vex-live-map-frame {
+      height: 240px;
+    }
   }
 
   /* ── Mario Miranda "Why Us" section ── */
@@ -424,6 +472,65 @@ const categories = [
   { title: "Clubs & Nightlife", path: "/clubs" },
 ]
 
+const liveExplorePlaces = [
+  {
+    id: "sakana",
+    name: "Sakana Japanese Restaurant",
+    category: "restaurants",
+    coords: [15.5823, 73.7428],
+    address: "Anjuna, Goa",
+    description: "Authentic sushi and ramen in a relaxed setting.",
+  },
+  {
+    id: "da-luna",
+    name: "Da Luna Restaurant",
+    category: "restaurants",
+    coords: [15.5805, 73.7478],
+    address: "Anjuna, Goa",
+    description: "Fine dining with sea-view evenings and premium Italian plates.",
+  },
+  {
+    id: "piccola-roma",
+    name: "Piccola Roma Pizza",
+    category: "restaurants",
+    coords: [15.6020, 73.7380],
+    address: "Vagator, Goa",
+    description: "Easy-going pizza stop for beach-town cravings.",
+  },
+  {
+    id: "chapora-lane",
+    name: "Chapora Lane",
+    category: "beaches",
+    coords: [15.6126, 73.7425],
+    address: "Chapora, Goa",
+    description: "Quiet village lanes with cafés, boutiques and sunset walks.",
+  },
+  {
+    id: "morjim-beach",
+    name: "Morjim Beach",
+    category: "beaches",
+    coords: [15.6228, 73.7306],
+    address: "Morjim, Goa",
+    description: "A calm shoreline best for sunset views and long coastal strolls.",
+  },
+  {
+    id: "hilltop-market",
+    name: "Hilltop Market",
+    category: "nightlife",
+    coords: [15.6608, 73.7608],
+    address: "Arpora, Goa",
+    description: "Friday night energy with live music, shopping and festive vibes.",
+  },
+  {
+    id: "bhagwan-mahavir",
+    name: "Bhagwan Mahavir Wildlife Sanctuary",
+    category: "nature",
+    coords: [15.3828, 74.1810],
+    address: "Mollem, Goa",
+    description: "Dense forests and lush trails for a nature-led escape.",
+  },
+]
+
 const trending = [
   {
     name: "Parra Road",
@@ -481,6 +588,14 @@ const trending = [
     path: "/bhagwan-mahavir-wildlife",
     location: "Mollem, Goa",
   },
+  {
+    name: "Cabo de Rama Beach",
+    desc: "Quiet cliffs, peaceful shores and scenic sunset views in South Goa",
+    tag: "🌅 Scenic",
+    img: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1200&q=80",
+    path: "/cabo-de-rama-beach",
+    location: "Cabo de Rama, Goa",
+  },
 ]
 
 const experiences = [
@@ -506,6 +621,11 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [isLivePanelOpen, setIsLivePanelOpen] = useState(false)
+  const [locationStatus, setLocationStatus] = useState("idle")
+  const [userLocation, setUserLocation] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedPlace, setSelectedPlace] = useState(liveExplorePlaces[0])
   const autoAdvanceRef = useRef(null)
   const timeoutRef = useRef(null)
   const dragStartX = useRef(null)
@@ -566,6 +686,65 @@ const Home = () => {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const openLivePanel = () => {
+    setIsLivePanelOpen(true)
+    setLocationStatus("loading")
+    setSelectedCategory("all")
+
+    if (!navigator.geolocation) {
+      setLocationStatus("unsupported")
+      setUserLocation(null)
+      return
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude
+        const lon = position.coords.longitude
+        const withDistance = liveExplorePlaces
+          .map((place) => ({
+            ...place,
+            distance: calculateDistance(lat, lon, place.coords[0], place.coords[1]),
+          }))
+          .sort((a, b) => a.distance - b.distance)
+
+        setUserLocation({ lat, lon })
+        setSelectedPlace(withDistance[0])
+        setLocationStatus("ready")
+      },
+      () => {
+        setLocationStatus("denied")
+        setUserLocation(null)
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+    )
+  }
+
+  const nearbyPlaces = useMemo(() => {
+    if (!userLocation) {
+      return liveExplorePlaces
+        .filter((place) => selectedCategory === "all" || place.category === selectedCategory)
+        .slice(0, 6)
+    }
+
+    return liveExplorePlaces
+      .map((place) => ({
+        ...place,
+        distance: calculateDistance(userLocation.lat, userLocation.lon, place.coords[0], place.coords[1]),
+      }))
+      .filter((place) => selectedCategory === "all" || place.category === selectedCategory)
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 8)
+  }, [selectedCategory, userLocation])
+
+  const markerIcon = (accent) =>
+    L.divIcon({
+      className: "",
+      html: `<div style="width: 16px; height: 16px; border-radius: 999px; background: ${accent}; border: 2px solid #fff; box-shadow: 0 0 0 6px rgba(255,255,255,.25);"></div>`,
+      iconSize: [18, 18],
+      iconAnchor: [9, 9],
+    })
+
   return (
     <div className="vex-font-body" style={{ background: "#fffaf0", color: "#1a1208", overflowX: "hidden" }}>
       <style>{globalStyle}</style>
@@ -618,13 +797,17 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="vex-eyebrow vex-pulse-glow" style={{
-              color: "#fff", background: "rgba(251,191,36,.18)",
-              padding: "6px 12px", borderRadius: 999, fontSize: 10,
-              border: "1px solid rgba(251,191,36,.45)",
-            }}>
+            <button
+              onClick={openLivePanel}
+              className="vex-eyebrow vex-pulse-glow"
+              style={{
+                color: "#fff", background: "rgba(251,191,36,.18)",
+                padding: "6px 12px", borderRadius: 999, fontSize: 10,
+                border: "1px solid rgba(251,191,36,.45)", cursor: "pointer",
+              }}
+            >
               ● LIVE
-            </div>
+            </button>
           </div>
         </div>
 
@@ -760,6 +943,178 @@ const Home = () => {
           <WaveDivider fill="#fffaf0" />
         </div>
       </section>
+
+      {isLivePanelOpen && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(8, 4, 1, 0.8)", zIndex: 70, padding: 20, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: "min(1160px, 100%)", maxHeight: "92vh", overflowY: "auto", borderRadius: 28, background: "#fffaf0", border: "1px solid rgba(249,115,22,.2)", boxShadow: "0 24px 80px rgba(0,0,0,.25)", padding: "24px 24px 30px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, marginBottom: 16 }}>
+              <div>
+                <div className="vex-eyebrow" style={{ color: "#b45309" }}>LIVE LOCATION</div>
+                <h3 className="vex-font-display" style={{ fontSize: "1.6rem", margin: "6px 0 4px", color: "#1a1208" }}>Explore Near Me</h3>
+                <p style={{ margin: 0, color: "#5b4632", maxWidth: 620, lineHeight: 1.65 }}>
+                  Discover nearby restaurants, beaches and nightlife around your current location in real time.
+                </p>
+              </div>
+              <button
+                onClick={() => setIsLivePanelOpen(false)}
+                style={{ border: "none", background: "rgba(249,115,22,.1)", color: "#9a2c0f", borderRadius: 999, width: 36, height: 36, cursor: "pointer", fontSize: 18 }}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="vex-live-shell">
+              <div className="vex-live-panel">
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
+                  {[
+                    { value: "all", label: "All" },
+                    { value: "restaurants", label: "Restaurants" },
+                    { value: "beaches", label: "Beaches" },
+                    { value: "nightlife", label: "Nightlife" },
+                    { value: "nature", label: "Nature" },
+                  ].map((filter) => (
+                    <button
+                      key={filter.value}
+                      onClick={() => setSelectedCategory(filter.value)}
+                      style={{
+                        border: "1px solid rgba(249,115,22,.2)",
+                        background: selectedCategory === filter.value ? "#f97316" : "#fff",
+                        color: selectedCategory === filter.value ? "#fff" : "#7c4a12",
+                        borderRadius: 999,
+                        padding: "7px 12px",
+                        cursor: "pointer",
+                        fontSize: 12,
+                        fontWeight: 700,
+                      }}
+                    >
+                      {filter.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div style={{ marginBottom: 12, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#b45309" }}>
+                    {locationStatus === "loading" ? "Finding your location…" : locationStatus === "ready" ? "Live recommendations" : locationStatus === "unsupported" ? "Location unavailable" : locationStatus === "denied" ? "Permission denied" : "Tap to unlock live suggestions"}
+                  </div>
+                  <button
+                    onClick={openLivePanel}
+                    style={{ border: "none", background: "linear-gradient(135deg, #f97316, #fbbf24)", color: "#1a0f00", borderRadius: 999, padding: "8px 12px", cursor: "pointer", fontSize: 12, fontWeight: 700 }}
+                  >
+                    Refresh
+                  </button>
+                </div>
+
+                {locationStatus === "loading" ? (
+                  <div style={{ padding: "18px 16px", borderRadius: 16, background: "rgba(251,191,36,.12)", color: "#7c4a12", fontWeight: 600 }}>
+                    Allow location access to see nearby spots sorted by distance and get turn-by-turn directions.
+                  </div>
+                ) : locationStatus === "unsupported" ? (
+                  <div style={{ padding: "18px 16px", borderRadius: 16, background: "rgba(251,191,36,.12)", color: "#7c4a12", fontWeight: 600 }}>
+                    This browser does not support geolocation. You can still browse curated nearby destinations below.
+                  </div>
+                ) : locationStatus === "denied" ? (
+                  <div style={{ padding: "18px 16px", borderRadius: 16, background: "rgba(251,191,36,.12)", color: "#7c4a12", fontWeight: 600 }}>
+                    Location permission was blocked. You can still explore recommended places around Goa.
+                  </div>
+                ) : null}
+
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 14 }}>
+                  {nearbyPlaces.map((place) => (
+                    <button
+                      key={place.id}
+                      onClick={() => setSelectedPlace(place)}
+                      style={{
+                        border: selectedPlace?.id === place.id ? "1px solid rgba(249,115,22,.5)" : "1px solid rgba(233,201,142,.8)",
+                        background: selectedPlace?.id === place.id ? "rgba(254,242,199,.95)" : "#fff",
+                        borderRadius: 16,
+                        padding: "14px 14px",
+                        textAlign: "left",
+                        cursor: "pointer",
+                        boxShadow: selectedPlace?.id === place.id ? "0 8px 28px -10px rgba(249,115,22,.4)" : "none",
+                      }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "flex-start" }}>
+                        <div>
+                          <div style={{ fontWeight: 700, color: "#1a1208", marginBottom: 4 }}>{place.name}</div>
+                          <div style={{ fontSize: 12, color: "#8b6a3c", lineHeight: 1.5 }}>{place.description}</div>
+                        </div>
+                        {userLocation && (
+                          <div style={{ fontSize: 12, color: "#b45309", fontWeight: 700, whiteSpace: "nowrap" }}>
+                            {formatDistance(place.distance)}
+                          </div>
+                        )}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="vex-live-map">
+                <div style={{ marginBottom: 12 }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#b45309" }}>Map view</div>
+                  <div style={{ fontSize: 14, color: "#5b4632", marginTop: 4 }}>
+                    {selectedPlace ? `${selectedPlace.name} • ${selectedPlace.address}` : "Choose a place to inspect it on the map"}
+                  </div>
+                </div>
+
+                <div className="vex-live-map-frame">
+                  <MapContainer
+                    center={userLocation ? [userLocation.lat, userLocation.lon] : [15.4989, 73.8278]}
+                    zoom={userLocation ? 12 : 9}
+                    style={{ height: "100%", width: "100%" }}
+                  >
+                    <TileLayer
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {userLocation && (
+                      <Marker position={[userLocation.lat, userLocation.lon]} icon={markerIcon("#14b8a6")}>
+                        <Popup>You are here</Popup>
+                      </Marker>
+                    )}
+                    {nearbyPlaces.map((place) => (
+                      <Marker
+                        key={place.id}
+                        position={place.coords}
+                        icon={markerIcon(place.category === "restaurants" ? "#f97316" : place.category === "nightlife" ? "#a855f7" : place.category === "nature" ? "#0f766e" : "#eab308")}
+                        eventHandlers={{ click: () => setSelectedPlace(place) }}
+                      >
+                        <Popup>
+                          <div style={{ minWidth: 180 }}>
+                            <strong>{place.name}</strong>
+                            <div style={{ fontSize: 12, color: "#5b4632", marginTop: 4 }}>{place.address}</div>
+                            {userLocation && (
+                              <div style={{ fontSize: 12, color: "#b45309", marginTop: 6, fontWeight: 700 }}>
+                                {formatDistance(place.distance)} away
+                              </div>
+                            )}
+                          </div>
+                        </Popup>
+                      </Marker>
+                    ))}
+                  </MapContainer>
+                </div>
+
+                {selectedPlace && (
+                  <div style={{ marginTop: 12, padding: "14px 14px", borderRadius: 16, background: "rgba(249,115,22,.08)", border: "1px solid rgba(249,115,22,.16)" }}>
+                    <div style={{ fontWeight: 700, color: "#1a1208" }}>{selectedPlace.name}</div>
+                    <div style={{ fontSize: 13, color: "#5b4632", marginTop: 4 }}>{selectedPlace.address}</div>
+                    <div style={{ fontSize: 13, color: "#5b4632", marginTop: 6 }}>{selectedPlace.description}</div>
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${selectedPlace.coords[0]},${selectedPlace.coords[1]}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ display: "inline-block", marginTop: 10, color: "#b45309", fontWeight: 700 }}
+                    >
+                      Open directions ↗
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ===== PREMIUM WEEKEND EXPERIENCE (DA LUNA) ===== */}
       <section style={{ background: "#fffaf0", padding: "20px 0 60px" }}>
@@ -973,12 +1328,14 @@ const Home = () => {
                 "Elephant Beach Cafe & Bar": "Peaceful vibes + Fresh Food",
                 "Thalassa": "Greek food + nightlife experience",
                 "Piccola Roma Pizza": "Pizza cravings + cozy Vagator dining",
+                "Sakana Japanese Restaurant": "Authentic Japanese flavors + relaxed Anjuna dining",
               }
               const logos = {
                 "Da Luna Restaurant": daLunaLogo,
                 "Elephant Beach Cafe & Bar": elephantBeachLogo,
                 "Thalassa": "https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg",
                 "Piccola Roma Pizza": piccoloLogo,
+                "Sakana Japanese Restaurant": sakanaLogo,
               }
               const isLuna = restaurant.name === "Da Luna Restaurant"
               return (

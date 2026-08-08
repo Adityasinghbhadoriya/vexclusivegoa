@@ -1,5 +1,9 @@
 import piccolo from "../assets/piccolo.webp";
 import piccolodish from "../assets/piccolodish.webp";
+import sakana1 from "../assets/sakana1.webp";
+import sakana2 from "../assets/sakana2.webp";
+import sakana3 from "../assets/sakana3.webp";
+import sakana4 from "../assets/sakana4.webp";
 
 export const restaurants = [
   {
@@ -159,6 +163,57 @@ export const restaurants = [
       "Luxury",
       "Live Entertainment"
     ]
+  },
+
+  {
+    id: 5,
+    name: "Sakana Japanese Restaurant",
+    cuisine: "Japanese • Sushi",
+    rating: 4.4,
+    reviews: 1020,
+    location: "Anjuna, Goa",
+    hours: "12:30 PM - 10:30 PM",
+    phone: "+919890135502",
+
+    googleLink:
+      "https://share.google/DHAnI0fiHaMOYNhdM",
+
+    instagram:
+      "https://www.instagram.com/sakana_goa/",
+
+    offer: "10% OFF",
+
+    image: sakana1,
+    
+    gallery: [
+      sakana1,
+      sakana2,
+      sakana3,
+      sakana4,
+    ],
+
+    description:
+      "A cosy Japanese restaurant in Anjuna serving authentic sushi, ramen, gyoza, teriyaki dishes and comforting soups in a relaxed setting ideal for couples, families and food lovers.",
+
+    tags: [
+      "Japanese",
+      "Sushi",
+      "Ramen",
+      "Authentic Flavors",
+      "Family Friendly"
+    ],
+
+    bestTime: "Weekday afternoons from 12:30 PM to 3:00 PM are quieter and more relaxed; evenings are livelier, especially on weekends.",
+
+    mustTry: [
+      "Sushi Rolls",
+      "Chicken or Pork Ramen",
+      "Gyoza",
+      "Teriyaki Dishes",
+      "Miso Soup"
+    ],
+
+    goodToKnow: "Perfect for couples, families and food lovers, with fresh, authentic Japanese flavors in a peaceful North Goa setting."
   },
 
 ]

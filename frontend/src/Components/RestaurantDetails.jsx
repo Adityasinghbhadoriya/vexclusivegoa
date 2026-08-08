@@ -191,6 +191,33 @@ const RestaurantDetails = () => {
           </p>
         </div>
 
+        {restaurant.bestTime && (
+          <div className="mt-6 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+            <h2 className="text-sm font-semibold tracking-wider text-stone-500 uppercase mb-2">Best Time to Visit</h2>
+            <p className="text-stone-700 text-sm leading-relaxed font-light">{restaurant.bestTime}</p>
+          </div>
+        )}
+
+        {restaurant.mustTry && restaurant.mustTry.length > 0 && (
+          <div className="mt-6 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+            <h2 className="text-sm font-semibold tracking-wider text-stone-500 uppercase mb-2">Must-Try Dishes</h2>
+            <div className="flex flex-wrap gap-2">
+              {restaurant.mustTry.map((dish) => (
+                <span key={dish} className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-medium text-orange-700">
+                  {dish}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {restaurant.goodToKnow && (
+          <div className="mt-6 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+            <h2 className="text-sm font-semibold tracking-wider text-stone-500 uppercase mb-2">Good to Know</h2>
+            <p className="text-stone-700 text-sm leading-relaxed font-light">{restaurant.goodToKnow}</p>
+          </div>
+        )}
+
         {/* Actions */}
         <div className="mt-7">
           <h2 className="text-sm font-semibold tracking-wider text-stone-500 uppercase mb-3">
