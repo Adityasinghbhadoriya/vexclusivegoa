@@ -15,6 +15,8 @@ import Morjim from "./Pages/Morjim"
 import BasilicaBomJesus from "./Pages/BasilicaBomJesus"
 import BhagwanMahavirWildlife from "./Pages/BhagwanMahavirWildlife"
 import CaboDeRamaBeach from "./Pages/CaboDeRamaBeach"
+import ColaBeachKayaking from "./Pages/ColaBeachKayaking"
+import FortAguada from "./Pages/FortAguada"
 // import RestaurantDetails from "./Pages/RestaurantDetails"
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
         <Route path="/basilica-bom-jesus" element={<BasilicaBomJesus />} />
         <Route path="/bhagwan-mahavir-wildlife" element={<BhagwanMahavirWildlife />} />
         <Route path="/cabo-de-rama-beach" element={<CaboDeRamaBeach />} />
+        <Route path="/cola-beach-kayaking" element={<ColaBeachKayaking />} />
+        <Route path="/fort-aguada" element={<FortAguada />} />
       </Routes>
     </div>
   )

@@ -4,6 +4,10 @@ import sakana1 from "../assets/sakana1.webp";
 import sakana2 from "../assets/sakana2.webp";
 import sakana3 from "../assets/sakana3.webp";
 import sakana4 from "../assets/sakana4.webp";
+import bgfactory1 from "../assets/Bgfactory1.webp";
+import bgfactory2 from "../assets/Bgfactory2.webp";
+import bgfactory3 from "../assets/Bgfactory3.webp";
+import bgfactory4 from "../assets/Bgfactory4.webp";
 
 export const restaurants = [
   {
@@ -214,6 +218,58 @@ export const restaurants = [
     ],
 
     goodToKnow: "Perfect for couples, families and food lovers, with fresh, authentic Japanese flavors in a peaceful North Goa setting."
+  },
+
+  {
+    id: 6,
+    name: "Burger Factory",
+    cuisine: "Burgers • American • Fast Casual",
+    rating: 4.3,
+    reviews: 980,
+    location: "Morjim, Goa",
+    hours: "Tuesday - Sunday, 1:00 PM - 10:00 PM",
+    phone: "+918904567890",
+
+    googleLink:
+      "https://share.google/KvNktMUH0P3yOO7Nl",
+
+    instagram:
+      "https://www.instagram.com/burgerfactorygoa/?hl=en",
+
+    offer: "10% OFF",
+
+    image: bgfactory3,
+
+    gallery: [
+      bgfactory1,
+      bgfactory2,
+      bgfactory3,
+      bgfactory4,
+    ],
+
+    description:
+      "A popular Morjim burger spot where juicy gourmet burgers, beachside ambience and sunset views come together for a relaxed Goan evening.",
+
+    tags: [
+      "Burgers",
+      "Beachside",
+      "Sunset Dining",
+      "Casual",
+      "Friends"
+    ],
+
+    bestTime: "Late afternoon to evening is ideal if you want to enjoy a burger and stay on for the sunset over the Arabian Sea.",
+
+    mustTry: [
+      "Cheddar Burger",
+      "Blue Cheese Burger",
+      "Classic Chicken Burger",
+      "Double Cheddar Bacon BBQ Burger",
+      "Spinach, Cheddar, Mushroom & Blue Cheese Burger",
+      "Milkshakes and refreshing drinks"
+    ],
+
+    goodToKnow: "Perfect for burger lovers, couples, friends and sunset seekers looking for a casual beachside meal in Morjim."
   },
 
 ]

@@ -34,6 +34,9 @@ import elephantBeachLogo from "../assets/Elephant-beach.webp"
 import piccoloLogo from "../assets/piccolo.webp"
 import basilicaImage from "../assets/Basilica Church.webp"
 import wildlifeImage from "../assets/MahavirWildlife.webp"
+import bgfactory3 from "../assets/Bgfactory3.webp"
+import colabeach2 from "../assets/Colabeach2.jpeg"
+import fortAguadaHome from "../assets/Fort1.jpeg"
 
 const BASE_URL = "https://vexclusivegoa.onrender.com"
 
@@ -595,6 +598,22 @@ const trending = [
     img: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1200&q=80",
     path: "/cabo-de-rama-beach",
     location: "Cabo de Rama, Goa",
+  },
+  {
+    name: "Cola Beach Kayaking",
+    desc: "Paddle through a peaceful lagoon with green surroundings and a calm South Goa vibe",
+    tag: "🛶 Adventure",
+    img: colabeach2,
+    path: "/cola-beach-kayaking",
+    location: "Cola Beach, South Goa",
+  },
+  {
+    name: "Fort Aguada",
+    desc: "Historic Portuguese fort with panoramic coastline views, lighthouse beauty and timeless charm",
+    tag: "🏛️ Heritage",
+    img: fortAguadaHome,
+    path: "/fort-aguada",
+    location: "Sinquerim, North Goa",
   },
 ]
 
@@ -1266,48 +1285,79 @@ const Home = () => {
             gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
             gap: 18,
           }}>
-            {trending.map((place, i) => (
-              <Link
-                key={i}
-                to={place.path}
-                className="vex-trending-item vex-card-hover"
-                style={{
-                  textDecoration: "none", color: "inherit",
-                  borderRadius: 20, overflow: "hidden",
-                  background: "#fff",
-                  border: "1px solid rgba(180,140,60,.18)",
-                  boxShadow: "0 6px 24px -10px rgba(120,80,20,.18)",
-                  animationDelay: `${i * 0.08}s`,
-                  display: "block",
-                }}
-              >
-                <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden" }}>
-                  <img
-                    src={place.img}
-                    alt={place.name}
-                    loading="lazy"
+            {trending.map((place, i) => {
+              const cardContent = (
+                <>
+                  <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden" }}>
+                    <img
+                      src={place.img}
+                      alt={place.name}
+                      loading="lazy"
+                      style={{
+                        width: "100%", height: "100%", objectFit: "cover",
+                        transition: "transform .6s cubic-bezier(.2,.7,.2,1)",
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.08)"}
+                      onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+                    />
+                    <div style={{
+                      position: "absolute", inset: 0,
+                      background: "linear-gradient(180deg, transparent 50%, rgba(0,0,0,.55) 100%)",
+                    }} />
+                    <span className="vex-badge" style={{ position: "absolute", top: 12, left: 12 }}>
+                      {place.tag}
+                    </span>
+                  </div>
+                  <div style={{ padding: "14px 16px 16px" }}>
+                    <h3 className="vex-font-display" style={{ fontSize: 17, fontWeight: 700, margin: 0 }}>{place.name}</h3>
+                    <p style={{ fontSize: 13, color: "#6b5128", margin: "4px 0 8px", lineHeight: 1.5 }}>{place.desc}</p>
+                    <p style={{ fontSize: 11.5, color: "#9a7a3a", margin: 0, letterSpacing: ".02em" }}>📍 {place.location}</p>
+                  </div>
+                </>
+              )
+
+              if (place.external) {
+                return (
+                  <a
+                    key={i}
+                    href={place.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="vex-trending-item vex-card-hover"
                     style={{
-                      width: "100%", height: "100%", objectFit: "cover",
-                      transition: "transform .6s cubic-bezier(.2,.7,.2,1)",
+                      textDecoration: "none", color: "inherit",
+                      borderRadius: 20, overflow: "hidden",
+                      background: "#fff",
+                      border: "1px solid rgba(180,140,60,.18)",
+                      boxShadow: "0 6px 24px -10px rgba(120,80,20,.18)",
+                      animationDelay: `${i * 0.08}s`,
+                      display: "block",
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.08)"}
-                    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
-                  />
-                  <div style={{
-                    position: "absolute", inset: 0,
-                    background: "linear-gradient(180deg, transparent 50%, rgba(0,0,0,.55) 100%)",
-                  }} />
-                  <span className="vex-badge" style={{ position: "absolute", top: 12, left: 12 }}>
-                    {place.tag}
-                  </span>
-                </div>
-                <div style={{ padding: "14px 16px 16px" }}>
-                  <h3 className="vex-font-display" style={{ fontSize: 17, fontWeight: 700, margin: 0 }}>{place.name}</h3>
-                  <p style={{ fontSize: 13, color: "#6b5128", margin: "4px 0 8px", lineHeight: 1.5 }}>{place.desc}</p>
-                  <p style={{ fontSize: 11.5, color: "#9a7a3a", margin: 0, letterSpacing: ".02em" }}>📍 {place.location}</p>
-                </div>
-              </Link>
-            ))}
+                  >
+                    {cardContent}
+                  </a>
+                )
+              }
+
+              return (
+                <Link
+                  key={i}
+                  to={place.path}
+                  className="vex-trending-item vex-card-hover"
+                  style={{
+                    textDecoration: "none", color: "inherit",
+                    borderRadius: 20, overflow: "hidden",
+                    background: "#fff",
+                    border: "1px solid rgba(180,140,60,.18)",
+                    boxShadow: "0 6px 24px -10px rgba(120,80,20,.18)",
+                    animationDelay: `${i * 0.08}s`,
+                    display: "block",
+                  }}
+                >
+                  {cardContent}
+                </Link>
+              )
+            })}
           </div>
         </div>
         <div className="vex-divider-thin" style={{ maxWidth: 600, margin: "50px auto 0" }} />
@@ -1329,6 +1379,7 @@ const Home = () => {
                 "Thalassa": "Greek food + nightlife experience",
                 "Piccola Roma Pizza": "Pizza cravings + cozy Vagator dining",
                 "Sakana Japanese Restaurant": "Authentic Japanese flavors + relaxed Anjuna dining",
+                "Burger Factory": "Gourmet burgers + laid-back beach sunset vibes",
               }
               const logos = {
                 "Da Luna Restaurant": daLunaLogo,
@@ -1336,6 +1387,7 @@ const Home = () => {
                 "Thalassa": "https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg",
                 "Piccola Roma Pizza": piccoloLogo,
                 "Sakana Japanese Restaurant": sakanaLogo,
+                "Burger Factory": bgfactory3,
               }
               const isLuna = restaurant.name === "Da Luna Restaurant"
               return (
