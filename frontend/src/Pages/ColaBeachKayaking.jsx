@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+﻿import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import colabeach1 from "../assets/Colabeach1.jpeg"
 
@@ -55,24 +55,24 @@ const globalStyle = `
 
 const highlights = [
   {
-    icon: "🛶",
+    icon: "≡ƒ¢╢",
     title: "Paddle Through Nature",
-    text: "Glide across Cola’s calm lagoon between coconut palms, greenery and a peaceful South Goa landscape.",
+    text: "Glide across ColaΓÇÖs calm lagoon between coconut palms, greenery and a peaceful South Goa landscape.",
   },
   {
-    icon: "🌴",
+    icon: "≡ƒî┤",
     title: "Quiet Coastal Escape",
     text: "Away from the busier beaches, Cola gives you a more relaxed and scenic environment for a gentle outdoor adventure.",
   },
   {
-    icon: "☀️",
+    icon: "ΓÿÇ∩╕Å",
     title: "Best Time to Go",
     text: "The most comfortable window is between October and March, with early mornings and late afternoons offering the best light and calm conditions.",
   },
   {
-    icon: "💰",
+    icon: "≡ƒÆ░",
     title: "Accessible Cost",
-    text: "Kayaking here often starts around ₹499 per person, depending on the operator, duration and package selected.",
+    text: "Kayaking here often starts around Γé╣499 per person, depending on the operator, duration and package selected.",
   },
 ]
 
@@ -96,13 +96,13 @@ const ColaBeachKayaking = () => {
         <div className="relative z-10 flex h-full items-center justify-center px-6 py-12 text-center">
           <div className="max-w-4xl">
             <p className="mb-4 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1 text-[0.7rem] uppercase tracking-[0.3em] text-[#fde68a]">
-              South Goa • Kayaking
+              South Goa ΓÇó Kayaking
             </p>
             <h1 className="vex-font-display vex-hero-title" style={{ fontSize: "clamp(2.7rem, 9vw, 4.8rem)" }}>
               Cola Beach Kayaking
             </h1>
             <h2 className="mt-4 text-lg font-medium text-white/90 sm:text-xl">
-              A peaceful adventure in Goa’s quieter side
+              A peaceful adventure in GoaΓÇÖs quieter side
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-sm leading-7 text-white/80 sm:text-base">
               Glide through a natural lagoon surrounded by coconut palms and lush greenery, taking in the calm scenery and slow rhythm of South Goa.
@@ -132,8 +132,8 @@ const ColaBeachKayaking = () => {
                 <p><strong>Location:</strong> Cola Beach, South Goa</p>
                 <p><strong>Activity:</strong> Kayaking</p>
                 <p><strong>Best time:</strong> October to March</p>
-                <p><strong>Typical duration:</strong> 30–60 minutes</p>
-                <p><strong>Approx. cost:</strong> From ₹499 per person</p>
+                <p><strong>Typical duration:</strong> 30ΓÇô60 minutes</p>
+                <p><strong>Approx. cost:</strong> From Γé╣499 per person</p>
                 <p><strong>Vibe:</strong> Quiet, scenic, relaxing</p>
               </div>
             </div>
@@ -169,7 +169,7 @@ const ColaBeachKayaking = () => {
 
           <div className="mx-auto mt-8 max-w-2xl rounded-[24px] border border-[#f1dfb2] bg-[#fff7e6] p-6">
             <h5 className="vex-font-display" style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: 8 }}>
-              📍 Find It Easily
+              ≡ƒôì Find It Easily
             </h5>
             <p style={{ fontSize: 15, lineHeight: 1.8, color: "#5b5b5b", marginBottom: 14 }}>
               Ready to explore? Open the location in Google Maps and start your journey with turn-by-turn directions.
@@ -192,12 +192,12 @@ const ColaBeachKayaking = () => {
                 boxShadow: "0 12px 28px -12px rgba(249,115,22,.45)",
               }}
             >
-              🗺️ View on Google Maps →
+              ≡ƒù║∩╕Å View on Google Maps ΓåÆ
             </a>
           </div>
 
           <div className="mt-6">
-            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>← Back to Home</Link>
+            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>ΓåÉ Back to Home</Link>
           </div>
         </div>
       </div>

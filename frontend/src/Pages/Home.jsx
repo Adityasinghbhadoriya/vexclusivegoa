@@ -1139,7 +1139,7 @@ const Home = () => {
       <section style={{ background: "#fffaf0", padding: "20px 0 60px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
           <div style={{ textAlign: "center", marginBottom: 24 }}>
-            <div className="vex-eyebrow" style={{ marginBottom: 8 }}>★ Featured Partner</div>
+            <div className="vex-eyebrow" style={{ marginBottom: 8 }}>★ Awarded Restaurant</div>
             <h2 className="vex-section-title" style={{ marginBottom: 8 }}>Weekend Experience at Da Luna</h2>
             <p style={{ marginTop: 10, fontSize: 14, color: "#7a5a2a", maxWidth: 680, margin: "0 auto" }}>
               A refined evening of music, indulgence and elevated hospitality designed for the perfect Goa weekend.
@@ -1428,7 +1428,7 @@ const Home = () => {
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
                       <h3 className="vex-font-display" style={{ fontSize: 16, fontWeight: 700, margin: 0 }}>{restaurant.name}</h3>
-                      {isLuna && <span className="vex-badge">Featured</span>}
+                      {isLuna && <span className="vex-badge">Awarded Restaurant</span>}
                     </div>
                     <p style={{ fontSize: 12.5, color: "#6b5128", margin: "4px 0 0" }}>{descriptions[restaurant.name]}</p>
                   </div>

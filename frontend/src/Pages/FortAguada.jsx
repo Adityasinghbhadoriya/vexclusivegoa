@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+﻿import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import fortAguadaMain from "../assets/Fort2.jpeg"
 
@@ -55,32 +55,32 @@ const globalStyle = `
 
 const highlights = [
   {
-    icon: "🏛️",
+    icon: "≡ƒÅ¢∩╕Å",
     title: "Historic stronghold",
-    text: "Built by the Portuguese in 1612, Fort Aguada served as a key defensive landmark guarding Goa’s coastline and river access.",
+    text: "Built by the Portuguese in 1612, Fort Aguada served as a key defensive landmark guarding GoaΓÇÖs coastline and river access.",
   },
   {
-    icon: "🌊",
+    icon: "≡ƒîè",
     title: "Strategic seafront",
     text: "Its hilltop position overlooking the Arabian Sea gave it a powerful military advantage, while allowing clear views of approaching ships.",
   },
   {
-    icon: "📸",
+    icon: "≡ƒô╕",
     title: "Photography paradise",
     text: "The laterite walls, lighthouse and expansive sea vistas make it one of the most photogenic historic spots in North Goa.",
   },
   {
-    icon: "🌅",
+    icon: "≡ƒîà",
     title: "Calm coastal views",
     text: "The fort is especially memorable in the early morning or late afternoon when the light softens and the coastline feels even more dramatic.",
   },
   {
-    icon: "🧭",
-    title: "A glimpse into Goa’s past",
-    text: "From its Portuguese-era architecture to the old lighthouse, the fort gives visitors a clear sense of Goa’s colonial and maritime history.",
+    icon: "≡ƒº¡",
+    title: "A glimpse into GoaΓÇÖs past",
+    text: "From its Portuguese-era architecture to the old lighthouse, the fort gives visitors a clear sense of GoaΓÇÖs colonial and maritime history.",
   },
   {
-    icon: "👨‍👩‍👧",
+    icon: "≡ƒæ¿ΓÇì≡ƒæ⌐ΓÇì≡ƒæº",
     title: "Ideal for slow sightseeing",
     text: "Whether traveling as a couple, family or solo, Fort Aguada offers a relaxed and rewarding cultural stop without the rush of a bigger tourist hotspot.",
   },
@@ -106,7 +106,7 @@ const FortAguada = () => {
         <div className="relative z-10 flex h-full items-center justify-center px-6 py-12 text-center">
           <div className="max-w-4xl">
             <p className="mb-4 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1 text-[0.7rem] uppercase tracking-[0.3em] text-[#f7de9d]">
-              North Goa • Historic Landmark
+              North Goa ΓÇó Historic Landmark
             </p>
             <h1 className="vex-font-display vex-hero-title" style={{ fontSize: "clamp(2.6rem, 8vw, 4.3rem)" }}>
               Fort Aguada
@@ -115,7 +115,7 @@ const FortAguada = () => {
               Where history meets the Arabian Sea
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-sm leading-7 text-white/80 sm:text-base">
-              Standing on a hill overlooking the Arabian Sea, Fort Aguada is one of Goa’s most recognizable historic landmarks, blending Portuguese military history with panoramic coastal beauty.
+              Standing on a hill overlooking the Arabian Sea, Fort Aguada is one of GoaΓÇÖs most recognizable historic landmarks, blending Portuguese military history with panoramic coastal beauty.
             </p>
           </div>
         </div>
@@ -132,7 +132,7 @@ const FortAguada = () => {
               </div>
               <h3 className="vex-section-title" style={{ fontSize: "1.32rem", marginBottom: 12 }}>A fortress built to protect Goa</h3>
               <p style={{ fontSize: 16, lineHeight: 1.8, color: "#4b4b4b" }}>
-                Constructed by the Portuguese in 1612, Fort Aguada was designed to defend Goa’s coastline and guard access to the Mandovi River. Its strategic hilltop location made it one of the most important maritime strongholds in the region.
+                Constructed by the Portuguese in 1612, Fort Aguada was designed to defend GoaΓÇÖs coastline and guard access to the Mandovi River. Its strategic hilltop location made it one of the most important maritime strongholds in the region.
               </p>
             </div>
 
@@ -174,12 +174,12 @@ const FortAguada = () => {
         <div className="mx-auto max-w-6xl rounded-[28px] border border-[#edd9a9] bg-[#fffdf7] p-8 text-center shadow-[0_16px_45px_rgba(0,0,0,0.04)]">
           <h4 style={{ fontWeight: 700, fontSize: "1.2rem", marginBottom: 10 }}>Why Fort Aguada deserves your visit</h4>
           <p style={{ fontSize: 15, lineHeight: 1.8, color: "#5b5b5b", maxWidth: 760, margin: "0 auto" }}>
-            If you want to experience a different side of Goa beyond beaches and nightlife, Fort Aguada is the perfect place to start. Come for the history, stay for the architecture and panoramic sea views, and leave with a glimpse into the centuries-old story of Goa’s coastline.
+            If you want to experience a different side of Goa beyond beaches and nightlife, Fort Aguada is the perfect place to start. Come for the history, stay for the architecture and panoramic sea views, and leave with a glimpse into the centuries-old story of GoaΓÇÖs coastline.
           </p>
 
           <div className="mx-auto mt-8 max-w-2xl rounded-[24px] border border-[#f1dfb2] bg-[#fff7e6] p-6">
             <h5 className="vex-font-display" style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: 8 }}>
-              📍 Find It Easily
+              ≡ƒôì Find It Easily
             </h5>
             <p style={{ fontSize: 15, lineHeight: 1.8, color: "#5b5b5b", marginBottom: 14 }}>
               Opening hours are usually around 9:30 AM to 6:00 PM, and the site is best explored in the cooler parts of the day.
@@ -202,12 +202,12 @@ const FortAguada = () => {
                 boxShadow: "0 12px 28px -12px rgba(249,115,22,.45)",
               }}
             >
-              🗺️ View on Google Maps →
+              ≡ƒù║∩╕Å View on Google Maps ΓåÆ
             </a>
           </div>
 
           <div className="mt-6">
-            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>← Back to Home</Link>
+            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>ΓåÉ Back to Home</Link>
           </div>
         </div>
       </div>
