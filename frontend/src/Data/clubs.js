@@ -1,5 +1,39 @@
 export const clubs = [
   {
+    id: 4,
+    name: "Savara Goa",
+    vibe: "Restro-Pub • Cocktails • Late Night",
+    cuisine: "Continental • Modern Indian",
+    rating: 4.8,
+    reviews: 980,
+    location: "Vagator, Goa",
+    hours: "7:00 PM – 2:00 AM",
+    offer: "10% OFF",
+    image:
+      "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=750&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80"
+    ],
+    description:
+      "Savara Goa in Vagator is a modern nightclub and restro-pub where great food, cocktails, music and a lively club atmosphere come together under one roof. Its spacious setting makes it ideal for dinner, celebrations and nights that do not end early.",
+    tags: [
+      "Restro-Pub",
+      "Cocktails",
+      "Live Music",
+      "Late Night"
+    ],
+    music: "Commercial · House · Bollywood",
+    dressCode: "Smart Casual / Party Wear",
+    coverCharge: "Entry varies by event",
+    phone: "+919823444444",
+    googleLink:
+      "https://www.google.com/search?q=Savara+Goa+Vagator",
+    instagram:
+      "https://www.instagram.com/savara_goa/?hl=en"
+  },
+  {
     id: 1,
     name: "SinQ Nightclub",
     vibe: "EDM • Premium Lounge",

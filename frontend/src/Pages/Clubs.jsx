@@ -98,7 +98,7 @@ const Clubs = () => {
             <div className="flex items-center gap-2">
               <FaFire className="text-orange-500" />
               <h2 className="text-lg font-bold text-stone-900">
-                Featured Club
+                Awarded Club
               </h2>
             </div>
 

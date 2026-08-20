@@ -107,7 +107,9 @@ const ClubsDetails = () => {
         <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-8 animate-fade-in-up">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 mb-4">
             <HiSparkles className="text-amber-300 text-xs" />
-            <span className="text-xs font-medium text-white tracking-wide">FEATURED PARTNER</span>
+            <span className="text-xs font-medium text-white tracking-wide">
+              {club.name === "Savara Goa" ? "AWARDED CLUB" : "FEATURED PARTNER"}
+            </span>
           </div>
           <h1 className="text-5xl font-bold text-white tracking-tight leading-none mb-2">
             {club.name}

@@ -136,7 +136,7 @@ const highlights = [
   {
     icon: "🌅",
     title: "When to Go",
-    text: "Hilltop Market usually kicks off on Sundays, especially during season. The sweet spot is around 5 PM for browsing and 7 PM onward for the full high-energy vibe.",
+    text: "Hilltop Market usually kicks off on Fridays, especially during season. The sweet spot is around 5 PM for browsing and 7 PM onward for the full high-energy vibe.",
   },
   {
     icon: "👀",
@@ -175,7 +175,7 @@ const HilltopMarket = () => {
         <div className="relative z-10 flex h-full items-center justify-center px-6 py-12 text-center">
           <div className="max-w-3xl">
             <p className="mb-4 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1 text-[0.7rem] uppercase tracking-[0.3em] text-[#fde68a]">
-              Vagator • Sunday Ritual
+              Vagator • Friday Ritual
             </p>
             <h1 className="vex-font-display vex-hero-title" style={{ fontSize: "clamp(2.6rem, 9vw, 4.4rem)" }}>
               Hilltop Market
@@ -211,7 +211,7 @@ const HilltopMarket = () => {
               <h4 style={{ fontWeight: 700, fontSize: "1.05rem", marginBottom: 14 }}>Quick local snapshot</h4>
               <div className="space-y-3 text-sm text-[#4b4b4b]">
                 <p><strong>Location:</strong> Vagator</p>
-                <p><strong>Day:</strong> Mostly Sundays</p>
+                <p><strong>Day:</strong> Mostly Fridays</p>
                 <p><strong>Vibe:</strong> Night market + party energy</p>
                 <p><strong>Best for:</strong> Shopping, music, meeting people</p>
               </div>
