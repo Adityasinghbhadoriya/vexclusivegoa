@@ -16,12 +16,29 @@ import { trackRestaurantClick } from "../api";
 
 const Restaurant = () => {
   const navigate = useNavigate();
-  const featuredRestaurant = restaurants[0];
+  const priorityOrder = [
+    "Da Luna Restaurant",
+    "Burger Factory",
+    "Nova Sandwich Shop",
+    "Babka Goa",
+    "Coco Moga Bakehouse",
+  ];
+
+  const featuredRestaurant =
+    restaurants.find((restaurant) => restaurant.name === "Da Luna Restaurant") || restaurants[0];
+
   const otherRestaurants = restaurants
     .filter((restaurant) => restaurant.id !== featuredRestaurant.id)
     .sort((a, b) => {
-      if (a.name === "Piccola Roma Pizza") return -1;
-      if (b.name === "Piccola Roma Pizza") return 1;
+      const aPriority = priorityOrder.indexOf(a.name);
+      const bPriority = priorityOrder.indexOf(b.name);
+
+      if (aPriority !== -1 || bPriority !== -1) {
+        if (aPriority === -1) return 1;
+        if (bPriority === -1) return -1;
+        return aPriority - bPriority;
+      }
+
       return 0;
     });
 

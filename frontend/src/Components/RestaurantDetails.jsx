@@ -30,6 +30,12 @@ const RestaurantDetails = () => {
   }
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [id]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % restaurant.gallery.length);
     }, 4000);

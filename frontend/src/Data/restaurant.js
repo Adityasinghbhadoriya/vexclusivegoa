@@ -8,6 +8,16 @@ import bgfactory1 from "../assets/Bgfactory1.webp";
 import bgfactory2 from "../assets/Bgfactory2.webp";
 import bgfactory3 from "../assets/Bgfactory3.webp";
 import bgfactory4 from "../assets/Bgfactory4.webp";
+import babka1 from "../assets/Babka1.webp";
+import babka2 from "../assets/Babka2.webp";
+import babka3 from "../assets/Babka3.webp";
+import babka4 from "../assets/Babka4.webp";
+import nova1 from "../assets/Nova1.webp";
+import nova2 from "../assets/Nova2.webp";
+import nova3 from "../assets/Nova3.webp";
+import coco1 from "../assets/Coco1.webp";
+import coco2 from "../assets/Coco2.webp";
+import coco3 from "../assets/Coco3.webp";
 
 export const restaurants = [
   {
@@ -49,7 +59,204 @@ export const restaurants = [
     ]
   },
 
+  {
+    id: 6,
+    name: "Burger Factory",
+    cuisine: "Burgers • American • Fast Casual",
+    rating: 4.3,
+    reviews: 980,
+    location: "Morjim, Goa",
+    hours: "Tuesday - Sunday, 1:00 PM - 10:00 PM",
+    phone: "087886 30791",
 
+    googleLink:
+      "https://share.google/KvNktMUH0P3yOO7Nl",
+
+    instagram:
+      "https://www.instagram.com/burgerfactorygoa/?hl=en",
+
+    offer: "10% OFF",
+
+    image: bgfactory3,
+
+    gallery: [
+      bgfactory1,
+      bgfactory2,
+      bgfactory3,
+      bgfactory4,
+    ],
+
+    description:
+      "A popular Morjim burger spot where juicy gourmet burgers, beachside ambience and sunset views come together for a relaxed Goan evening.",
+
+    tags: [
+      "Burgers",
+      "Beachside",
+      "Sunset Dining",
+      "Casual",
+      "Friends"
+    ],
+
+    bestTime: "Late afternoon to evening is ideal if you want to enjoy a burger and stay on for the sunset over the Arabian Sea.",
+
+    mustTry: [
+      "Cheddar Burger",
+      "Blue Cheese Burger",
+      "Classic Chicken Burger",
+      "Double Cheddar Bacon BBQ Burger",
+      "Spinach, Cheddar, Mushroom & Blue Cheese Burger",
+      "Milkshakes and refreshing drinks"
+    ],
+
+    goodToKnow: "Perfect for burger lovers, couples, friends and sunset seekers looking for a casual beachside meal in Morjim."
+  },
+
+  {
+    id: 8,
+    name: "Nova Sandwich Shop",
+    cuisine: "Sandwiches • Café • Casual",
+    rating: 4.8,
+    reviews: 920,
+    location: "Anjuna, Goa",
+    hours: "12:00 PM - 11:00 PM",
+    phone: "+918000000000",
+
+    googleLink: "https://www.google.com/search?client=ms-android-samsung-rvo1&hs=6loV&sca_esv=51a2d2901f02fd24&hl=en-IN&cs=1&sxsrf=APpeQntAf-fggO1NVMVoMxwhF81VQ3sVyA%3A1787292812264&kgmid=%2Fg%2F11x34kv88s&q=The%20Nova%20Sandwich%20Shop&shem=epsd1%2Cltae%2Crimspwouoe&shndl=30&source=sh%2Fx%2Floc%2Fact%2Fm1%2F4&kgs=535141f723467819",
+
+    instagram: "https://www.instagram.com/novasandwichshop/?hl=en",
+
+    offer: "10% OFF",
+
+    image: nova1,
+
+    gallery: [
+      nova1,
+      nova2,
+      nova3,
+    ],
+
+    description:
+      "Nova Sandwich Shop in Anjuna is a cosy little food stop where overnight-fermented, wood-fired bread meets flavour-packed fillings, homemade sauces and a playful café atmosphere that feels like a hidden local find.",
+
+    tags: [
+      "Sandwiches",
+      "Café",
+      "Casual Dining",
+      "Wood Fired Bread",
+      "South Goa Favorite"
+    ],
+
+    bestTime: "12 PM–2 PM for lunch or 7 PM onwards for dinner. Going a little outside peak hours gives you a more relaxed experience in this cosy spot.",
+
+    mustTry: [
+      "Chicken 65 Sandwich",
+      "Chicken & Pesto",
+      "Tori Katsu",
+      "The Greek",
+      "Classic Pesto",
+      "Pork Belly Bao",
+      "Parmesan Fries + Garlic Aioli"
+    ],
+
+    goodToKnow: "Perfect for couples, foodies, casual dates and anyone looking for something beyond Goa’s usual café menu. Try the Peach, Lemon or Hibiscus Iced Tea with your sandwich."
+  },
+
+  {
+    id: 7,
+    name: "Babka Goa",
+    cuisine: "Bakery • Café • Breakfast",
+    rating: 4.7,
+    reviews: 840,
+    location: "Anjuna, Goa",
+    hours: "9:00 AM - 11:00 PM",
+    phone: "+918000000000",
+
+    googleLink: "https://share.google/nq9AgUfiT1YGVh4J2",
+
+    instagram: "https://www.instagram.com/babka.goa/?hl=en",
+
+    offer: "10% OFF",
+
+    image: babka2,
+
+    gallery: [
+      babka1,
+      babka2,
+      babka3,
+      babka4,
+    ],
+
+    description:
+      "Babka Goa in Anjuna is a slow, beautiful bakery-café for travellers who want an easy, European-style morning with freshly baked pastries, comforting coffee and a relaxed North Goa vibe.",
+
+    tags: [
+      "Bakery",
+      "Coffee",
+      "Breakfast",
+      "European Vibes",
+      "Slow Morning"
+    ],
+
+    bestTime: "9:00–11:00 AM is ideal if you want the freshest pastries and a quieter, more relaxed breakfast before exploring Anjuna, Vagator or Chapora.",
+
+    mustTry: [
+      "Chocolate Babka",
+      "Cinnamon Roll",
+      "Eclairs & Pastries",
+      "Bagels & Sandwiches",
+      "Fresh Coffee"
+    ],
+
+    goodToKnow: "Perfect for couples, coffee lovers, bakery fans and anyone looking for an aesthetic, slower morning away from Goa's usual beach-and-party rhythm."
+  },
+
+  {
+    id: 9,
+    name: "Coco Moga Bakehouse",
+    cuisine: "Bakery • Coffee • Breakfast",
+    rating: 4.7,
+    reviews: 700,
+    location: "Goa",
+    hours: "9:00 AM - 4:00 PM",
+    phone: "+919067186132",
+
+    googleLink: "https://www.google.com/search?client=ms-android-samsung-rvo1&hs=J7Tq&sca_esv=f9672e346feee6d9&hl=en-IN&cs=1&sxsrf=APpeQnvjQvVJF9LlbTodPMjHdXqOQO1PDQ%3A1787294931696&kgmid=%2Fg%2F11p15rsnj3&q=Cocoa%20Moga%20Bakehouse%20Goa&shem=epsd1%2Cltae%2Crimspwouoe&shndl=30&source=sh%2Fx%2Floc%2Fact%2Fm1%2F4&kgs=bcab5ddc1965becc",
+
+    instagram: "https://www.instagram.com/cocoamoga/?hl=en",
+
+    offer: "10% OFF",
+
+    image: coco1,
+
+    gallery: [
+      coco1,
+      coco2,
+      coco3,
+    ],
+
+    description:
+      "A little bakery stop worth slowing down for, Coco Moga Bakehouse is for travellers who want the comforting side of Goa—freshly baked treats, coffee, and a relaxed bakery feel that makes you want to sit a little longer.",
+
+    tags: [
+      "Bakery",
+      "Coffee",
+      "Breakfast",
+      "Fresh Bakes",
+      "Slow Travel"
+    ],
+
+    bestTime: "Morning to early afternoon is ideal for the freshest selection of bakes and a relaxed breakfast or coffee stop before continuing your Goa plans.",
+
+    mustTry: [
+      "Freshly Baked Breads",
+      "Pastries",
+      "Cakes",
+      "Bakery Specials",
+      "Coffee"
+    ],
+
+    goodToKnow: "Perfect for slow travellers, breakfast lovers, café hoppers and anyone who enjoys discovering smaller local food spots instead of only sticking to Goa’s tourist cafés."
+  },
 
   {
     id: 2,
@@ -218,58 +425,6 @@ export const restaurants = [
     ],
 
     goodToKnow: "Perfect for couples, families and food lovers, with fresh, authentic Japanese flavors in a peaceful North Goa setting."
-  },
-
-  {
-    id: 6,
-    name: "Burger Factory",
-    cuisine: "Burgers • American • Fast Casual",
-    rating: 4.3,
-    reviews: 980,
-    location: "Morjim, Goa",
-    hours: "Tuesday - Sunday, 1:00 PM - 10:00 PM",
-    phone: "+918904567890",
-
-    googleLink:
-      "https://share.google/KvNktMUH0P3yOO7Nl",
-
-    instagram:
-      "https://www.instagram.com/burgerfactorygoa/?hl=en",
-
-    offer: "10% OFF",
-
-    image: bgfactory3,
-
-    gallery: [
-      bgfactory1,
-      bgfactory2,
-      bgfactory3,
-      bgfactory4,
-    ],
-
-    description:
-      "A popular Morjim burger spot where juicy gourmet burgers, beachside ambience and sunset views come together for a relaxed Goan evening.",
-
-    tags: [
-      "Burgers",
-      "Beachside",
-      "Sunset Dining",
-      "Casual",
-      "Friends"
-    ],
-
-    bestTime: "Late afternoon to evening is ideal if you want to enjoy a burger and stay on for the sunset over the Arabian Sea.",
-
-    mustTry: [
-      "Cheddar Burger",
-      "Blue Cheese Burger",
-      "Classic Chicken Burger",
-      "Double Cheddar Bacon BBQ Burger",
-      "Spinach, Cheddar, Mushroom & Blue Cheese Burger",
-      "Milkshakes and refreshing drinks"
-    ],
-
-    goodToKnow: "Perfect for burger lovers, couples, friends and sunset seekers looking for a casual beachside meal in Morjim."
-  },
+  }
 
 ]

@@ -35,10 +35,34 @@ import piccoloLogo from "../assets/piccolo.webp"
 import basilicaImage from "../assets/Basilica Church.webp"
 import wildlifeImage from "../assets/MahavirWildlife.webp"
 import bgfactory3 from "../assets/Bgfactory3.webp"
+import babka2 from "../assets/Babka2.webp"
+import nova1 from "../assets/Nova1.webp"
+import coco1 from "../assets/Coco1.webp"
 import colabeach2 from "../assets/Colabeach2.jpeg"
 import fortAguadaHome from "../assets/Fort1.jpeg"
 
 const BASE_URL = "https://vexclusivegoa.onrender.com"
+
+const priorityOrder = [
+  "Da Luna Restaurant",
+  "Burger Factory",
+  "Nova Sandwich Shop",
+  "Babka Goa",
+  "Coco Moga Bakehouse",
+]
+
+const mustVisitRestaurants = [...restaurants].sort((a, b) => {
+  const aPriority = priorityOrder.indexOf(a.name)
+  const bPriority = priorityOrder.indexOf(b.name)
+
+  if (aPriority !== -1 || bPriority !== -1) {
+    if (aPriority === -1) return 1
+    if (bPriority === -1) return -1
+    return aPriority - bPriority
+  }
+
+  return restaurants.indexOf(a) - restaurants.indexOf(b)
+})
 
 /* ─── Google Fonts injected once ─────────────────────────────────── */
 if (typeof document !== "undefined" && !document.getElementById("vex-fonts")) {
@@ -1372,7 +1396,7 @@ const Home = () => {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            {restaurants.map((restaurant) => {
+            {mustVisitRestaurants.map((restaurant) => {
               const descriptions = {
                 "Da Luna Restaurant": "Italian vibes + perfect sunset dining",
                 "Elephant Beach Cafe & Bar": "Peaceful vibes + Fresh Food",
@@ -1380,6 +1404,9 @@ const Home = () => {
                 "Piccola Roma Pizza": "Pizza cravings + cozy Vagator dining",
                 "Sakana Japanese Restaurant": "Authentic Japanese flavors + relaxed Anjuna dining",
                 "Burger Factory": "Gourmet burgers + laid-back beach sunset vibes",
+                "Babka Goa": "Slow mornings + fresh pastries and coffee",
+                "Nova Sandwich Shop": "Wood-fired sandwiches + cozy hidden gem vibes",
+                "Coco Moga Bakehouse": "Fresh bakes + slow café mornings in Goa",
               }
               const logos = {
                 "Da Luna Restaurant": daLunaLogo,
@@ -1388,6 +1415,9 @@ const Home = () => {
                 "Piccola Roma Pizza": piccoloLogo,
                 "Sakana Japanese Restaurant": sakanaLogo,
                 "Burger Factory": bgfactory3,
+                "Babka Goa": babka2,
+                "Nova Sandwich Shop": nova1,
+                "Coco Moga Bakehouse": coco1,
               }
               const isLuna = restaurant.name === "Da Luna Restaurant"
               return (
