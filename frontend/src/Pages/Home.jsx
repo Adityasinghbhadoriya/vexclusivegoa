@@ -64,6 +64,8 @@ const mustVisitRestaurants = [...restaurants].sort((a, b) => {
   return restaurants.indexOf(a) - restaurants.indexOf(b)
 })
 
+const visibleMustVisitRestaurants = mustVisitRestaurants.slice(0, 5)
+
 /* ─── Google Fonts injected once ─────────────────────────────────── */
 if (typeof document !== "undefined" && !document.getElementById("vex-fonts")) {
   const link = document.createElement("link")
@@ -1396,7 +1398,7 @@ const Home = () => {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            {mustVisitRestaurants.map((restaurant) => {
+            {visibleMustVisitRestaurants.map((restaurant) => {
               const descriptions = {
                 "Da Luna Restaurant": "Italian vibes + perfect sunset dining",
                 "Elephant Beach Cafe & Bar": "Peaceful vibes + Fresh Food",
@@ -1466,6 +1468,27 @@ const Home = () => {
                 </div>
               )
             })}
+
+            {mustVisitRestaurants.length > visibleMustVisitRestaurants.length && (
+              <button
+                type="button"
+                onClick={() => navigate("/restaurants")}
+                style={{
+                  marginTop: 10,
+                  alignSelf: "center",
+                  border: "none",
+                  borderRadius: 999,
+                  background: "linear-gradient(135deg, #f97316 0%, #fbbf24 100%)",
+                  color: "#1a1208",
+                  fontWeight: 700,
+                  padding: "12px 20px",
+                  cursor: "pointer",
+                  boxShadow: "0 10px 25px -12px rgba(249,115,22,.75)",
+                }}
+              >
+                Show more
+              </button>
+            )}
           </div>
         </div>
       </section>
