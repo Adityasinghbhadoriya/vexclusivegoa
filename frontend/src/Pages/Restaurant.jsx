@@ -18,6 +18,7 @@ const Restaurant = () => {
   const navigate = useNavigate();
   const priorityOrder = [
     "Da Luna Restaurant",
+    "Pincode Bungalow",
     "Burger Factory",
     "Nova Sandwich Shop",
     "Babka Goa",

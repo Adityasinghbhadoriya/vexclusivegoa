@@ -38,6 +38,7 @@ import bgfactory3 from "../assets/Bgfactory3.webp"
 import babka2 from "../assets/Babka2.webp"
 import nova1 from "../assets/Nova1.webp"
 import coco1 from "../assets/Coco1.webp"
+import pincode3 from "../assets/Pincode3.webp"
 import colabeach2 from "../assets/Colabeach2.jpeg"
 import fortAguadaHome from "../assets/Fort1.jpeg"
 
@@ -45,6 +46,7 @@ const BASE_URL = "https://vexclusivegoa.onrender.com"
 
 const priorityOrder = [
   "Da Luna Restaurant",
+  "Pincode Bungalow",
   "Burger Factory",
   "Nova Sandwich Shop",
   "Babka Goa",
@@ -1409,6 +1411,7 @@ const Home = () => {
                 "Babka Goa": "Slow mornings + fresh pastries and coffee",
                 "Nova Sandwich Shop": "Wood-fired sandwiches + cozy hidden gem vibes",
                 "Coco Moga Bakehouse": "Fresh bakes + slow café mornings in Goa",
+                "Pincode Bungalow": "Elevated Indian flavours in a restored Vagator bungalow",
               }
               const logos = {
                 "Da Luna Restaurant": daLunaLogo,
@@ -1420,6 +1423,7 @@ const Home = () => {
                 "Babka Goa": babka2,
                 "Nova Sandwich Shop": nova1,
                 "Coco Moga Bakehouse": coco1,
+                "Pincode Bungalow": pincode3,
               }
               const isLuna = restaurant.name === "Da Luna Restaurant"
               return (

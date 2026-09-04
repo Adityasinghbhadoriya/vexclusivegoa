@@ -18,6 +18,16 @@ import nova3 from "../assets/Nova3.webp";
 import coco1 from "../assets/Coco1.webp";
 import coco2 from "../assets/Coco2.webp";
 import coco3 from "../assets/Coco3.webp";
+import pincode1 from "../assets/Pincode1.webp";
+import pincode2 from "../assets/Pincode2.webp";
+import pincode3 from "../assets/Pincode3.webp";
+import pincode4 from "../assets/Pincode4.webp";
+import cazyimage1 from "../assets/Cazyimage1.webp";
+import cazyimage2 from "../assets/Cazyimage2.webp";
+import cazyimage3 from "../assets/Cazyimage3.webp";
+import pablos1 from "../assets/Pablos1.webp";
+import pablos2 from "../assets/Pablos2.webp";
+import pablos3 from "../assets/Pablos3.webp";
 
 export const restaurants = [
   {
@@ -259,6 +269,61 @@ export const restaurants = [
   },
 
   {
+    id: 10,
+    name: "Pincode Bungalow",
+    cuisine: "Indian • Contemporary",
+    rating: 4.6,
+    reviews: 620,
+    location: "Vagator, Goa",
+    hours: "Daily, 9:00 AM - 11:30 PM",
+    phone: "",
+
+    googleLink: "https://share.google/jFvTbAk2LVsEcZVOP",
+
+    instagram: "https://www.instagram.com/pincode.bungalow/?hl=en",
+
+    offer: "10% OFF",
+
+    image: pincode3,
+
+    gallery: [
+      pincode1,
+      pincode2,
+      pincode3,
+      pincode4,
+    ],
+
+    description:
+      "Tucked into a beautifully restored Portuguese bungalow in Vagator, Pincode Bungalow brings together Indian comfort food, contemporary dining and Goa’s relaxed atmosphere. The menu celebrates flavours from different parts of India, making every dish feel familiar yet a little unexpected.",
+
+    tags: [
+      "Indian Cuisine",
+      "Contemporary Dining",
+      "Portuguese Bungalow",
+      "Full Bar",
+      "Indoor & Outdoor Seating"
+    ],
+
+    bestTime: "Come in the morning for breakfast if you prefer a quieter start, or visit around sunset and dinner for a more atmospheric experience.",
+
+    mustTry: [
+      "Butter Chicken",
+      "Pressure Cooker Chicken",
+      "Chicken Biryani",
+      "Dal Makhani",
+      "Paneer Makhani",
+      "Goan Fish Curry",
+      "Kothey Momos",
+      "Guntur Paneer Tikka",
+      "Dilli 6 Chicken",
+      "Serradura",
+      "Filter Kaapi Tiramisu"
+    ],
+
+    goodToKnow: "It works equally well for a relaxed lunch, a special dinner or an evening with friends. Best for food lovers, couples, families and travellers looking for elevated Indian cuisine in a beautiful Goa setting."
+  },
+
+  {
     id: 2,
     name: "Piccola Roma Pizza",
     cuisine: "Pizza • Italian",
@@ -267,33 +332,14 @@ export const restaurants = [
     location: "Vagator, Goa",
     hours: "9:00 AM - 11:00 PM",
     phone: "+917507806821",
-
-    googleLink:
-      "https://www.google.com/search?q=picola+pizza+roma+place+in+vegator+goa&oq=picola+pizza+roma+place+in+vegator+goa&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCAgCEAAYFhgeMggIAxAAGBYYHjIICAQQABgWGB4yCAgFEAAYFhgeMggIBhAAGBYYHjIICAcQABgWGB4yCAgIEAAYFhgeMggICRAAGBYYHtIBCDcwMjNqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8",
-
-    instagram:
-      "https://www.instagram.com/popular/piccola-roma-vagator/",
-
+    googleLink: "https://www.google.com/search?q=picola+pizza+roma+place+in+vegator+goa",
+    instagram: "https://www.instagram.com/popular/piccola-roma-vagator/",
     offer: "10% OFF",
-
     image: piccolo,
-
-    gallery: [
-      piccolo,
-      piccolodish,
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=80",
-    ],
-
+    gallery: [piccolo, piccolodish],
     description:
       "A popular pizza spot in Vagator serving fresh Roman-style slices, handmade pies, and casual Italian comfort food for a relaxed beach-town meal.",
-
-    tags: [
-      "Pizza",
-      "Italian",
-      "Casual Dining",
-      "Vagator",
-      "Family Friendly"
-    ]
+    tags: ["Pizza", "Italian", "Casual Dining", "Vagator", "Family Friendly"]
   },
 
   {
@@ -305,37 +351,15 @@ export const restaurants = [
     location: "Vagator, Goa",
     hours: "9:00 AM - 11:00 PM",
     phone: "+919123456789",
-
-    googleLink:
-      "https://www.google.com/search?q=Elephant+Beach+Cafe+Bar+Goa",
-
-    instagram:
-      "https://www.instagram.com/elephantbeachcafe/",
-
+    googleLink: "https://www.google.com/search?q=Elephant+Beach+Cafe+Bar+Goa",
+    instagram: "https://www.instagram.com/elephantbeachcafe/",
     offer: "10% OFF",
-
-    image:
-      "https://d2kihw5e8drjh5.cloudfront.net/eyJidWNrZXQiOiJ1dGEtaW1hZ2VzIiwia2V5IjoicGxhY2VfaW1nL0hxc0hmVW9DVG9DX1JSWnlNa2V5aFEiLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjY0MCwiaGVpZ2h0Ijo2NDAsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsInRvRm9ybWF0IjogIndlYnAifX0=",
-
-    gallery: [
-      "https://d2kihw5e8drjh5.cloudfront.net/eyJidWNrZXQiOiJ1dGEtaW1hZ2VzIiwia2V5IjoicGxhY2VfaW1nL0hxc0hmVW9DVG9DX1JSWnlNa2V5aFEiLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjY0MCwiaGVpZ2h0Ijo2NDAsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsInRvRm9ybWF0IjogIndlYnAifX0=",
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80",
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80",
-    ],
-
+    image: "https://d2kihw5e8drjh5.cloudfront.net/eyJidWNrZXQiOiJ1dGEtaW1hZ2VzIiwia2V5IjoicGxhY2VfaW1nL0hxc0hmVW9DVG9DX1JSWnlNa2V5aFEiLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjY0MCwiaGVpZ2h0Ijo2NDAsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsInRvRm9ybWF0IjogIndlYnAifX0=",
+    gallery: ["https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80"],
     description:
       "A vibrant beachside café and bar in Vagator known for sunset views, seafood platters, cocktails, live music and laid-back Goa vibes.",
-
-    tags: [
-      "Beachside",
-      "Seafood",
-      "Cocktails",
-      "Live Music",
-      "Sunset View"
-    ]
+    tags: ["Beachside", "Seafood", "Cocktails", "Live Music", "Sunset View"]
   },
-
-
 
   {
     id: 4,
@@ -346,34 +370,14 @@ export const restaurants = [
     location: "Siolim, Goa",
     hours: "9:00 AM - 1:00 AM",
     phone: "+919850033537",
-
-    googleLink:
-      "https://www.google.com/search?q=thalassa+restaurant+goa",
-
-    instagram:
-      "https://www.instagram.com/thalassagreektaverna/",
-
+    googleLink: "https://www.google.com/search?q=thalassa+restaurant+goa",
+    instagram: "https://www.instagram.com/thalassagreektaverna/",
     offer: "10% OFF",
-
-    image:
-      "https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg",
-
-    gallery: [
-      "https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg",
-      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=1200&q=80",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80",
-    ],
-
+    image: "https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg",
+    gallery: ["https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg"],
     description:
       "One of Goa’s most iconic cliffside restaurants offering Greek and Mediterranean cuisine, legendary sunsets, live performances and luxury dining.",
-
-    tags: [
-      "Greek",
-      "Mediterranean",
-      "Sunset Dining",
-      "Luxury",
-      "Live Entertainment"
-    ]
+    tags: ["Greek", "Mediterranean", "Sunset Dining", "Luxury", "Live Entertainment"]
   },
 
   {
@@ -385,46 +389,69 @@ export const restaurants = [
     location: "Anjuna, Goa",
     hours: "12:30 PM - 10:30 PM",
     phone: "+919890135502",
-
-    googleLink:
-      "https://share.google/DHAnI0fiHaMOYNhdM",
-
-    instagram:
-      "https://www.instagram.com/sakana_goa/",
-
+    googleLink: "https://share.google/DHAnI0fiHaMOYNhdM",
+    instagram: "https://www.instagram.com/sakana_goa/",
     offer: "10% OFF",
-
     image: sakana1,
-    
-    gallery: [
-      sakana1,
-      sakana2,
-      sakana3,
-      sakana4,
-    ],
-
+    gallery: [sakana1, sakana2, sakana3, sakana4],
     description:
       "A cosy Japanese restaurant in Anjuna serving authentic sushi, ramen, gyoza, teriyaki dishes and comforting soups in a relaxed setting ideal for couples, families and food lovers.",
+    tags: ["Japanese", "Sushi", "Ramen", "Authentic Flavors", "Family Friendly"]
+  },
 
-    tags: [
-      "Japanese",
-      "Sushi",
-      "Ramen",
-      "Authentic Flavors",
-      "Family Friendly"
-    ],
-
-    bestTime: "Weekday afternoons from 12:30 PM to 3:00 PM are quieter and more relaxed; evenings are livelier, especially on weekends.",
-
+  {
+    id: 11,
+    name: "Cajy Bar",
+    cuisine: "Goan • Local Bar",
+    rating: 4.4,
+    reviews: 480,
+    location: "Arpora, Goa",
+    hours: "Daily, from 6:30 PM",
+    phone: "",
+    googleLink: "https://share.google/uYaAsQBPf118eGSJB",
+    instagram: "http://instagram.com/cajybar/?hl=en",
+    offer: "10% OFF",
+    image: cazyimage3,
+    gallery: [cazyimage1, cazyimage2, cazyimage3],
+    description:
+      "Dating back to 1970, Cajy Bar is a rustic local bar in Arpora with a laid-back Goan vibe, classic local food, drinks, music and a friendly neighbourhood atmosphere.",
+    tags: ["Goan Food", "Local Bar", "Rustic", "Live Music", "Neighbourhood Vibe"],
+    bestTime: "Visit around 6:30–8 PM for a relaxed evening. Later nights can get livelier with music and a local crowd.",
     mustTry: [
-      "Sushi Rolls",
-      "Chicken or Pork Ramen",
-      "Gyoza",
-      "Teriyaki Dishes",
-      "Miso Soup"
+      "Pork Ribs",
+      "Chicken Cafreal",
+      "Goan Chorizo",
+      "Beef Croquettes",
+      "Rava-fried Fish"
     ],
+    goodToKnow: "A great spot for travellers who want local food, drinks and an authentic side of North Goa beyond the crowded clubs."
+  },
 
-    goodToKnow: "Perfect for couples, families and food lovers, with fresh, authentic Japanese flavors in a peaceful North Goa setting."
+  {
+    id: 12,
+    name: "Pablos",
+    cuisine: "Goan • Tavern",
+    rating: 4.4,
+    reviews: 430,
+    location: "Assagao, Goa",
+    hours: "Daily, evening until midnight",
+    phone: "",
+    googleLink: "https://share.google/6zwLcmnyiEbloBt8x",
+    instagram: "https://www.instagram.com/pablosfamilia/?hl=en",
+    offer: "10% OFF",
+    image: pablos3,
+    gallery: [pablos1, pablos2, pablos3],
+    description:
+      "Pablos is a charming Goan tavern in Assagao with an old-school atmosphere, relaxed evenings, local drinks, comforting food and laid-back conversations.",
+    tags: ["Goan Tavern", "Cocktails", "Local Drinks", "Bar Food", "Susegad Vibe"],
+    bestTime: "Evenings around 6–9 PM are ideal for settling in with a drink and some food. The place generally operates until midnight.",
+    mustTry: [
+      "Chorizo Fries",
+      "Garlic Poi",
+      "Masala Fries",
+      "Cafreal Chicken with Poi",
+      "Feni and Urrak Cocktails"
+    ],
+    goodToKnow: "A relaxed choice for travellers wanting to experience Goa’s tavern culture, local drinks and comforting bar food beyond the beach clubs."
   }
-
 ]

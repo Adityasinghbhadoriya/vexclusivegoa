@@ -21,6 +21,12 @@ const RestaurantDetails = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [liked, setLiked] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [id]);
+
   if (!restaurant) {
     return (
       <div className="min-h-screen bg-stone-50 flex items-center justify-center">
@@ -28,12 +34,6 @@ const RestaurantDetails = () => {
       </div>
     );
   }
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, [id]);
 
   useEffect(() => {
     const interval = setInterval(() => {
