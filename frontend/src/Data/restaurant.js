@@ -28,6 +28,17 @@ import cazyimage3 from "../assets/Cazyimage3.webp";
 import pablos1 from "../assets/Pablos1.webp";
 import pablos2 from "../assets/Pablos2.webp";
 import pablos3 from "../assets/Pablos3.webp";
+import calhiz1 from "../assets/Calhiz1.webp";
+import calhiz2 from "../assets/Calhiz2.webp";
+import calhiz3 from "../assets/Calhiz3.webp";
+import boiler1 from "../assets/Boiler1.webp";
+import boiler2 from "../assets/Boiler2.webp";
+import boiler3 from "../assets/Boiler3.webp";
+import boiler4 from "../assets/Boiler4.webp";
+import anand1 from "../assets/Anand1.webp";
+import anand2 from "../assets/Anand2.webp";
+import anand3 from "../assets/Anand3.webp";
+import anand4 from "../assets/Anand4.webp";
 
 export const restaurants = [
   {
@@ -453,5 +464,110 @@ export const restaurants = [
       "Feni and Urrak Cocktails"
     ],
     goodToKnow: "A relaxed choice for travellers wanting to experience Goa’s tavern culture, local drinks and comforting bar food beyond the beach clubs."
+  },
+
+  {
+    id: 13,
+    name: "Calhiz, Village Bar",
+    cuisine: "Goan • Village Bar",
+    rating: 4.8,
+    reviews: 42,
+    location: "Goa",
+    hours: "",
+    phone: "094099 99910",
+    googleLink: "https://share.google/Z7ouZpoAw5VwNsYLD",
+    instagram: "https://www.instagram.com/calhiz.goa/",
+    offer: "10% OFF",
+    image: calhiz1,
+    gallery: [calhiz1, calhiz2, calhiz3],
+    description:
+      "Calhiz, Village Bar is a casual Goan spot with a rustic outdoor setting—good food, drinks and an unpretentious village-bar atmosphere. A slower, more local evening away from crowded tourist hotspots.",
+    tags: [
+      "Village Bar",
+      "Outdoor Seating",
+      "Goan Food",
+      "Casual",
+      "Local Experience"
+    ],
+    bestTime: "Settle in for an easy-going evening with food, drinks and conversation in the open outdoor space.",
+    mustTry: [
+      "Seafood",
+      "Goan-style favourites",
+      "Bar snacks"
+    ],
+    goodToKnow: "Ideal for friends, couples and travellers looking for authentic Goan village-bar vibes rather than flashy interiors or fine-dining formalities."
+  },
+
+  {
+    id: 14,
+    name: "Boilermaker",
+    cuisine: "Cocktails • Craft Beer • Bar",
+    rating: 4.6,
+    reviews: 403,
+    location: "Siolim, Goa",
+    hours: "",
+    phone: "092260 49851",
+    googleLink: "https://share.google/DzGt0bHKNEoQ3g2iZ",
+    instagram: "https://www.instagram.com/boilermaker.goa/",
+    offer: "10% OFF",
+    image: boiler1,
+    gallery: [boiler1, boiler2, boiler3, boiler4],
+    description:
+      "A laid-back neighbourhood bar in Siolim where creative cocktails, craft beers, good music and a relaxed crowd come together in an industrial-style setting.",
+    tags: [
+      "Cocktails",
+      "Craft Beer",
+      "Local Flavours",
+      "Good Music",
+      "Neighbourhood Bar"
+    ],
+    bestTime: "Visit after 7 PM for the lively evening atmosphere. Weekends can get busy, so arriving earlier is a good idea.",
+    mustTry: [
+      "Signature Cocktails",
+      "Craft Beers",
+      "Prawn Chorizo Gambas",
+      "Kokum Buttered Fish",
+      "Pork Belly Rice Cake",
+      "Feni and Kokum Drinks"
+    ],
+    goodToKnow: "Ideal for an easy-going evening with friends when you want a lively local hangout without the formal club atmosphere."
+  },
+
+  {
+    id: 15,
+    name: "Anand Sea Food Bar & Restaurant",
+    cuisine: "Goan • Seafood • North Indian • Chinese",
+    rating: 4.2,
+    reviews: 9800,
+    location: "Anjuna, Goa",
+    hours: "",
+    phone: "082379 98363",
+    googleLink: "https://share.google/lCfZIJV50WZyRZ91j",
+    instagram: "",
+    offer: "10% OFF",
+    image: anand1,
+    gallery: [anand1, anand2, anand3, anand4],
+    description:
+      "A popular, no-frills restaurant in Anjuna known for fresh seafood, generous portions and authentic local flavours alongside Goan, North Indian and Chinese favourites.",
+    tags: [
+      "Goan Seafood",
+      "Casual Dining",
+      "Full Bar",
+      "Indoor & Outdoor Seating",
+      "Group Friendly"
+    ],
+    bestTime: "Visit for lunch or dinner, preferably just before peak hours. Weekends and tourist season can be busy, with longer waiting times.",
+    mustTry: [
+      "Fish Curry Thali",
+      "Kingfish Fry",
+      "Prawn Masala Fry",
+      "Prawn Fry",
+      "Squid Dishes",
+      "Crab Preparations",
+      "Rava-fried Seafood",
+      "Fish Curry Rice",
+      "Solkadhi"
+    ],
+    goodToKnow: "Come for a hearty, local-style Goan meal rather than a fancy beachfront experience. The casual indoor and outdoor setting works well for groups."
   }
 ]

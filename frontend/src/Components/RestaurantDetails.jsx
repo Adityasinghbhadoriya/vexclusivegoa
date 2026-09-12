@@ -44,8 +44,12 @@ const RestaurantDetails = () => {
 
   const actions = [
     { icon: FaDirections, label: "Directions", sub: "Open in Maps", onClick: () => window.open(restaurant.googleLink, "_blank") },
-    { icon: FaPhoneAlt, label: "Call", sub: "Reserve a table", onClick: () => (window.location.href = `tel:${restaurant.phone}`) },
-    { icon: FaInstagram, label: "Instagram", sub: restaurant.instagram ? restaurant.instagram.split('/').pop() : "Follow us", onClick: () => window.open(restaurant.instagram, "_blank") },
+    ...(restaurant.phone
+      ? [{ icon: FaPhoneAlt, label: "Call", sub: "Reserve a table", onClick: () => (window.location.href = `tel:${restaurant.phone}`) }]
+      : []),
+    ...(restaurant.instagram
+      ? [{ icon: FaInstagram, label: "Instagram", sub: restaurant.instagram.replace(/\/$/, "").split("/").pop(), onClick: () => window.open(restaurant.instagram, "_blank") }]
+      : []),
     { icon: FaUtensils, label: "Menu", sub: "Browse dishes", onClick: () => window.open(restaurant.googleLink, "_blank") },
   ];
 
@@ -139,29 +143,30 @@ const RestaurantDetails = () => {
       {/* Content card */}
       <div className="relative -mt-8 mx-4 rounded-t-[2rem] bg-stone-50 px-6 pt-8 pb-6 shadow-2xl">
         {/* Offer */}
-        <div className="relative overflow-hidden rounded-3xl p-[1.5px] shadow-[0_10px_40px_-10px_rgba(234,88,12,0.5)] animate-scale-in bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500">
-          <div className="relative rounded-[calc(1.5rem-1.5px)] bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500 px-6 py-7 overflow-hidden">
-            <div className="absolute inset-0 opacity-30 bg-[linear-gradient(110deg,transparent_30%,rgba(255,255,255,0.4)_50%,transparent_70%)] bg-[length:200%_100%] animate-shimmer" />
-            <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
-            <div className="absolute -bottom-12 -left-8 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
+        {restaurant.offer && (
+          <div className="relative overflow-hidden rounded-3xl p-[1.5px] shadow-[0_10px_40px_-10px_rgba(234,88,12,0.5)] animate-scale-in bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500">
+            <div className="relative rounded-[calc(1.5rem-1.5px)] bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500 px-6 py-7 overflow-hidden">
+              <div className="absolute inset-0 opacity-30 bg-[linear-gradient(110deg,transparent_30%,rgba(255,255,255,0.4)_50%,transparent_70%)] bg-[length:200%_100%] animate-shimmer" />
+              <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
+              <div className="absolute -bottom-12 -left-8 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
 
-            <div className="relative flex items-center justify-between">
-              <div>
-                <p className="text-white/85 text-xs font-medium tracking-[0.2em] uppercase mb-1">
-                  Exclusive Offer
-                </p>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-6xl font-black text-white leading-none tracking-tight">10%</span>
-                  <span className="text-xl font-semibold text-white/90">OFF</span>
+              <div className="relative flex items-center justify-between">
+                <div>
+                  <p className="text-white/85 text-xs font-medium tracking-[0.2em] uppercase mb-1">
+                    Exclusive Offer
+                  </p>
+                  <div className="text-5xl font-black text-white leading-none tracking-tight">
+                    {restaurant.offer}
+                  </div>
+                  <p className="text-white/85 text-sm mt-2">Show this screen at billing</p>
                 </div>
-                <p className="text-white/85 text-sm mt-2">Show this screen at billing</p>
-              </div>
-              <div className="grid place-items-center h-20 w-20 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/30 animate-float">
-                <HiSparkles className="text-white text-4xl" />
+                <div className="grid place-items-center h-20 w-20 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/30 animate-float">
+                  <HiSparkles className="text-white text-4xl" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Tags */}
         <div className="mt-6 flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none">
@@ -176,18 +181,17 @@ const RestaurantDetails = () => {
         </div>
 
         {/* Hours */}
-        <div className="mt-5 flex items-center gap-3 rounded-2xl bg-stone-100 px-4 py-3.5 border border-stone-200">
-          <div className="grid place-items-center h-10 w-10 rounded-xl bg-white shadow-sm">
-            <FaClock className="text-orange-600 text-sm" />
+        {restaurant.hours && (
+          <div className="mt-5 flex items-center gap-3 rounded-2xl bg-stone-100 px-4 py-3.5 border border-stone-200">
+            <div className="grid place-items-center h-10 w-10 rounded-xl bg-white shadow-sm">
+              <FaClock className="text-orange-600 text-sm" />
+            </div>
+            <div className="flex-1">
+              <p className="text-xs text-stone-500">Opening hours</p>
+              <p className="text-sm font-semibold text-stone-900">{restaurant.hours}</p>
+            </div>
           </div>
-          <div className="flex-1">
-            <p className="text-xs text-stone-500">Open today</p>
-            <p className="text-sm font-semibold text-stone-900">{restaurant.hours}</p>
-          </div>
-          <span className="text-xs font-semibold text-orange-600 bg-orange-100 px-2.5 py-1 rounded-full">
-            OPEN NOW
-          </span>
-        </div>
+        )}
 
         {/* About */}
         <div className="mt-6">

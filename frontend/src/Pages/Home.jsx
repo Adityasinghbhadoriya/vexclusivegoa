@@ -39,6 +39,9 @@ import babka2 from "../assets/Babka2.webp"
 import nova1 from "../assets/Nova1.webp"
 import coco1 from "../assets/Coco1.webp"
 import pincode3 from "../assets/Pincode3.webp"
+import calhiz1 from "../assets/Calhiz1.webp"
+import boiler1 from "../assets/Boiler1.webp"
+import anand1 from "../assets/Anand1.webp"
 import colabeach2 from "../assets/Colabeach2.jpeg"
 import fortAguadaHome from "../assets/Fort1.jpeg"
 
@@ -51,6 +54,9 @@ const priorityOrder = [
   "Nova Sandwich Shop",
   "Babka Goa",
   "Coco Moga Bakehouse",
+  "Calhiz, Village Bar",
+  "Boilermaker",
+  "Anand Sea Food Bar & Restaurant",
 ]
 
 const mustVisitRestaurants = [...restaurants].sort((a, b) => {
@@ -1412,6 +1418,9 @@ const Home = () => {
                 "Nova Sandwich Shop": "Wood-fired sandwiches + cozy hidden gem vibes",
                 "Coco Moga Bakehouse": "Fresh bakes + slow café mornings in Goa",
                 "Pincode Bungalow": "Elevated Indian flavours in a restored Vagator bungalow",
+                "Calhiz, Village Bar": "Authentic village-bar vibes + relaxed Goan food and drinks",
+                "Boilermaker": "Creative cocktails + craft beers in a lively Siolim hangout",
+                "Anand Sea Food Bar & Restaurant": "Fresh seafood + hearty local Goan flavours in Anjuna",
               }
               const logos = {
                 "Da Luna Restaurant": daLunaLogo,
@@ -1424,6 +1433,9 @@ const Home = () => {
                 "Nova Sandwich Shop": nova1,
                 "Coco Moga Bakehouse": coco1,
                 "Pincode Bungalow": pincode3,
+                "Calhiz, Village Bar": calhiz1,
+                "Boilermaker": boiler1,
+                "Anand Sea Food Bar & Restaurant": anand1,
               }
               const isLuna = restaurant.name === "Da Luna Restaurant"
               return (

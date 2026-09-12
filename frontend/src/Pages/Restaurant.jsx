@@ -23,6 +23,9 @@ const Restaurant = () => {
     "Nova Sandwich Shop",
     "Babka Goa",
     "Coco Moga Bakehouse",
+    "Calhiz, Village Bar",
+    "Boilermaker",
+    "Anand Sea Food Bar & Restaurant",
   ];
 
   const featuredRestaurant =
@@ -314,12 +317,14 @@ const Restaurant = () => {
                     <span>{r.distance}</span>
                   </div>
 
-                  <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-orange-50 border border-orange-100 px-2 py-1">
-                    <HiSparkles className="text-orange-500 text-[10px]"/>
-                    <span className="text-[10px] font-semibold text-orange-600">
-                      {r.offer}
-                    </span>
-                  </div>
+                  {r.offer && (
+                    <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-orange-50 border border-orange-100 px-2 py-1">
+                      <HiSparkles className="text-orange-500 text-[10px]"/>
+                      <span className="text-[10px] font-semibold text-orange-600">
+                        {r.offer}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
