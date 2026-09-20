@@ -42,8 +42,12 @@ import pincode3 from "../assets/Pincode3.webp"
 import calhiz1 from "../assets/Calhiz1.webp"
 import boiler1 from "../assets/Boiler1.webp"
 import anand1 from "../assets/Anand1.webp"
+import casa1 from "../assets/Casa1.webp"
 import colabeach2 from "../assets/Colabeach2.jpeg"
 import fortAguadaHome from "../assets/Fort1.jpeg"
+import museumOfGoaHome from "../assets/Museum1.webp"
+import reisMagosHome from "../assets/Reis1.webp"
+import chaporaFortHome from "../assets/Chapora1.webp"
 
 const BASE_URL = "https://vexclusivegoa.onrender.com"
 
@@ -57,6 +61,7 @@ const priorityOrder = [
   "Calhiz, Village Bar",
   "Boilermaker",
   "Anand Sea Food Bar & Restaurant",
+  "Casa Jaali",
 ]
 
 const mustVisitRestaurants = [...restaurants].sort((a, b) => {
@@ -648,6 +653,30 @@ const trending = [
     img: fortAguadaHome,
     path: "/fort-aguada",
     location: "Sinquerim, North Goa",
+  },
+  {
+    name: "Museum of Goa",
+    desc: "Contemporary art, sculptures and cultural stories exploring Goa’s identity",
+    tag: "🎨 Culture",
+    img: museumOfGoaHome,
+    path: "/museum-of-goa",
+    location: "Pilerne, North Goa",
+  },
+  {
+    name: "Reis Magos Fort",
+    desc: "Restored Portuguese-era fort with peaceful Mandovi River views",
+    tag: "🏰 Heritage",
+    img: reisMagosHome,
+    path: "/reis-magos-fort",
+    location: "Reis Magos, North Goa",
+  },
+  {
+    name: "Chapora Fort",
+    desc: "Historic hilltop ruins with dramatic cliffs and sweeping sunset views",
+    tag: "🌅 Scenic",
+    img: chaporaFortHome,
+    path: "/chapora-fort",
+    location: "Chapora, North Goa",
   },
 ]
 
@@ -1421,6 +1450,7 @@ const Home = () => {
                 "Calhiz, Village Bar": "Authentic village-bar vibes + relaxed Goan food and drinks",
                 "Boilermaker": "Creative cocktails + craft beers in a lively Siolim hangout",
                 "Anand Sea Food Bar & Restaurant": "Fresh seafood + hearty local Goan flavours in Anjuna",
+                "Casa Jaali": "Slow breakfasts + peaceful waterfront views in South Goa",
               }
               const logos = {
                 "Da Luna Restaurant": daLunaLogo,
@@ -1436,6 +1466,7 @@ const Home = () => {
                 "Calhiz, Village Bar": calhiz1,
                 "Boilermaker": boiler1,
                 "Anand Sea Food Bar & Restaurant": anand1,
+                "Casa Jaali": casa1,
               }
               const isLuna = restaurant.name === "Da Luna Restaurant"
               return (

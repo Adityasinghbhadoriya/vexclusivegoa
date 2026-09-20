@@ -113,12 +113,16 @@ const RestaurantDetails = () => {
           </h1>
           <p className="text-white/80 text-base font-light mb-3">{restaurant.cuisine}</p>
           <div className="flex items-center gap-4 text-white/90 text-sm">
-            <span className="flex items-center gap-1.5">
-              <FaStar className="text-amber-300" />
-              <span className="font-semibold">{restaurant.rating}</span>
-              <span className="text-white/60">({restaurant.reviews})</span>
-            </span>
-            <span className="h-3 w-px bg-white/30" />
+            {restaurant.rating && (
+              <>
+                <span className="flex items-center gap-1.5">
+                  <FaStar className="text-amber-300" />
+                  <span className="font-semibold">{restaurant.rating}</span>
+                  {restaurant.reviews && <span className="text-white/60">({restaurant.reviews})</span>}
+                </span>
+                <span className="h-3 w-px bg-white/30" />
+              </>
+            )}
             <span className="flex items-center gap-1.5">
               <FaMapMarkerAlt className="text-xs" />
               <span className="text-xs">{restaurant.location}</span>

@@ -17,6 +17,9 @@ import BhagwanMahavirWildlife from "./Pages/BhagwanMahavirWildlife"
 import CaboDeRamaBeach from "./Pages/CaboDeRamaBeach"
 import ColaBeachKayaking from "./Pages/ColaBeachKayaking"
 import FortAguada from "./Pages/FortAguada"
+import MuseumOfGoa from "./Pages/MuseumOfGoa"
+import ReisMagosFort from "./Pages/ReisMagosFort"
+import ChaporaFort from "./Pages/ChaporaFort"
 // import RestaurantDetails from "./Pages/RestaurantDetails"
 
 function App() {
@@ -40,6 +43,9 @@ function App() {
         <Route path="/cabo-de-rama-beach" element={<CaboDeRamaBeach />} />
         <Route path="/cola-beach-kayaking" element={<ColaBeachKayaking />} />
         <Route path="/fort-aguada" element={<FortAguada />} />
+        <Route path="/museum-of-goa" element={<MuseumOfGoa />} />
+        <Route path="/reis-magos-fort" element={<ReisMagosFort />} />
+        <Route path="/chapora-fort" element={<ChaporaFort />} />
       </Routes>
     </div>
   )

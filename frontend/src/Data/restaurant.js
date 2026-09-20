@@ -39,6 +39,10 @@ import anand1 from "../assets/Anand1.webp";
 import anand2 from "../assets/Anand2.webp";
 import anand3 from "../assets/Anand3.webp";
 import anand4 from "../assets/Anand4.webp";
+import casa1 from "../assets/Casa1.webp";
+import casa2 from "../assets/Casa2.webp";
+import casa3 from "../assets/Casa3.webp";
+import casa4 from "../assets/Casa4.webp";
 
 export const restaurants = [
   {
@@ -96,7 +100,7 @@ export const restaurants = [
     instagram:
       "https://www.instagram.com/burgerfactorygoa/?hl=en",
 
-    offer: "10% OFF",
+    offer: "",
 
     image: bgfactory3,
 
@@ -146,7 +150,7 @@ export const restaurants = [
 
     instagram: "https://www.instagram.com/novasandwichshop/?hl=en",
 
-    offer: "10% OFF",
+    offer: "",
 
     image: nova1,
 
@@ -196,7 +200,7 @@ export const restaurants = [
 
     instagram: "https://www.instagram.com/babka.goa/?hl=en",
 
-    offer: "10% OFF",
+    offer: "",
 
     image: babka2,
 
@@ -245,7 +249,7 @@ export const restaurants = [
 
     instagram: "https://www.instagram.com/cocoamoga/?hl=en",
 
-    offer: "10% OFF",
+    offer: "",
 
     image: coco1,
 
@@ -293,7 +297,7 @@ export const restaurants = [
 
     instagram: "https://www.instagram.com/pincode.bungalow/?hl=en",
 
-    offer: "10% OFF",
+    offer: "",
 
     image: pincode3,
 
@@ -345,7 +349,7 @@ export const restaurants = [
     phone: "+917507806821",
     googleLink: "https://www.google.com/search?q=picola+pizza+roma+place+in+vegator+goa",
     instagram: "https://www.instagram.com/popular/piccola-roma-vagator/",
-    offer: "10% OFF",
+    offer: "",
     image: piccolo,
     gallery: [piccolo, piccolodish],
     description:
@@ -364,7 +368,7 @@ export const restaurants = [
     phone: "+919123456789",
     googleLink: "https://www.google.com/search?q=Elephant+Beach+Cafe+Bar+Goa",
     instagram: "https://www.instagram.com/elephantbeachcafe/",
-    offer: "10% OFF",
+    offer: "",
     image: "https://d2kihw5e8drjh5.cloudfront.net/eyJidWNrZXQiOiJ1dGEtaW1hZ2VzIiwia2V5IjoicGxhY2VfaW1nL0hxc0hmVW9DVG9DX1JSWnlNa2V5aFEiLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjY0MCwiaGVpZ2h0Ijo2NDAsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsInRvRm9ybWF0IjogIndlYnAifX0=",
     gallery: ["https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80"],
     description:
@@ -383,7 +387,7 @@ export const restaurants = [
     phone: "+919850033537",
     googleLink: "https://www.google.com/search?q=thalassa+restaurant+goa",
     instagram: "https://www.instagram.com/thalassagreektaverna/",
-    offer: "10% OFF",
+    offer: "",
     image: "https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg",
     gallery: ["https://www.acroncandolimresortgoa.com/explore-goa/local-cuisine-in-goa/thalassa-goa/images/thalassa-goa.jpg"],
     description:
@@ -402,7 +406,7 @@ export const restaurants = [
     phone: "+919890135502",
     googleLink: "https://share.google/DHAnI0fiHaMOYNhdM",
     instagram: "https://www.instagram.com/sakana_goa/",
-    offer: "10% OFF",
+    offer: "",
     image: sakana1,
     gallery: [sakana1, sakana2, sakana3, sakana4],
     description:
@@ -421,7 +425,7 @@ export const restaurants = [
     phone: "",
     googleLink: "https://share.google/uYaAsQBPf118eGSJB",
     instagram: "http://instagram.com/cajybar/?hl=en",
-    offer: "10% OFF",
+    offer: "",
     image: cazyimage3,
     gallery: [cazyimage1, cazyimage2, cazyimage3],
     description:
@@ -449,7 +453,7 @@ export const restaurants = [
     phone: "",
     googleLink: "https://share.google/6zwLcmnyiEbloBt8x",
     instagram: "https://www.instagram.com/pablosfamilia/?hl=en",
-    offer: "10% OFF",
+    offer: "",
     image: pablos3,
     gallery: [pablos1, pablos2, pablos3],
     description:
@@ -477,7 +481,7 @@ export const restaurants = [
     phone: "094099 99910",
     googleLink: "https://share.google/Z7ouZpoAw5VwNsYLD",
     instagram: "https://www.instagram.com/calhiz.goa/",
-    offer: "10% OFF",
+    offer: "",
     image: calhiz1,
     gallery: [calhiz1, calhiz2, calhiz3],
     description:
@@ -509,7 +513,7 @@ export const restaurants = [
     phone: "092260 49851",
     googleLink: "https://share.google/DzGt0bHKNEoQ3g2iZ",
     instagram: "https://www.instagram.com/boilermaker.goa/",
-    offer: "10% OFF",
+    offer: "",
     image: boiler1,
     gallery: [boiler1, boiler2, boiler3, boiler4],
     description:
@@ -544,7 +548,7 @@ export const restaurants = [
     phone: "082379 98363",
     googleLink: "https://share.google/lCfZIJV50WZyRZ91j",
     instagram: "",
-    offer: "10% OFF",
+    offer: "",
     image: anand1,
     gallery: [anand1, anand2, anand3, anand4],
     description:
@@ -569,5 +573,37 @@ export const restaurants = [
       "Solkadhi"
     ],
     goodToKnow: "Come for a hearty, local-style Goan meal rather than a fancy beachfront experience. The casual indoor and outdoor setting works well for groups."
+  },
+
+  {
+    id: 16,
+    name: "Casa Jaali",
+    cuisine: "Café • Breakfast • Waterfront",
+    rating: "",
+    reviews: "",
+    location: "South Goa",
+    hours: "",
+    phone: "",
+    googleLink: "https://share.google/o7Vnmf8OUO1RyRE3g",
+    instagram: "https://www.instagram.com/casa.jaali/",
+    offer: "",
+    image: casa1,
+    gallery: [casa1, casa2, casa3, casa4],
+    description:
+      "A peaceful waterfront escape in South Goa where greenery, gentle breezes and slow meals create an easy setting for breakfast, sunset and unhurried time by the water.",
+    tags: [
+      "Waterfront",
+      "Breakfast",
+      "Peaceful",
+      "Scenic Views",
+      "South Goa"
+    ],
+    bestTime: "Visit in the morning for a relaxed breakfast and peaceful views, or around sunset when the waterfront becomes especially beautiful.",
+    mustTry: [
+      "Homemade Granola",
+      "Middle Eastern Beef Burger",
+      "Churros"
+    ],
+    goodToKnow: "A lovely choice when you want to slow down and enjoy a quiet meal surrounded by greenery, breeze and waterfront views."
   }
 ]
