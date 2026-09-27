@@ -3,6 +3,7 @@ import Home from "./Pages/Home"
 // import Restaurants from "./Pages/Restaurant"
 import Clubs from "./Pages/Clubs"
 import Restaurant from "./Pages/Restaurant"
+import RestaurantCategories from "./Pages/RestaurantCategories"
 import RestaurantDetails from "./Components/RestaurantDetails"
 import ClubsDetails from "./Components/ClubsDetails"
 import SpaDetails from "./Components/SpaDetails"
@@ -27,7 +28,8 @@ function App() {
     <div className="max-w-107.5 mx-auto w-full min-h-screen">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/restaurants" element={<Restaurant />} />
+        <Route path="/restaurants" element={<RestaurantCategories />} />
+        <Route path="/restaurants/browse" element={<Restaurant />} />
         <Route path="/clubs" element={<Clubs />} />
         <Route path="/spa/:id" element={<SpaDetails />} />
         <Route path="/restaurant/:id" element={<RestaurantDetails />} />

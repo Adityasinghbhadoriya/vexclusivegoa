@@ -39,10 +39,11 @@ import anand1 from "../assets/Anand1.webp";
 import anand2 from "../assets/Anand2.webp";
 import anand3 from "../assets/Anand3.webp";
 import anand4 from "../assets/Anand4.webp";
-import casa1 from "../assets/Casa1.webp";
-import casa2 from "../assets/Casa2.webp";
-import casa3 from "../assets/Casa3.webp";
-import casa4 from "../assets/Casa4.webp";
+import fisherman1 from "../assets/Fisherman1.webp";
+import fisherman2 from "../assets/Fisherman2.webp";
+import fisherman3 from "../assets/Fisherman3.webp";
+import fisherman4 from "../assets/Fisherman4.webp";
+import fisherman5 from "../assets/Fisherman5.webp";
 
 export const restaurants = [
   {
@@ -291,7 +292,7 @@ export const restaurants = [
     reviews: 620,
     location: "Vagator, Goa",
     hours: "Daily, 9:00 AM - 11:30 PM",
-    phone: "",
+    phone: "097306 36529",
 
     googleLink: "https://share.google/jFvTbAk2LVsEcZVOP",
 
@@ -422,7 +423,7 @@ export const restaurants = [
     reviews: 480,
     location: "Arpora, Goa",
     hours: "Daily, from 6:30 PM",
-    phone: "",
+    phone: "093704 37069",
     googleLink: "https://share.google/uYaAsQBPf118eGSJB",
     instagram: "http://instagram.com/cajybar/?hl=en",
     offer: "",
@@ -450,7 +451,7 @@ export const restaurants = [
     reviews: 430,
     location: "Assagao, Goa",
     hours: "Daily, evening until midnight",
-    phone: "",
+    phone: "098903 45291",
     googleLink: "https://share.google/6zwLcmnyiEbloBt8x",
     instagram: "https://www.instagram.com/pablosfamilia/?hl=en",
     offer: "",
@@ -577,33 +578,36 @@ export const restaurants = [
 
   {
     id: 16,
-    name: "Casa Jaali",
-    cuisine: "Café • Breakfast • Waterfront",
-    rating: "",
-    reviews: "",
-    location: "South Goa",
+    name: "The Fisherman's Wharf",
+    cuisine: "Goan • Seafood • Indian • Continental",
+    rating: 4.4,
+    reviews: 4200,
+    location: "Anjuna, Goa",
     hours: "",
-    phone: "",
-    googleLink: "https://share.google/o7Vnmf8OUO1RyRE3g",
-    instagram: "https://www.instagram.com/casa.jaali/",
+    phone: "088066 60103",
+    googleLink: "https://share.google/XrRGwpYO7Byhd0if6",
+    instagram: "https://www.instagram.com/thefishermanswharfanjuna/",
     offer: "",
-    image: casa1,
-    gallery: [casa1, casa2, casa3, casa4],
+    image: fisherman5,
+    gallery: [fisherman1, fisherman2, fisherman3, fisherman4, fisherman5],
     description:
-      "A peaceful waterfront escape in South Goa where greenery, gentle breezes and slow meals create an easy setting for breakfast, sunset and unhurried time by the water.",
+      "A place where Goan flavours, fresh seafood and a beautiful laid-back setting come together. Experience Goa beyond the beaches with relaxed outdoor seating, warm interiors and a lively atmosphere — more than just a meal.",
     tags: [
-      "Waterfront",
-      "Breakfast",
-      "Peaceful",
-      "Scenic Views",
-      "South Goa"
+      "Goan Seafood",
+      "Outdoor Seating",
+      "Vegetarian Friendly",
+      "Family Friendly",
+      "Scenic Views"
     ],
-    bestTime: "Visit in the morning for a relaxed breakfast and peaceful views, or around sunset when the waterfront becomes especially beautiful.",
+    bestTime:
+      "Ideal for a leisurely lunch or an easy evening meal when you want good food, good vibes and slow moments.",
     mustTry: [
-      "Homemade Granola",
-      "Middle Eastern Beef Burger",
-      "Churros"
+      "Fish Curry Rice",
+      "Prawn Curry",
+      "Chicken Xacuti",
+      "Kingfish Recheado"
     ],
-    goodToKnow: "A lovely choice when you want to slow down and enjoy a quiet meal surrounded by greenery, breeze and waterfront views."
+    goodToKnow:
+      "Beyond seafood, the menu also includes Indian, Continental and vegetarian options — great for mixed groups."
   }
 ]

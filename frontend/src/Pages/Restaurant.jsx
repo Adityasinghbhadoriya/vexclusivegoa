@@ -1,6 +1,6 @@
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useMemo } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   FaStar,
   FaPhoneAlt,
@@ -12,45 +12,93 @@ import {
 } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
 import { restaurants } from "../Data/restaurant";
+import {
+  filterRestaurantsByMealCategory,
+  getMealCategoryById,
+} from "../Data/restaurantMealCategories";
 import { trackRestaurantClick } from "../api";
+
+const DA_LUNA_NAME = "Da Luna Restaurant";
+
+const priorityOrder = [
+  "Da Luna Restaurant",
+  "Pincode Bungalow",
+  "Burger Factory",
+  "Nova Sandwich Shop",
+  "Babka Goa",
+  "Coco Moga Bakehouse",
+  "Calhiz, Village Bar",
+  "Boilermaker",
+  "Anand Sea Food Bar & Restaurant",
+  "The Fisherman's Wharf",
+];
+
+const sortByPriority = (list) =>
+  [...list].sort((a, b) => {
+    const aPriority = priorityOrder.indexOf(a.name);
+    const bPriority = priorityOrder.indexOf(b.name);
+
+    if (aPriority !== -1 || bPriority !== -1) {
+      if (aPriority === -1) return 1;
+      if (bPriority === -1) return -1;
+      return aPriority - bPriority;
+    }
+
+    return 0;
+  });
 
 const Restaurant = () => {
   const navigate = useNavigate();
-  const priorityOrder = [
-    "Da Luna Restaurant",
-    "Pincode Bungalow",
-    "Burger Factory",
-    "Nova Sandwich Shop",
-    "Babka Goa",
-    "Coco Moga Bakehouse",
-    "Calhiz, Village Bar",
-    "Boilermaker",
-    "Anand Sea Food Bar & Restaurant",
-    "Casa Jaali",
-  ];
+  const [searchParams] = useSearchParams();
+  const categoryId = searchParams.get("category");
+  const mealCategory = getMealCategoryById(categoryId);
 
-  const featuredRestaurant =
-    restaurants.find((restaurant) => restaurant.name === "Da Luna Restaurant") || restaurants[0];
+  const filteredRestaurants = useMemo(
+    () => filterRestaurantsByMealCategory(restaurants, categoryId),
+    [categoryId]
+  );
 
-  const otherRestaurants = restaurants
-    .filter((restaurant) => restaurant.id !== featuredRestaurant.id)
-    .sort((a, b) => {
-      const aPriority = priorityOrder.indexOf(a.name);
-      const bPriority = priorityOrder.indexOf(b.name);
+  const featuredRestaurant = useMemo(() => {
+    if (!filteredRestaurants.length) return null;
 
-      if (aPriority !== -1 || bPriority !== -1) {
-        if (aPriority === -1) return 1;
-        if (bPriority === -1) return -1;
-        return aPriority - bPriority;
-      }
+    // Unfiltered (View All): keep today's Da Luna-first behavior
+    if (!categoryId) {
+      return (
+        filteredRestaurants.find((restaurant) => restaurant.name === DA_LUNA_NAME) ||
+        filteredRestaurants[0]
+      );
+    }
 
-      return 0;
-    });
+    // Per-category featured: best match by existing priority order
+    return sortByPriority(filteredRestaurants)[0];
+  }, [filteredRestaurants, categoryId]);
+
+  const otherRestaurants = useMemo(() => {
+    if (!featuredRestaurant) return [];
+    return sortByPriority(
+      filteredRestaurants.filter((restaurant) => restaurant.id !== featuredRestaurant.id)
+    );
+  }, [filteredRestaurants, featuredRestaurant]);
+
+  const showDaLunaOffers = filteredRestaurants.some(
+    (restaurant) => restaurant.name === DA_LUNA_NAME
+  );
+
+  const daLunaRestaurant =
+    filteredRestaurants.find((restaurant) => restaurant.name === DA_LUNA_NAME) ||
+    restaurants.find((restaurant) => restaurant.name === DA_LUNA_NAME);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOffer, setSelectedOffer] = useState(null);
 
   useEffect(() => {
+    setCurrentIndex(0);
+    setSelectedOffer(null);
+  }, [categoryId, featuredRestaurant?.id]);
+
+  useEffect(() => {
+    if (!featuredRestaurant?.gallery?.length) return undefined;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) =>
         (prev + 1) % featuredRestaurant.gallery.length
@@ -58,8 +106,7 @@ const Restaurant = () => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [featuredRestaurant.gallery.length]);
-
+  }, [featuredRestaurant?.gallery?.length, featuredRestaurant?.id]);
   useEffect(() => {
     if (!selectedOffer) return undefined;
 
@@ -144,7 +191,7 @@ const Restaurant = () => {
         <div className="px-5 pt-5 pb-4">
           <div className="flex items-center justify-between mb-4">
             <button
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/restaurants")}
               className="grid place-items-center h-10 w-10 rounded-full bg-white border border-stone-200 shadow-sm"
             >
               <FaArrowLeft className="text-sm" />
@@ -165,20 +212,43 @@ const Restaurant = () => {
             <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent"> Restaurants</span>
           </h1>
           <p className="text-stone-500 text-sm mt-1">
-            Top places in Goa curated for you
+            {mealCategory
+              ? `${mealCategory.emoji} ${mealCategory.label} picks curated for you`
+              : "Top places in Goa curated for you"}
           </p>
         </div>
       </div>
 
       <div className="px-5 pt-6 space-y-8">
 
+        {!featuredRestaurant && (
+          <section className="rounded-3xl border border-stone-200 bg-white p-6 text-center shadow-sm">
+            <p className="text-base font-semibold text-stone-900">
+              No restaurants in this category yet
+            </p>
+            <p className="mt-1 text-sm text-stone-500">
+              Try another category or view the full list.
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate("/restaurants")}
+              className="mt-4 rounded-2xl bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white"
+            >
+              Back to categories
+            </button>
+          </section>
+        )}
+
         {/* Featured Restaurant */}
+        {featuredRestaurant && (
         <section>
           <div className="flex items-end justify-between mb-3">
             <div className="flex items-center gap-2">
               <FaFire className="text-orange-500" />
               <h2 className="text-lg font-bold text-stone-900">
-                Awarded Restaurant
+                {featuredRestaurant.name === DA_LUNA_NAME
+                  ? "Awarded Restaurant"
+                  : "Featured Restaurant"}
               </h2>
             </div>
 
@@ -204,12 +274,16 @@ const Restaurant = () => {
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30" />
 
+              {featuredRestaurant.name === DA_LUNA_NAME && (
               <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/30 px-3 py-1.5">
                 <HiSparkles className="text-amber-300 text-xs"/>
                 <span className="text-xs font-semibold text-white">
-                  {featuredRestaurant.offer} • V EXCLUSIVE
+                  {featuredRestaurant.offer
+                    ? `${featuredRestaurant.offer} • V EXCLUSIVE`
+                    : "V EXCLUSIVE"}
                 </span>
               </div>
+              )}
 
               <div className="absolute top-4 right-4 flex items-center gap-1 rounded-full bg-white px-2.5 py-1 shadow-lg">
                 <FaStar className="text-amber-400 text-xs" />
@@ -269,9 +343,11 @@ const Restaurant = () => {
             </div>
           </div>
         </section>
+        )}
 
 
-        {/* Exclusive Offers */}
+        {/* Exclusive Offers — only when Da Luna is in the active category (or View All) */}
+        {showDaLunaOffers && (
         <section>
           <div className="mb-4">
             <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-bold tracking-[0.16em] text-amber-800 uppercase">
@@ -333,9 +409,11 @@ const Restaurant = () => {
             </p>
           </div>
         </section>
+        )}
 
 
         {/* Other Restaurants */}
+        {featuredRestaurant && (
         <section>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-stone-900">
@@ -394,10 +472,11 @@ const Restaurant = () => {
             ))}
           </div>
         </section>
+        )}
 
       </div>
 
-      {selectedOffer && (
+      {selectedOffer && featuredRestaurant && (
         <div className="fixed inset-0 z-100 flex items-end justify-center">
           <button
             type="button"
@@ -462,7 +541,7 @@ const Restaurant = () => {
               <button
                 type="button"
                 onClick={() => {
-                  window.location.href = `tel:${featuredRestaurant.phone}`;
+                  window.location.href = `tel:${daLunaRestaurant?.phone || featuredRestaurant.phone}`;
                 }}
                 className="rounded-2xl bg-stone-900 px-4 py-3.5 text-sm font-bold text-white shadow-lg"
               >
@@ -471,7 +550,7 @@ const Restaurant = () => {
               </button>
               <button
                 type="button"
-                onClick={() => window.open(featuredRestaurant.googleLink, "_blank", "noopener,noreferrer")}
+                onClick={() => window.open(daLunaRestaurant?.googleLink || featuredRestaurant.googleLink, "_blank", "noopener,noreferrer")}
                 className="rounded-2xl bg-linear-to-r from-amber-500 to-orange-500 px-4 py-3.5 text-sm font-bold text-white shadow-lg"
               >
                 <FaDirections className="mx-auto mb-1.5" />

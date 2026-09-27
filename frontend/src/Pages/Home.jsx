@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
+import { Link } from "react-router-dom"
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet"
 import L from "leaflet"
-import CategoryCard from "../Components/CategoryCard"
 import { restaurants } from "../Data/restaurant"
 import {
   FaPhoneAlt,
@@ -13,18 +12,15 @@ import {
   FaPizzaSlice,
   FaMusic,
   FaMicrophoneAlt,
+  FaHeadphones,
   FaClock,
   FaGift,
 } from "react-icons/fa"
 import { trackCategoryClick, trackRestaurantClick } from "../api.js"
 import { calculateDistance, formatDistance } from "../utils/location"
 import logo from "../assets/logo.webp"
-import dalunaImage from "../assets/DaLunaRes.webp"
+import azulejosImage from "../assets/azulejos2.webp"
 import sakanaLogo from "../assets/sakana1.webp"
-
-import dalunaOffer1 from "../assets/da-luna-offer1.webp"
-import dalunaOffer2 from "../assets/da-luna-offer3.webp"
-import dalunaOffer3 from "../assets/DaLunaOffers.jpeg"
 import parraRoadGoa from "../assets/Parra-Road-Goa.jpg.webp"
 import hilltopMarketImage from "../assets/Hiltopmarket.jpg"
 import chaporaLaneImage from "../assets/chaporaLane.jpeg"
@@ -42,7 +38,7 @@ import pincode3 from "../assets/Pincode3.webp"
 import calhiz1 from "../assets/Calhiz1.webp"
 import boiler1 from "../assets/Boiler1.webp"
 import anand1 from "../assets/Anand1.webp"
-import casa1 from "../assets/Casa1.webp"
+import fisherman5 from "../assets/Fisherman5.webp"
 import colabeach2 from "../assets/Colabeach2.jpeg"
 import fortAguadaHome from "../assets/Fort1.jpeg"
 import museumOfGoaHome from "../assets/Museum1.webp"
@@ -61,8 +57,17 @@ const priorityOrder = [
   "Calhiz, Village Bar",
   "Boilermaker",
   "Anand Sea Food Bar & Restaurant",
-  "Casa Jaali",
+  "The Fisherman's Wharf",
 ]
+
+const LiveMapRecenter = ({ center, zoom }) => {
+  const map = useMap()
+  useEffect(() => {
+    if (!center) return
+    map.setView(center, zoom, { animate: true })
+  }, [center, zoom, map])
+  return null
+}
 
 const mustVisitRestaurants = [...restaurants].sort((a, b) => {
   const aPriority = priorityOrder.indexOf(a.name)
@@ -85,7 +90,7 @@ if (typeof document !== "undefined" && !document.getElementById("vex-fonts")) {
   link.id = "vex-fonts"
   link.rel = "stylesheet"
   link.href =
-    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Bebas+Neue&display=swap"
+    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@500;600;700&family=Bebas+Neue&display=swap"
   document.head.appendChild(link)
 }
 
@@ -124,8 +129,8 @@ const globalStyle = `
     50%      { transform: translateY(-6px); }
   }
   @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,.45); }
-    50%      { box-shadow: 0 0 0 14px rgba(251,191,36,0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(56,189,248,.45); }
+    50%      { box-shadow: 0 0 0 14px rgba(56,189,248,0); }
   }
 
   .vex-font-display { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; }
@@ -140,6 +145,13 @@ const globalStyle = `
     background-clip: text;
     text-shadow: 0 0 24px rgba(255,255,255,.35);
     animation: shimmer 4.5s linear infinite;
+  }
+
+  .vex-hero-title-cool {
+    color: #ffffff;
+    text-shadow:
+      0 1px 2px rgba(4, 12, 28, .55),
+      0 8px 28px rgba(4, 12, 28, .45);
   }
 
   .vex-fade-up   { opacity: 0; animation: fadeUp .9s cubic-bezier(.2,.7,.2,1) forwards; }
@@ -195,6 +207,10 @@ const globalStyle = `
     background: linear-gradient(90deg, #f97316, #fbbf24);
     border-radius: 2px;
   }
+  .vex-section-title-center::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
   .vex-eyebrow {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
@@ -208,6 +224,31 @@ const globalStyle = `
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
     border: 1px solid rgba(255,255,255,.18);
+  }
+  .vex-glass-dark {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .12);
+    backdrop-filter: blur(26px) saturate(160%) brightness(0.72);
+    -webkit-backdrop-filter: blur(26px) saturate(160%) brightness(0.72);
+    border: 1px solid rgba(255, 255, 255, .32);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, .35),
+      inset 0 -1px 0 rgba(30, 70, 140, .2),
+      0 14px 36px rgba(20, 50, 110, .28);
+  }
+  .vex-glass-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(40, 90, 170, .38);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .vex-glass-dark > * {
+    position: relative;
+    z-index: 1;
   }
   .vex-glass-light {
     background: rgba(255,255,255,.7);
@@ -296,7 +337,7 @@ const globalStyle = `
 
   /* ── Mario Miranda "Why Us" section ── */
   .mm-section {
-    background: #f5c800;
+    background: #f0d78c;
     position: relative;
     padding: 64px 24px 72px;
     overflow: hidden;
@@ -343,7 +384,7 @@ const globalStyle = `
   .mm-promise-tag {
     display: inline-block;
     background: #1a1200;
-    color: #f5c800;
+    color: #f0d78c;
     font-family: 'Bebas Neue', 'DM Sans', sans-serif;
     font-size: 0.82rem;
     letter-spacing: 0.22em;
@@ -436,8 +477,8 @@ const globalStyle = `
     position: absolute;
     top: 6px; right: 6px;
     width: 10px; height: 10px;
-    border-top: 2px solid #f5c800;
-    border-right: 2px solid #f5c800;
+    border-top: 2px solid #f0d78c;
+    border-right: 2px solid #f0d78c;
   }
   .mm-card-icon {
     font-size: 28px;
@@ -449,7 +490,7 @@ const globalStyle = `
     font-family: 'Bebas Neue', 'Playfair Display', Georgia, serif;
     font-size: 1.2rem;
     letter-spacing: 0.07em;
-    color: #f5c800;
+    color: #f0d78c;
     margin: 0 0 8px;
     text-transform: uppercase;
   }
@@ -457,49 +498,7 @@ const globalStyle = `
     font-family: 'DM Sans', sans-serif;
     font-size: 12.5px;
     line-height: 1.65;
-    color: rgba(245,200,0,0.7);
-  }
-  .mm-badge-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    flex-wrap: wrap;
-    margin-top: 34px;
-  }
-  .mm-badge-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-  .mm-badge-circle {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: #1a1200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    position: relative;
-    transition: transform .25s ease;
-  }
-  .mm-badge-circle:hover { transform: scale(1.1); }
-  .mm-badge-circle::before {
-    content: '';
-    position: absolute;
-    inset: 3px;
-    border-radius: 50%;
-    border: 1px dashed rgba(245,200,0,0.45);
-  }
-  .mm-badge-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #1a1200;
+    color: rgba(240,215,140,0.82);
   }
   .mm-ink-blob {
     position: absolute;
@@ -509,11 +508,6 @@ const globalStyle = `
   }
 `
 
-const categories = [
-  { title: "Restaurants", path: "/restaurants" },
-  { title: "Clubs & Nightlife", path: "/clubs" },
-]
-
 const liveExplorePlaces = [
   {
     id: "sakana",
@@ -522,6 +516,7 @@ const liveExplorePlaces = [
     coords: [15.5823, 73.7428],
     address: "Anjuna, Goa",
     description: "Authentic sushi and ramen in a relaxed setting.",
+    restaurantId: 5,
   },
   {
     id: "da-luna",
@@ -530,6 +525,7 @@ const liveExplorePlaces = [
     coords: [15.5805, 73.7478],
     address: "Anjuna, Goa",
     description: "Fine dining with sea-view evenings and premium Italian plates.",
+    restaurantId: 1,
   },
   {
     id: "piccola-roma",
@@ -538,6 +534,7 @@ const liveExplorePlaces = [
     coords: [15.6020, 73.7380],
     address: "Vagator, Goa",
     description: "Easy-going pizza stop for beach-town cravings.",
+    restaurantId: 2,
   },
   {
     id: "chapora-lane",
@@ -546,6 +543,7 @@ const liveExplorePlaces = [
     coords: [15.6126, 73.7425],
     address: "Chapora, Goa",
     description: "Quiet village lanes with cafés, boutiques and sunset walks.",
+    path: "/chapora-lane",
   },
   {
     id: "morjim-beach",
@@ -554,6 +552,7 @@ const liveExplorePlaces = [
     coords: [15.6228, 73.7306],
     address: "Morjim, Goa",
     description: "A calm shoreline best for sunset views and long coastal strolls.",
+    path: "/morjim",
   },
   {
     id: "hilltop-market",
@@ -562,6 +561,7 @@ const liveExplorePlaces = [
     coords: [15.6608, 73.7608],
     address: "Arpora, Goa",
     description: "Friday night energy with live music, shopping and festive vibes.",
+    path: "/hilltop-market",
   },
   {
     id: "bhagwan-mahavir",
@@ -570,6 +570,7 @@ const liveExplorePlaces = [
     coords: [15.3828, 74.1810],
     address: "Mollem, Goa",
     description: "Dense forests and lush trails for a nature-led escape.",
+    path: "/bhagwan-mahavir-wildlife",
   },
 ]
 
@@ -577,7 +578,7 @@ const trending = [
   {
     name: "Parra Road",
     desc: "Scenic coconut-lined road for peaceful drives",
-    tag: "🌴 Scenic",
+    tag: "Scenic",
     img: parraRoadGoa,
     path: "/parra-road",
     location: "Parra, Goa",
@@ -585,7 +586,7 @@ const trending = [
   {
     name: "Hilltop Market",
     desc: "Night market with music, shopping & party vibes",
-    tag: "🎶 Vibrant",
+    tag: "Vibrant",
     img: hilltopMarketImage,
     path: "/hilltop-market",
     location: "Arpora, Goa",
@@ -593,7 +594,7 @@ const trending = [
   {
     name: "Chapora Lane",
     desc: "Quiet village lanes with cafés & local charm",
-    tag: "🏘️ Peaceful",
+    tag: "Peaceful",
     img: chaporaLaneImage,
     path: "/chapora-lane",
     location: "Chapora, Goa",
@@ -601,7 +602,7 @@ const trending = [
   {
     name: "Mandrem Beach",
     desc: "Calm beach for relaxation & yoga sessions",
-    tag: "🏖️ Serene",
+    tag: "Serene",
     img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
     path: "/mandrem-beach",
     location: "Mandrem, Goa",
@@ -609,7 +610,7 @@ const trending = [
   {
     name: "Morjim",
     desc: "Quiet coastal paradise with turtles, sunsets & peaceful beaches",
-    tag: "🌊 Tranquil",
+    tag: "Tranquil",
     img: morjimImage,
     path: "/morjim",
     location: "Morjim, Goa",
@@ -617,7 +618,7 @@ const trending = [
   {
     name: "Basilica of Bom Jesus",
     desc: "Historic church with sacred relics and timeless heritage in Old Goa",
-    tag: "⛪ Heritage",
+    tag: "Heritage",
     img: basilicaImage,
     path: "/basilica-bom-jesus",
     location: "Old Goa",
@@ -625,7 +626,7 @@ const trending = [
   {
     name: "Bhagwan Mahavir Wildlife Sanctuary",
     desc: "Lush forests, waterfalls and wild trails in the heart of South Goa",
-    tag: "🌿 Nature",
+    tag: "Nature",
     img: wildlifeImage,
     path: "/bhagwan-mahavir-wildlife",
     location: "Mollem, Goa",
@@ -633,7 +634,7 @@ const trending = [
   {
     name: "Cabo de Rama Beach",
     desc: "Quiet cliffs, peaceful shores and scenic sunset views in South Goa",
-    tag: "🌅 Scenic",
+    tag: "Scenic",
     img: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1200&q=80",
     path: "/cabo-de-rama-beach",
     location: "Cabo de Rama, Goa",
@@ -641,7 +642,7 @@ const trending = [
   {
     name: "Cola Beach Kayaking",
     desc: "Paddle through a peaceful lagoon with green surroundings and a calm South Goa vibe",
-    tag: "🛶 Adventure",
+    tag: "Adventure",
     img: colabeach2,
     path: "/cola-beach-kayaking",
     location: "Cola Beach, South Goa",
@@ -649,7 +650,7 @@ const trending = [
   {
     name: "Fort Aguada",
     desc: "Historic Portuguese fort with panoramic coastline views, lighthouse beauty and timeless charm",
-    tag: "🏛️ Heritage",
+    tag: "Heritage",
     img: fortAguadaHome,
     path: "/fort-aguada",
     location: "Sinquerim, North Goa",
@@ -657,7 +658,7 @@ const trending = [
   {
     name: "Museum of Goa",
     desc: "Contemporary art, sculptures and cultural stories exploring Goa’s identity",
-    tag: "🎨 Culture",
+    tag: "Culture",
     img: museumOfGoaHome,
     path: "/museum-of-goa",
     location: "Pilerne, North Goa",
@@ -665,7 +666,7 @@ const trending = [
   {
     name: "Reis Magos Fort",
     desc: "Restored Portuguese-era fort with peaceful Mandovi River views",
-    tag: "🏰 Heritage",
+    tag: "Heritage",
     img: reisMagosHome,
     path: "/reis-magos-fort",
     location: "Reis Magos, North Goa",
@@ -673,7 +674,7 @@ const trending = [
   {
     name: "Chapora Fort",
     desc: "Historic hilltop ruins with dramatic cliffs and sweeping sunset views",
-    tag: "🌅 Scenic",
+    tag: "Scenic",
     img: chaporaFortHome,
     path: "/chapora-fort",
     location: "Chapora, North Goa",
@@ -682,7 +683,7 @@ const trending = [
 
 const experiences = [
   { label: "Sunset Cruise", icon: "🛥️", color: "linear-gradient(135deg,#fff7ed,#ffedd5)", link: "https://www.google.com/search?q=Santa+Monica+Jetty+Terminal+Goa+sunset+cruise" },
-  { label: "Beach Party",   icon: "🎉", color: "linear-gradient(135deg,#fef9c3,#fde68a)", link: "https://www.google.com/search?q=Shiva+Valley+Beach+Party+Goa" },
+  { label: "Beach Party",   icon: "🎉", color: "linear-gradient(135deg,#fef9c3,#fde68a)", path: "/clubs" },
   { label: "Water Sports",  icon: "🏄", color: "linear-gradient(135deg,#ecfdf5,#d1fae5)", link: "https://www.google.com/search?q=Goa+Water+Sports+Activities+and+Boat+Tours" },
   { label: "Casino Night",  icon: "🎰", color: "linear-gradient(135deg,#fdf4ff,#fae8ff)", link: "https://www.google.com/search?q=Big+Daddy+Casino+Goa" },
 ]
@@ -696,61 +697,21 @@ const WaveDivider = ({ flip = false, fill = "#fffaf0" }) => (
 )
 
 const Home = () => {
-  const navigate = useNavigate()
   const trendingRef = useRef(null)
-  const offerImages = [dalunaOffer1, dalunaOffer2, dalunaOffer3]
+  const daLunaRef = useRef(null)
 
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isLivePanelOpen, setIsLivePanelOpen] = useState(false)
   const [locationStatus, setLocationStatus] = useState("idle")
   const [userLocation, setUserLocation] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedPlace, setSelectedPlace] = useState(liveExplorePlaces[0])
-  const autoAdvanceRef = useRef(null)
-  const timeoutRef = useRef(null)
-  const dragStartX = useRef(null)
-  const hasDragged = useRef(false)
-  const AUTO_DELAY = 5000
 
-  const scrollToTrending = () => {
-    trendingRef.current?.scrollIntoView({ behavior: "smooth" })
+  const scrollToFeatured = () => {
+    daLunaRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 
-  const setSlide = (index) => {
-    const normalized = ((index % offerImages.length) + offerImages.length) % offerImages.length
-    setCurrentSlide(normalized)
-    setIsAnimating(true)
-    clearTimeout(timeoutRef.current)
-    timeoutRef.current = setTimeout(() => setIsAnimating(false), 800)
-  }
-
-  const nextSlide = () => { setSlide(currentSlide + 1); restartAutoAdvance() }
-  const prevSlide = () => { setSlide(currentSlide - 1); restartAutoAdvance() }
-  const goToSlide = (index) => { setSlide(index); restartAutoAdvance() }
-
-  const restartAutoAdvance = () => {
-    clearTimeout(autoAdvanceRef.current)
-    autoAdvanceRef.current = setTimeout(() => {
-      setCurrentSlide((prev) => {
-        const next = (prev + 1) % offerImages.length
-        setIsAnimating(true)
-        clearTimeout(timeoutRef.current)
-        timeoutRef.current = setTimeout(() => setIsAnimating(false), 800)
-        return next
-      })
-      restartAutoAdvance()
-    }, AUTO_DELAY)
-  }
-
-  useEffect(() => {
-    restartAutoAdvance()
-    return () => {
-      clearTimeout(autoAdvanceRef.current)
-      clearTimeout(timeoutRef.current)
-    }
-  }, [])
+  const closeLivePanel = () => setIsLivePanelOpen(false)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -768,6 +729,23 @@ const Home = () => {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  useEffect(() => {
+    if (!isLivePanelOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") closeLivePanel()
+    }
+    window.addEventListener("keydown", onKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener("keydown", onKeyDown)
+    }
+  }, [isLivePanelOpen])
+
   const openLivePanel = () => {
     setIsLivePanelOpen(true)
     setLocationStatus("loading")
@@ -776,6 +754,7 @@ const Home = () => {
     if (!navigator.geolocation) {
       setLocationStatus("unsupported")
       setUserLocation(null)
+      setSelectedPlace(liveExplorePlaces[0])
       return
     }
 
@@ -797,6 +776,7 @@ const Home = () => {
       () => {
         setLocationStatus("denied")
         setUserLocation(null)
+        setSelectedPlace(liveExplorePlaces[0])
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
     )
@@ -819,6 +799,24 @@ const Home = () => {
       .slice(0, 8)
   }, [selectedCategory, userLocation])
 
+  useEffect(() => {
+    if (!nearbyPlaces.length) {
+      setSelectedPlace(null)
+      return
+    }
+    setSelectedPlace((current) => {
+      if (current && nearbyPlaces.some((place) => place.id === current.id)) {
+        return nearbyPlaces.find((place) => place.id === current.id) || nearbyPlaces[0]
+      }
+      return nearbyPlaces[0]
+    })
+  }, [nearbyPlaces])
+
+  const mapCenter = userLocation
+    ? [userLocation.lat, userLocation.lon]
+    : [15.4989, 73.8278]
+  const mapZoom = userLocation ? 12 : 9
+
   const markerIcon = (accent) =>
     L.divIcon({
       className: "",
@@ -838,23 +836,36 @@ const Home = () => {
           className="vex-kenburns"
           style={{
             position: "absolute", inset: 0,
-            backgroundImage: `url(${dalunaImage})`,
+            backgroundImage: `url(${azulejosImage})`,
             backgroundSize: "cover", backgroundPosition: "center",
             willChange: "transform",
           }}
         />
-        {/* Layered luxury overlays */}
+        {/* Cool azulejos overlays — darker mid so white type stays crisp */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(180deg, rgba(10,5,0,.55) 0%, rgba(10,5,0,.35) 40%, rgba(10,5,0,.85) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(4,12,28,.62) 0%, rgba(4,12,28,.48) 35%, rgba(4,12,28,.62) 68%, rgba(4,10,24,.9) 100%)",
         }} />
         <div style={{
           position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse at 70% 20%, rgba(251,191,36,.25), transparent 60%)",
+          background:
+            "radial-gradient(ellipse 90% 55% at 50% 28%, rgba(4,12,28,.35), transparent 70%)",
         }} />
         <div style={{
           position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse at 20% 80%, rgba(249,115,22,.18), transparent 55%)",
+          background:
+            "radial-gradient(ellipse 70% 50% at 88% 78%, rgba(37, 99, 235, .22), transparent 55%)",
+        }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          background:
+            "radial-gradient(ellipse 55% 45% at 8% 88%, rgba(14, 116, 144, .16), transparent 50%)",
+        }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          boxShadow: "inset 0 0 140px rgba(4, 12, 28, .5)",
+          pointerEvents: "none",
         }} />
 
         {/* Top Navbar */}
@@ -863,7 +874,7 @@ const Home = () => {
           style={{
             position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
             padding: "12px 18px",
-            background: scrolled ? "rgba(15,8,2,.7)" : "rgba(15,8,2,.25)",
+            background: scrolled ? "rgba(6,14,32,.78)" : "rgba(8,18,40,.28)",
             transition: "background .3s ease",
           }}
         >
@@ -873,7 +884,7 @@ const Home = () => {
                 <img src={logo} alt="V Exclusive Goa" style={{ width: "100%", height: "100%", borderRadius: 999, objectFit: "cover", background: "#0f0802" }} />
               </div>
               <div style={{ lineHeight: 1 }}>
-                <div className="vex-eyebrow" style={{ color: "#fbbf24", fontSize: 9 }}>PREMIUM GOA</div>
+                <div className="vex-eyebrow" style={{ color: "#bfdbfe", fontSize: 9 }}>PREMIUM GOA</div>
                 <div className="vex-font-display" style={{ fontSize: 15, fontWeight: 700, color: "#fff", letterSpacing: ".05em" }}>
                   V EXCLUSIVE GOA
                 </div>
@@ -883,9 +894,9 @@ const Home = () => {
               onClick={openLivePanel}
               className="vex-eyebrow vex-pulse-glow"
               style={{
-                color: "#fff", background: "rgba(251,191,36,.18)",
+                color: "#fff", background: "rgba(56,189,248,.16)",
                 padding: "6px 12px", borderRadius: 999, fontSize: 10,
-                border: "1px solid rgba(251,191,36,.45)", cursor: "pointer",
+                border: "1px solid rgba(125,211,252,.45)", cursor: "pointer",
               }}
             >
               ● LIVE
@@ -901,7 +912,13 @@ const Home = () => {
           textAlign: "center",
         }}>
           <div className="vex-fade-up" style={{ animationDelay: ".1s" }}>
-            <span className="vex-badge" style={{ background: "rgba(255,255,255,.12)", color: "#fde68a", border: "1px solid rgba(251,191,36,.4)", boxShadow: "none", backdropFilter: "blur(8px)" }}>
+            <span className="vex-badge" style={{
+              background: "rgba(255,255,255,.16)",
+              color: "#ffffff",
+              border: "1px solid rgba(255,255,255,.4)",
+              boxShadow: "0 8px 28px rgba(4,12,28,.3)",
+              backdropFilter: "blur(10px)",
+            }}>
               Goa's #1 Discovery Platform
             </span>
           </div>
@@ -910,13 +927,15 @@ const Home = () => {
             marginTop: 22, fontSize: "clamp(2.4rem, 8vw, 4.4rem)",
             lineHeight: 1.05, fontWeight: 700,
             animationDelay: ".25s",
+            color: "#ffffff",
           }}>
-            <span className="vex-hero-title">Experience Goa</span>
+            <span className="vex-hero-title-cool">Experience Goa</span>
           </h1>
 
           <h2 className="vex-font-serif vex-fade-up" style={{
             marginTop: 6, fontSize: "clamp(1.4rem, 5vw, 2.2rem)",
-            fontWeight: 500, color: "#fff8e6", fontStyle: "italic",
+            fontWeight: 500, color: "#ffffff", fontStyle: "italic",
+            textShadow: "0 2px 16px rgba(4,12,28,.4)",
             animationDelay: ".4s",
           }}>
             Like Never Before
@@ -924,14 +943,16 @@ const Home = () => {
 
           <p className="vex-fade-up" style={{
             marginTop: 22, fontSize: 15.5, lineHeight: 1.7,
-            color: "rgba(255,255,255,.82)", maxWidth: 520, margin: "22px auto 0",
+            color: "rgba(255,255,255,.92)", maxWidth: 520, margin: "22px auto 0",
+            textShadow: "0 1px 12px rgba(4,12,28,.35)",
             animationDelay: ".55s",
           }}>
             Your ultimate guide to the best restaurants, nightlife, beaches & curated experiences across Goa.
           </p>
 
           <button
-            onClick={scrollToTrending}
+            type="button"
+            onClick={scrollToFeatured}
             className="vex-cta vex-fade-up"
             style={{
               marginTop: 32, padding: "14px 30px",
@@ -945,7 +966,7 @@ const Home = () => {
             <span style={{ fontSize: 18, lineHeight: 1 }}>›</span>
           </button>
 
-          <div className="vex-scroll-hint" style={{ marginTop: 50, color: "rgba(255,255,255,.5)", fontSize: 22 }}>↓</div>
+          <div className="vex-scroll-hint" style={{ marginTop: 50, color: "rgba(255,255,255,.65)", fontSize: 22 }}>↓</div>
         </div>
 
         {/* Floating Category Glass Cards */}
@@ -961,7 +982,7 @@ const Home = () => {
               <Link
                 to="/restaurants"
                 onClick={() => trackCategoryClick("restaurants")}
-                className="vex-glass vex-tilt"
+                className="vex-glass-dark vex-tilt"
                 style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, flex: 1, maxWidth: 320 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -980,7 +1001,7 @@ const Home = () => {
               <Link
                 to="/clubs"
                 onClick={() => trackCategoryClick("clubs")}
-                className="vex-glass vex-tilt"
+                className="vex-glass-dark vex-tilt"
                 style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, flex: 1, maxWidth: 320 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -1002,7 +1023,7 @@ const Home = () => {
               <Link
                 to="/spa/1"
                 onClick={() => trackCategoryClick("spa")}
-                className="vex-glass vex-tilt"
+                className="vex-glass-dark vex-tilt"
                 style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, maxWidth: 320 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -1027,18 +1048,29 @@ const Home = () => {
       </section>
 
       {isLivePanelOpen && (
-        <div style={{ position: "fixed", inset: 0, background: "rgba(8, 4, 1, 0.8)", zIndex: 70, padding: 20, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ width: "min(1160px, 100%)", maxHeight: "92vh", overflowY: "auto", borderRadius: 28, background: "#fffaf0", border: "1px solid rgba(249,115,22,.2)", boxShadow: "0 24px 80px rgba(0,0,0,.25)", padding: "24px 24px 30px" }}>
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="live-panel-title"
+          style={{ position: "fixed", inset: 0, background: "rgba(8, 4, 1, 0.8)", zIndex: 70, padding: 20, display: "flex", alignItems: "center", justifyContent: "center" }}
+          onClick={closeLivePanel}
+        >
+          <div
+            style={{ width: "min(1160px, 100%)", maxHeight: "92vh", overflowY: "auto", borderRadius: 28, background: "#fffaf0", border: "1px solid rgba(249,115,22,.2)", boxShadow: "0 24px 80px rgba(0,0,0,.25)", padding: "24px 24px 30px" }}
+            onClick={(event) => event.stopPropagation()}
+          >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, marginBottom: 16 }}>
               <div>
                 <div className="vex-eyebrow" style={{ color: "#b45309" }}>LIVE LOCATION</div>
-                <h3 className="vex-font-display" style={{ fontSize: "1.6rem", margin: "6px 0 4px", color: "#1a1208" }}>Explore Near Me</h3>
+                <h3 id="live-panel-title" className="vex-font-display" style={{ fontSize: "1.6rem", margin: "6px 0 4px", color: "#1a1208" }}>Explore Near Me</h3>
                 <p style={{ margin: 0, color: "#5b4632", maxWidth: 620, lineHeight: 1.65 }}>
                   Discover nearby restaurants, beaches and nightlife around your current location in real time.
                 </p>
               </div>
               <button
-                onClick={() => setIsLivePanelOpen(false)}
+                type="button"
+                aria-label="Close live explore panel"
+                onClick={closeLivePanel}
                 style={{ border: "none", background: "rgba(249,115,22,.1)", color: "#9a2c0f", borderRadius: 999, width: 36, height: 36, cursor: "pointer", fontSize: 18 }}
               >
                 ×
@@ -1141,10 +1173,12 @@ const Home = () => {
 
                 <div className="vex-live-map-frame">
                   <MapContainer
-                    center={userLocation ? [userLocation.lat, userLocation.lon] : [15.4989, 73.8278]}
-                    zoom={userLocation ? 12 : 9}
+                    key={userLocation ? `me-${userLocation.lat.toFixed(3)}-${userLocation.lon.toFixed(3)}` : "goa-default"}
+                    center={mapCenter}
+                    zoom={mapZoom}
                     style={{ height: "100%", width: "100%" }}
                   >
+                    <LiveMapRecenter center={mapCenter} zoom={mapZoom} />
                     <TileLayer
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -1182,14 +1216,37 @@ const Home = () => {
                     <div style={{ fontWeight: 700, color: "#1a1208" }}>{selectedPlace.name}</div>
                     <div style={{ fontSize: 13, color: "#5b4632", marginTop: 4 }}>{selectedPlace.address}</div>
                     <div style={{ fontSize: 13, color: "#5b4632", marginTop: 6 }}>{selectedPlace.description}</div>
-                    <a
-                      href={`https://www.google.com/maps/dir/?api=1&destination=${selectedPlace.coords[0]},${selectedPlace.coords[1]}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{ display: "inline-block", marginTop: 10, color: "#b45309", fontWeight: 700 }}
-                    >
-                      Open directions ↗
-                    </a>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 10 }}>
+                      <a
+                        href={`https://www.google.com/maps/dir/?api=1&destination=${selectedPlace.coords[0]},${selectedPlace.coords[1]}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ color: "#b45309", fontWeight: 700 }}
+                      >
+                        Open directions ↗
+                      </a>
+                      {selectedPlace.restaurantId && (
+                        <Link
+                          to={`/restaurant/${selectedPlace.restaurantId}`}
+                          onClick={() => {
+                            trackRestaurantClick(selectedPlace.restaurantId, selectedPlace.name)
+                            closeLivePanel()
+                          }}
+                          style={{ color: "#b45309", fontWeight: 700 }}
+                        >
+                          View restaurant →
+                        </Link>
+                      )}
+                      {selectedPlace.path && (
+                        <Link
+                          to={selectedPlace.path}
+                          onClick={closeLivePanel}
+                          style={{ color: "#b45309", fontWeight: 700 }}
+                        >
+                          Explore page →
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -1199,12 +1256,12 @@ const Home = () => {
       )}
 
       {/* ===== PREMIUM WEEKEND EXPERIENCE (DA LUNA) ===== */}
-      <section style={{ background: "#fffaf0", padding: "20px 0 60px" }}>
+      <section ref={daLunaRef} style={{ background: "#fffaf0", padding: "24px 0 64px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
-          <div style={{ textAlign: "center", marginBottom: 24 }}>
+          <div style={{ textAlign: "center", marginBottom: 28 }}>
             <div className="vex-eyebrow" style={{ marginBottom: 8 }}>★ Awarded Restaurant</div>
-            <h2 className="vex-section-title" style={{ marginBottom: 8 }}>Weekend Experience at Da Luna</h2>
-            <p style={{ marginTop: 10, fontSize: 14, color: "#7a5a2a", maxWidth: 680, margin: "0 auto" }}>
+            <h2 className="vex-section-title vex-section-title-center">Weekend Experience at Da Luna</h2>
+            <p style={{ marginTop: 28, fontSize: 14, color: "#7a5a2a", maxWidth: 680, marginLeft: "auto", marginRight: "auto", lineHeight: 1.65 }}>
               A refined evening of music, indulgence and elevated hospitality designed for the perfect Goa weekend.
             </p>
           </div>
@@ -1294,7 +1351,7 @@ const Home = () => {
                 {[
                   { icon: <FaMusic />, label: "Live Music" },
                   { icon: <FaMicrophoneAlt />, label: "Karaoke Night" },
-                  { icon: <FaBeer />, label: "DJ Experience" },
+                  { icon: <FaHeadphones />, label: "DJ Experience" },
                 ].map((item) => (
                   <div key={item.label} style={{ borderRadius: 16, padding: "12px 14px", background: "rgba(255,255,255,.05)", border: "1px solid rgba(251,191,36,.16)", color: "#f7e2ba", display: "flex", alignItems: "center", gap: 10, fontSize: 14 }}>
                     <span style={{ color: "#fbbf24" }}>{item.icon}</span>
@@ -1304,26 +1361,45 @@ const Home = () => {
               </div>
 
               <div style={{ marginTop: 24, textAlign: "center" }}>
-                <a
-                  href="https://www.google.com/search?q=Da+Luna+Goa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 8,
-                    padding: "12px 20px",
-                    borderRadius: 999,
-                    background: "linear-gradient(135deg, #c77d13 0%, #fbbf24 45%, #fde68a 100%)",
-                    color: "#1b1208",
-                    fontWeight: 700,
-                    textDecoration: "none",
-                    boxShadow: "0 12px 30px -10px rgba(199,125,19,.45)",
-                  }}
-                >
-                  <FaPhoneAlt /> Reserve Your Table
-                </a>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
+                  <Link
+                    to="/restaurant/1"
+                    onClick={() => trackRestaurantClick(1, "Da Luna Restaurant")}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 8,
+                      padding: "12px 20px",
+                      borderRadius: 999,
+                      background: "linear-gradient(135deg, #c77d13 0%, #fbbf24 45%, #fde68a 100%)",
+                      color: "#1b1208",
+                      fontWeight: 700,
+                      textDecoration: "none",
+                      boxShadow: "0 12px 30px -10px rgba(199,125,19,.45)",
+                    }}
+                  >
+                    Explore Da Luna
+                  </Link>
+                  <a
+                    href="tel:+919356712345"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 8,
+                      padding: "12px 20px",
+                      borderRadius: 999,
+                      background: "rgba(255,255,255,.08)",
+                      border: "1px solid rgba(251,191,36,.35)",
+                      color: "#fde68a",
+                      fontWeight: 700,
+                      textDecoration: "none",
+                    }}
+                  >
+                    <FaPhoneAlt /> Call to Reserve
+                  </a>
+                </div>
                 <div style={{ marginTop: 10, color: "#d7c08b", fontSize: 13 }}>
                   Seats are limited. Book early to avoid disappointment.
                 </div>
@@ -1336,7 +1412,7 @@ const Home = () => {
       </section>
 
       {/* ===== TRENDING ===== */}
-      <section ref={trendingRef} style={{ background: "#fffaf0", padding: "20px 0 60px" }}>
+      <section ref={trendingRef} style={{ background: "#fffaf0", padding: "24px 0 64px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
           <div style={{ marginBottom: 26 }}>
             <div className="vex-eyebrow" style={{ marginBottom: 6 }}>Curated By Locals</div>
@@ -1374,33 +1450,10 @@ const Home = () => {
                   <div style={{ padding: "14px 16px 16px" }}>
                     <h3 className="vex-font-display" style={{ fontSize: 17, fontWeight: 700, margin: 0 }}>{place.name}</h3>
                     <p style={{ fontSize: 13, color: "#6b5128", margin: "4px 0 8px", lineHeight: 1.5 }}>{place.desc}</p>
-                    <p style={{ fontSize: 11.5, color: "#9a7a3a", margin: 0, letterSpacing: ".02em" }}>📍 {place.location}</p>
+                    <p style={{ fontSize: 11.5, color: "#9a7a3a", margin: 0, letterSpacing: ".02em" }}>{place.location}</p>
                   </div>
                 </>
               )
-
-              if (place.external) {
-                return (
-                  <a
-                    key={i}
-                    href={place.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="vex-trending-item vex-card-hover"
-                    style={{
-                      textDecoration: "none", color: "inherit",
-                      borderRadius: 20, overflow: "hidden",
-                      background: "#fff",
-                      border: "1px solid rgba(180,140,60,.18)",
-                      boxShadow: "0 6px 24px -10px rgba(120,80,20,.18)",
-                      animationDelay: `${i * 0.08}s`,
-                      display: "block",
-                    }}
-                  >
-                    {cardContent}
-                  </a>
-                )
-              }
 
               return (
                 <Link
@@ -1450,7 +1503,7 @@ const Home = () => {
                 "Calhiz, Village Bar": "Authentic village-bar vibes + relaxed Goan food and drinks",
                 "Boilermaker": "Creative cocktails + craft beers in a lively Siolim hangout",
                 "Anand Sea Food Bar & Restaurant": "Fresh seafood + hearty local Goan flavours in Anjuna",
-                "Casa Jaali": "Slow breakfasts + peaceful waterfront views in South Goa",
+                "The Fisherman's Wharf": "Goan flavours + fresh seafood with a laid-back view",
               }
               const logos = {
                 "Da Luna Restaurant": daLunaLogo,
@@ -1466,17 +1519,15 @@ const Home = () => {
                 "Calhiz, Village Bar": calhiz1,
                 "Boilermaker": boiler1,
                 "Anand Sea Food Bar & Restaurant": anand1,
-                "Casa Jaali": casa1,
+                "The Fisherman's Wharf": fisherman5,
               }
               const isLuna = restaurant.name === "Da Luna Restaurant"
               return (
-                <div
+                <Link
                   key={restaurant.id}
+                  to={`/restaurant/${restaurant.id}`}
                   className="vex-card-hover"
-                  onClick={() => {
-                    trackRestaurantClick(restaurant.id, restaurant.name)
-                    navigate(`/restaurant/${restaurant.id}`)
-                  }}
+                  onClick={() => trackRestaurantClick(restaurant.id, restaurant.name)}
                   style={{
                     background: isLuna
                       ? "linear-gradient(135deg, #fffbeb 0%, #fff 60%)"
@@ -1492,11 +1543,13 @@ const Home = () => {
                       : "0 4px 18px -8px rgba(120,80,20,.15)",
                     cursor: "pointer",
                     position: "relative",
+                    textDecoration: "none",
+                    color: "inherit",
                   }}
                 >
                   <div className={isLuna ? "vex-luna-ring" : ""} style={{ flexShrink: 0 }}>
                     <img
-                      src={logos[restaurant.name]}
+                      src={logos[restaurant.name] || restaurant.image}
                       alt={restaurant.name}
                       style={{
                         width: 60, height: 60, borderRadius: 999,
@@ -1509,32 +1562,31 @@ const Home = () => {
                       <h3 className="vex-font-display" style={{ fontSize: 16, fontWeight: 700, margin: 0 }}>{restaurant.name}</h3>
                       {isLuna && <span className="vex-badge">Awarded Restaurant</span>}
                     </div>
-                    <p style={{ fontSize: 12.5, color: "#6b5128", margin: "4px 0 0" }}>{descriptions[restaurant.name]}</p>
+                    <p style={{ fontSize: 12.5, color: "#6b5128", margin: "4px 0 0" }}>{descriptions[restaurant.name] || restaurant.cuisine}</p>
                   </div>
                   <div style={{ color: "#b45309", fontSize: 22, fontWeight: 300 }}>›</div>
-                </div>
+                </Link>
               )
             })}
 
             {mustVisitRestaurants.length > visibleMustVisitRestaurants.length && (
-              <button
-                type="button"
-                onClick={() => navigate("/restaurants")}
+              <Link
+                to="/restaurants"
                 style={{
                   marginTop: 10,
                   alignSelf: "center",
-                  border: "none",
                   borderRadius: 999,
                   background: "linear-gradient(135deg, #f97316 0%, #fbbf24 100%)",
                   color: "#1a1208",
                   fontWeight: 700,
                   padding: "12px 20px",
-                  cursor: "pointer",
                   boxShadow: "0 10px 25px -12px rgba(249,115,22,.75)",
+                  textDecoration: "none",
+                  textAlign: "center",
                 }}
               >
                 Show more
-              </button>
+              </Link>
             )}
           </div>
         </div>
@@ -1552,25 +1604,45 @@ const Home = () => {
             gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
             gap: 14,
           }}>
-            {experiences.map((item, i) => (
-              <div
-                key={i}
-                className="vex-exp-card vex-card-hover"
-                onClick={() => window.open(item.link, "_blank")}
-                style={{
-                  background: item.color,
-                  borderRadius: 18,
-                  padding: "24px 14px",
-                  textAlign: "center",
-                  border: "1px solid rgba(180,140,60,.18)",
-                  cursor: "pointer",
-                  boxShadow: "0 4px 16px -6px rgba(120,80,20,.12)",
-                }}
-              >
-                <div style={{ fontSize: 34, marginBottom: 6 }}>{item.icon}</div>
-                <div className="vex-font-display" style={{ fontSize: 14, fontWeight: 700, color: "#1a1208" }}>{item.label}</div>
-              </div>
-            ))}
+            {experiences.map((item, i) => {
+              const cardStyle = {
+                background: item.color,
+                borderRadius: 18,
+                padding: "24px 14px",
+                textAlign: "center",
+                border: "1px solid rgba(180,140,60,.18)",
+                cursor: "pointer",
+                boxShadow: "0 4px 16px -6px rgba(120,80,20,.12)",
+                textDecoration: "none",
+                color: "inherit",
+                display: "block",
+              }
+              const content = (
+                <>
+                  <div style={{ fontSize: 34, marginBottom: 6 }}>{item.icon}</div>
+                  <div className="vex-font-display" style={{ fontSize: 14, fontWeight: 700, color: "#1a1208" }}>{item.label}</div>
+                </>
+              )
+              if (item.path) {
+                return (
+                  <Link key={i} to={item.path} className="vex-exp-card vex-card-hover" style={cardStyle}>
+                    {content}
+                  </Link>
+                )
+              }
+              return (
+                <a
+                  key={i}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="vex-exp-card vex-card-hover"
+                  style={cardStyle}
+                >
+                  {content}
+                </a>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -1645,7 +1717,7 @@ const Home = () => {
  
 
       {/* ===== GOOGLE REVIEWS ===== */}
-      <section style={{ background: "#fffaf0", padding: "20px 20px 70px" }}>
+      <section style={{ background: "#fffaf0", padding: "24px 20px 70px" }}>
         <div style={{
           maxWidth: 720, margin: "0 auto", textAlign: "center",
           background: "linear-gradient(135deg,#fff 0%, #fffaf0 100%)",
@@ -1703,17 +1775,24 @@ const Home = () => {
             alignItems: "center",
           }}>
             {[
-              { icon: <FaPhoneAlt />, text: "+91 91583 06507" },
-              { icon: <FaEnvelope />, text: "vkyrental@gmail.com" },
-              { icon: <FaMapMarkerAlt />, text: "Panaji, Goa" },
+              { icon: <FaPhoneAlt />, text: "+91 91583 06507", href: "tel:+919158306507" },
+              { icon: <FaEnvelope />, text: "vkyrental@gmail.com", href: "mailto:vkyrental@gmail.com" },
+              { icon: <FaMapMarkerAlt />, text: "Panaji, Goa", href: "https://www.google.com/maps/search/?api=1&query=Panaji+Goa" },
             ].map((item, i) => (
-              <div key={i} style={{
-                display: "inline-flex", alignItems: "center", gap: 10,
-                fontSize: 13.5, color: "rgba(255,255,255,.78)",
-              }}>
+              <a
+                key={i}
+                href={item.href}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 10,
+                  fontSize: 13.5, color: "rgba(255,255,255,.78)",
+                  textDecoration: "none",
+                }}
+              >
                 <span style={{ color: "#fbbf24", fontSize: 13 }}>{item.icon}</span>
                 {item.text}
-              </div>
+              </a>
             ))}
           </div>
 
