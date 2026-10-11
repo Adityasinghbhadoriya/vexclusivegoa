@@ -19,7 +19,7 @@ import {
 import { trackCategoryClick, trackRestaurantClick } from "../api.js"
 import { calculateDistance, formatDistance } from "../utils/location"
 import logo from "../assets/logo.webp"
-import azulejosImage from "../assets/azulejos2.webp"
+import azulejosImage from "../assets/azulejos3.jpg"
 import sakanaLogo from "../assets/sakana1.webp"
 import parraRoadGoa from "../assets/Parra-Road-Goa.jpg.webp"
 import hilltopMarketImage from "../assets/Hiltopmarket.jpg"
@@ -129,8 +129,8 @@ const globalStyle = `
     50%      { transform: translateY(-6px); }
   }
   @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(56,189,248,.45); }
-    50%      { box-shadow: 0 0 0 14px rgba(56,189,248,0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,.45); }
+    50%      { box-shadow: 0 0 0 14px rgba(251,191,36,0); }
   }
 
   .vex-font-display { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; }
@@ -147,11 +147,11 @@ const globalStyle = `
     animation: shimmer 4.5s linear infinite;
   }
 
-  .vex-hero-title-cool {
+  .vex-hero-title-white {
     color: #ffffff;
     text-shadow:
-      0 1px 2px rgba(4, 12, 28, .55),
-      0 8px 28px rgba(4, 12, 28, .45);
+      0 1px 2px rgba(35, 12, 5, .65),
+      0 8px 28px rgba(35, 12, 5, .5);
   }
 
   .vex-fade-up   { opacity: 0; animation: fadeUp .9s cubic-bezier(.2,.7,.2,1) forwards; }
@@ -228,21 +228,21 @@ const globalStyle = `
   .vex-glass-dark {
     position: relative;
     overflow: hidden;
-    background: rgba(255, 255, 255, .12);
-    backdrop-filter: blur(26px) saturate(160%) brightness(0.72);
-    -webkit-backdrop-filter: blur(26px) saturate(160%) brightness(0.72);
-    border: 1px solid rgba(255, 255, 255, .32);
+    background: rgba(126, 88, 27, .94);
+    backdrop-filter: blur(28px) saturate(135%);
+    -webkit-backdrop-filter: blur(28px) saturate(135%);
+    border: 1px solid rgba(226, 203, 145, .78);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, .35),
-      inset 0 -1px 0 rgba(30, 70, 140, .2),
-      0 14px 36px rgba(20, 50, 110, .28);
+      inset 0 1px 0 rgba(255, 239, 194, .24),
+      inset 0 -1px 0 rgba(255, 255, 255, .08),
+      0 12px 28px rgba(38, 24, 5, .32);
   }
   .vex-glass-dark::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: rgba(40, 90, 170, .38);
+    background: linear-gradient(135deg, rgba(255, 230, 166, .1), rgba(86, 55, 12, .08));
     pointer-events: none;
     z-index: 0;
   }
@@ -337,7 +337,7 @@ const globalStyle = `
 
   /* ── Mario Miranda "Why Us" section ── */
   .mm-section {
-    background: #f0d78c;
+    background: #d4a928;
     position: relative;
     padding: 64px 24px 72px;
     overflow: hidden;
@@ -841,30 +841,30 @@ const Home = () => {
             willChange: "transform",
           }}
         />
-        {/* Cool azulejos overlays — darker mid so white type stays crisp */}
+        {/* Warm Azulejos overlays — dark terracotta tones keep text legible */}
         <div style={{
           position: "absolute", inset: 0,
           background:
-            "linear-gradient(180deg, rgba(4,12,28,.62) 0%, rgba(4,12,28,.48) 35%, rgba(4,12,28,.62) 68%, rgba(4,10,24,.9) 100%)",
+            "linear-gradient(180deg, rgba(35,12,5,.58) 0%, rgba(35,12,5,.38) 35%, rgba(35,12,5,.58) 68%, rgba(25,9,4,.88) 100%)",
         }} />
         <div style={{
           position: "absolute", inset: 0,
           background:
-            "radial-gradient(ellipse 90% 55% at 50% 28%, rgba(4,12,28,.35), transparent 70%)",
+            "radial-gradient(ellipse 90% 55% at 50% 28%, rgba(70,25,8,.28), transparent 70%)",
         }} />
         <div style={{
           position: "absolute", inset: 0,
           background:
-            "radial-gradient(ellipse 70% 50% at 88% 78%, rgba(37, 99, 235, .22), transparent 55%)",
+            "radial-gradient(ellipse 70% 50% at 88% 78%, rgba(255, 196, 0, .2), transparent 55%)",
         }} />
         <div style={{
           position: "absolute", inset: 0,
           background:
-            "radial-gradient(ellipse 55% 45% at 8% 88%, rgba(14, 116, 144, .16), transparent 50%)",
+            "radial-gradient(ellipse 55% 45% at 8% 88%, rgba(255, 224, 102, .16), transparent 50%)",
         }} />
         <div style={{
           position: "absolute", inset: 0,
-          boxShadow: "inset 0 0 140px rgba(4, 12, 28, .5)",
+          boxShadow: "inset 0 0 140px rgba(35, 12, 5, .48)",
           pointerEvents: "none",
         }} />
 
@@ -874,7 +874,7 @@ const Home = () => {
           style={{
             position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
             padding: "12px 18px",
-            background: scrolled ? "rgba(6,14,32,.78)" : "rgba(8,18,40,.28)",
+            background: scrolled ? "rgba(35,12,5,.82)" : "rgba(35,12,5,.32)",
             transition: "background .3s ease",
           }}
         >
@@ -884,7 +884,7 @@ const Home = () => {
                 <img src={logo} alt="V Exclusive Goa" style={{ width: "100%", height: "100%", borderRadius: 999, objectFit: "cover", background: "#0f0802" }} />
               </div>
               <div style={{ lineHeight: 1 }}>
-                <div className="vex-eyebrow" style={{ color: "#bfdbfe", fontSize: 9 }}>PREMIUM GOA</div>
+                <div className="vex-eyebrow" style={{ color: "#ffd166", fontSize: 9 }}>PREMIUM GOA</div>
                 <div className="vex-font-display" style={{ fontSize: 15, fontWeight: 700, color: "#fff", letterSpacing: ".05em" }}>
                   V EXCLUSIVE GOA
                 </div>
@@ -894,9 +894,9 @@ const Home = () => {
               onClick={openLivePanel}
               className="vex-eyebrow vex-pulse-glow"
               style={{
-                color: "#fff", background: "rgba(56,189,248,.16)",
+                color: "#fff7e6", background: "rgba(251,191,36,.16)",
                 padding: "6px 12px", borderRadius: 999, fontSize: 10,
-                border: "1px solid rgba(125,211,252,.45)", cursor: "pointer",
+                border: "1px solid rgba(255,209,102,.52)", cursor: "pointer",
               }}
             >
               ● LIVE
@@ -908,7 +908,7 @@ const Home = () => {
         <div style={{
           position: "relative", zIndex: 10,
           maxWidth: 760, margin: "0 auto",
-          padding: "140px 22px 40px",
+          padding: "140px 22px 16px",
           textAlign: "center",
         }}>
           <div className="vex-fade-up" style={{ animationDelay: ".1s" }}>
@@ -929,13 +929,13 @@ const Home = () => {
             animationDelay: ".25s",
             color: "#ffffff",
           }}>
-            <span className="vex-hero-title-cool">Experience Goa</span>
+            <span className="vex-hero-title-white">Experience Goa</span>
           </h1>
 
           <h2 className="vex-font-serif vex-fade-up" style={{
             marginTop: 6, fontSize: "clamp(1.4rem, 5vw, 2.2rem)",
             fontWeight: 500, color: "#ffffff", fontStyle: "italic",
-            textShadow: "0 2px 16px rgba(4,12,28,.4)",
+              textShadow: "0 2px 16px rgba(35,12,5,.45)",
             animationDelay: ".4s",
           }}>
             Like Never Before
@@ -944,7 +944,7 @@ const Home = () => {
           <p className="vex-fade-up" style={{
             marginTop: 22, fontSize: 15.5, lineHeight: 1.7,
             color: "rgba(255,255,255,.92)", maxWidth: 520, margin: "22px auto 0",
-            textShadow: "0 1px 12px rgba(4,12,28,.35)",
+            textShadow: "0 1px 12px rgba(35,12,5,.4)",
             animationDelay: ".55s",
           }}>
             Your ultimate guide to the best restaurants, nightlife, beaches & curated experiences across Goa.
@@ -966,14 +966,14 @@ const Home = () => {
             <span style={{ fontSize: 18, lineHeight: 1 }}>›</span>
           </button>
 
-          <div className="vex-scroll-hint" style={{ marginTop: 50, color: "rgba(255,255,255,.65)", fontSize: 22 }}>↓</div>
+          <div className="vex-scroll-hint" style={{ marginTop: 14, color: "rgba(255,255,255,.65)", fontSize: 22 }}>↓</div>
         </div>
 
         {/* Floating Category Glass Cards */}
         <div style={{
           position: "relative", zIndex: 10,
-          maxWidth: 720, margin: "0 auto",
-          padding: "0 22px 110px",
+          maxWidth: 460, margin: "0 auto",
+          padding: "0 16px 110px",
         }}>
           <div className="vex-fade-up" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, animationDelay: ".85s" }}>
             {/* Top row - Restaurants and Nightlife */}
@@ -983,17 +983,18 @@ const Home = () => {
                 to="/restaurants"
                 onClick={() => trackCategoryClick("restaurants")}
                 className="vex-glass-dark vex-tilt"
-                style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, flex: 1, maxWidth: 320 }}
+                style={{ textDecoration: "none", color: "#fff", borderRadius: 15, padding: 12, display: "block", minWidth: 0, flex: 1, maxWidth: 160 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <div style={{
-                    width: 42, height: 42, borderRadius: 12,
-                    background: "linear-gradient(135deg,#fbbf24,#f97316)",
+                    width: 32, height: 32, borderRadius: 9,
+                    background: "rgba(245,214,138,.18)",
+                    border: "1px solid rgba(255,237,179,.55)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 22, marginBottom: 6,
+                    fontSize: 17, marginBottom: 4,
                   }}>🍽</div>
-                  <div className="vex-font-display" style={{ fontSize: 16, fontWeight: 700 }}>Top Restaurants</div>
-                  <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Curated dining experience</div>
+                  <div className="vex-font-display" style={{ fontSize: 14, fontWeight: 700, textShadow: "0 1px 3px rgba(0,0,0,.45)" }}>Top Restaurants</div>
+                  <div style={{ fontSize: 10, color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,.45)" }}>Curated dining experience</div>
                 </div>
               </Link>
 
@@ -1002,39 +1003,41 @@ const Home = () => {
                 to="/clubs"
                 onClick={() => trackCategoryClick("clubs")}
                 className="vex-glass-dark vex-tilt"
-                style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, flex: 1, maxWidth: 320 }}
+                style={{ textDecoration: "none", color: "#fff", borderRadius: 15, padding: 12, display: "block", minWidth: 0, flex: 1, maxWidth: 160 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <div style={{
-                    width: 42, height: 42, borderRadius: 12,
-                    background: "linear-gradient(135deg,#a78bfa,#ec4899)",
+                    width: 32, height: 32, borderRadius: 9,
+                    background: "rgba(245,214,138,.18)",
+                    border: "1px solid rgba(255,237,179,.55)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 22, marginBottom: 6,
+                    fontSize: 17, marginBottom: 4,
                   }}>🍸</div>
-                  <div className="vex-font-display" style={{ fontSize: 16, fontWeight: 700 }}>Nightlife & Clubs</div>
-                  <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Best parties & beach clubs</div>
+                  <div className="vex-font-display" style={{ fontSize: 14, fontWeight: 700, textShadow: "0 1px 3px rgba(0,0,0,.45)" }}>Nightlife & Clubs</div>
+                  <div style={{ fontSize: 10, color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,.45)" }}>Best parties & beach clubs</div>
                 </div>
               </Link>
             </div>
 
             {/* Bottom row - Spa & Wellness centered */}
-            <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+              <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
               {/* Spa & Wellness */}
               <Link
                 to="/spa/1"
                 onClick={() => trackCategoryClick("spa")}
                 className="vex-glass-dark vex-tilt"
-                style={{ textDecoration: "none", color: "#fff", borderRadius: 20, padding: 18, display: "block", minWidth: 180, maxWidth: 320 }}
+                style={{ textDecoration: "none", color: "#fff", borderRadius: 15, padding: 12, display: "block", width: "calc((100% - 14px) / 2)", maxWidth: 160 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <div style={{
-                    width: 42, height: 42, borderRadius: 12,
-                    background: "linear-gradient(135deg,#14b8a6,#06b6d4)",
+                    width: 32, height: 32, borderRadius: 9,
+                    background: "rgba(245,214,138,.18)",
+                    border: "1px solid rgba(255,237,179,.55)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 22, marginBottom: 6,
+                    fontSize: 17, marginBottom: 4,
                   }}>🧖</div>
-                  <div className="vex-font-display" style={{ fontSize: 16, fontWeight: 700 }}>Spa & Wellness</div>
-                  <div style={{ fontSize: 12, color: "rgba(255,255,255,.7)" }}>Relaxation and rejuvenation</div>
+                  <div className="vex-font-display" style={{ fontSize: 14, fontWeight: 700, textShadow: "0 1px 3px rgba(0,0,0,.45)" }}>Spa & Wellness</div>
+                  <div style={{ fontSize: 10, color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,.45)" }}>Relaxation and rejuvenation</div>
                 </div>
               </Link>
             </div>

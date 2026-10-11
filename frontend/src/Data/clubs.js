@@ -8,7 +8,6 @@ export const clubs = [
     reviews: 980,
     location: "Vagator, Goa",
     hours: "7:00 PM – 2:00 AM",
-    offer: "10% OFF",
     image:
       "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=750&q=80",
     gallery: [
@@ -42,7 +41,6 @@ export const clubs = [
     reviews: 2180,
     location: "Candolim, Goa",
     hours: "9:00 PM – 4:00 AM",
-    offer: "10% OFF",
     image:
       "https://sinq.in/wp-content/uploads/2026/01/sinq-night-club-11.webp",
     gallery: [
@@ -77,7 +75,6 @@ export const clubs = [
     reviews: 1540,
     location: "Anjuna, Goa",
     hours: "10:00 PM – 3:30 AM",
-    offer: "10% OFF",
     image:
       "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=750&q=80",
     gallery: [
@@ -112,7 +109,6 @@ export const clubs = [
     reviews: 1275,
     location: "Vagator, Goa",
     hours: "7:00 PM – 4:00 AM",
-    offer: "10% OFF",
     image:
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=750&q=80",
     gallery: [

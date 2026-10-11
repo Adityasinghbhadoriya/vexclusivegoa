@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import Home from "./Pages/Home"
 // import Restaurants from "./Pages/Restaurant"
 import Clubs from "./Pages/Clubs"
+import NightlifeCategories from "./Pages/NightlifeCategories"
 import Restaurant from "./Pages/Restaurant"
 import RestaurantCategories from "./Pages/RestaurantCategories"
 import RestaurantDetails from "./Components/RestaurantDetails"
@@ -30,7 +31,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/restaurants" element={<RestaurantCategories />} />
         <Route path="/restaurants/browse" element={<Restaurant />} />
-        <Route path="/clubs" element={<Clubs />} />
+        <Route path="/clubs" element={<NightlifeCategories />} />
+        <Route path="/clubs/browse" element={<Clubs />} />
         <Route path="/spa/:id" element={<SpaDetails />} />
         <Route path="/restaurant/:id" element={<RestaurantDetails />} />
         <Route path="/club/:id" element={<ClubsDetails />} />

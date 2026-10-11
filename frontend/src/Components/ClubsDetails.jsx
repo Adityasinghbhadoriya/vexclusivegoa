@@ -145,31 +145,6 @@ const ClubsDetails = () => {
 
       {/* Content card */}
       <div className="relative -mt-8 mx-4 rounded-t-[2rem] bg-stone-50 px-6 pt-8 pb-6 shadow-2xl">
-        {/* Offer */}
-        <div className="relative overflow-hidden rounded-3xl p-[1.5px] shadow-[0_10px_40px_-10px_rgba(234,88,12,0.5)] animate-scale-in bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500">
-          <div className="relative rounded-[calc(1.5rem-1.5px)] bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500 px-6 py-7 overflow-hidden">
-            <div className="absolute inset-0 opacity-30 bg-[linear-gradient(110deg,transparent_30%,rgba(255,255,255,0.4)_50%,transparent_70%)] bg-[length:200%_100%] animate-shimmer" />
-            <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
-            <div className="absolute -bottom-12 -left-8 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
-
-            <div className="relative flex items-center justify-between">
-              <div>
-                <p className="text-white/85 text-xs font-medium tracking-[0.2em] uppercase mb-1">
-                  Exclusive Offer
-                </p>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-6xl font-black text-white leading-none tracking-tight">10%</span>
-                  <span className="text-xl font-semibold text-white/90">OFF</span>
-                </div>
-                <p className="text-white/85 text-sm mt-2">Show this screen at billing</p>
-              </div>
-              <div className="grid place-items-center h-20 w-20 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/30 animate-float">
-                <HiSparkles className="text-white text-4xl" />
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Tags */}
         <div className="mt-6 flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none">
           {club.tags.map((tag) => (

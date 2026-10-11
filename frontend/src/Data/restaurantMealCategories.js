@@ -2,6 +2,7 @@
  * Meal-category assignments.
  * Values: "breakfast" | "lunch" | "brunch"
  */
+import { COMMUNITY_BAR_RESTAURANT_IDS } from "./nightlifeCategories";
 
 export const MEAL_CATEGORIES = [
   {
@@ -52,9 +53,7 @@ export const restaurantMealCategoryMap = {
   5: ["lunch"], // Sakana Japanese Restaurant
   15: ["lunch"], // Anand Sea Food Bar & Restaurant
   16: ["lunch"], // The Fisherman's Wharf
-  11: ["lunch"], // Cajy Bar
   12: ["lunch"], // Pablos
-  13: ["lunch"], // Calhiz, Village Bar
   14: ["lunch"], // Boilermaker
 };
 
@@ -62,14 +61,15 @@ export const getMealCategoryById = (categoryId) =>
   MEAL_CATEGORIES.find((category) => category.id === categoryId) || null;
 
 export const restaurantBelongsToMealCategory = (restaurant, categoryId) => {
+  if (COMMUNITY_BAR_RESTAURANT_IDS.includes(restaurant.id)) return false;
   if (!categoryId) return true;
   const assigned = restaurantMealCategoryMap[restaurant.id] || [];
   return assigned.includes(categoryId);
 };
 
 export const filterRestaurantsByMealCategory = (restaurants, categoryId) => {
-  if (!categoryId) return restaurants;
-  return restaurants.filter((restaurant) =>
-    restaurantBelongsToMealCategory(restaurant, categoryId)
-  );
+  return restaurants.filter((restaurant) => {
+    if (COMMUNITY_BAR_RESTAURANT_IDS.includes(restaurant.id)) return false;
+    return !categoryId || restaurantBelongsToMealCategory(restaurant, categoryId);
+  });
 };

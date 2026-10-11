@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   FaStar,
   FaPhoneAlt,
@@ -9,14 +9,27 @@ import {
   FaMapMarkerAlt,
   FaFire,
 } from "react-icons/fa";
-import { HiSparkles } from "react-icons/hi2";
 import { clubs } from "../Data/clubs";
-import { trackClubClick } from "../api";
+import { restaurants } from "../Data/restaurant";
+import {
+  COMMUNITY_BAR_RESTAURANT_IDS,
+  filterClubsByNightlifeCategory,
+} from "../Data/nightlifeCategories";
+import { trackClubClick, trackRestaurantClick } from "../api";
 
 const Clubs = () => {
   const navigate = useNavigate();
-  const featuredClub = clubs[0];
-  const otherClubs = clubs.slice(1);
+  const [searchParams] = useSearchParams();
+  const categoryId = searchParams.get("category");
+  const isCommunityBars = categoryId === "community-bars";
+  const categorizedClubs = categoryId === "clubs"
+    ? filterClubsByNightlifeCategory(clubs, categoryId)
+    : clubs;
+  const featuredClub = categorizedClubs[0];
+  const otherClubs = categorizedClubs.slice(1);
+  const communityBars = restaurants.filter((restaurant) =>
+    COMMUNITY_BAR_RESTAURANT_IDS.includes(restaurant.id)
+  );
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -34,6 +47,65 @@ const Clubs = () => {
     trackClubClick(club.id, club.name);
     navigate(`/club/${club.id}`);
   };
+
+  const goToCommunityBar = (restaurant) => {
+    trackRestaurantClick(restaurant.id, restaurant.name);
+    navigate(`/restaurant/${restaurant.id}`);
+  };
+
+  if (isCommunityBars) {
+    return (
+      <div className="min-h-screen bg-stone-50 pb-12">
+        <div className="sticky top-0 z-30 border-b border-stone-200/60 bg-stone-50/80 backdrop-blur-xl">
+          <div className="px-5 pb-4 pt-5">
+            <div className="mb-4 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => navigate("/clubs")}
+                aria-label="Back to nightlife categories"
+                className="grid h-10 w-10 place-items-center rounded-full border border-stone-200 bg-white shadow-sm"
+              >
+                <FaArrowLeft className="text-sm" />
+              </button>
+              <span className="text-sm font-medium text-stone-600">Goa</span>
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-linear-to-br from-orange-400 to-rose-500 font-bold text-white shadow-md">V</span>
+            </div>
+            <h1 className="text-3xl font-bold tracking-tight text-stone-900">
+              Community <span className="bg-linear-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">Bars</span>
+            </h1>
+            <p className="mt-1 text-sm text-stone-500">Local bars and neighborhood favorites in Goa</p>
+          </div>
+        </div>
+
+        <main className="space-y-3 px-5 pt-6">
+          {communityBars.map((bar, index) => (
+            <button
+              key={bar.id}
+              type="button"
+              onClick={() => goToCommunityBar(bar)}
+              style={{ animationDelay: `${index * 80}ms` }}
+              className="animate-fade-up flex w-full gap-3 rounded-2xl border border-stone-200 bg-white p-3 text-left shadow-sm transition hover:shadow-lg"
+            >
+              <div className="relative shrink-0">
+                <img src={bar.image} alt={bar.name} className="h-24 w-24 rounded-xl object-cover" />
+                {bar.rating && (
+                  <span className="absolute left-1.5 top-1.5 flex items-center gap-0.5 rounded-full bg-white px-1.5 py-0.5 text-[10px] font-bold">
+                    <FaStar className="text-[9px] text-amber-400" /> {bar.rating}
+                  </span>
+                )}
+              </div>
+              <span className="min-w-0 flex-1 py-1">
+                <span className="block font-bold text-stone-900">{bar.name}</span>
+                <span className="mt-1 block text-xs text-stone-500">{bar.cuisine}</span>
+                <span className="mt-2 block text-[11px] text-stone-500">{bar.location}</span>
+                <span className="mt-2 block text-xs leading-relaxed text-stone-600">{bar.description}</span>
+              </span>
+            </button>
+          ))}
+        </main>
+      </div>
+    );
+  }
 
 
 
@@ -64,7 +136,7 @@ const Clubs = () => {
         <div className="px-5 pt-5 pb-4">
           <div className="flex items-center justify-between mb-4">
             <button
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/clubs")}
               className="grid place-items-center h-10 w-10 rounded-full bg-white border border-stone-200 shadow-sm"
             >
               <FaArrowLeft className="text-sm" />
@@ -75,17 +147,17 @@ const Clubs = () => {
               <span className="font-medium">Goa</span>
             </div>
 
-            <div className="grid place-items-center h-10 w-10 rounded-full bg-gradient-to-br from-orange-400 to-rose-500 text-white font-bold shadow-md">
+            <div className="grid place-items-center h-10 w-10 rounded-full bg-linear-to-br from-orange-400 to-rose-500 text-white font-bold shadow-md">
               V
             </div>
           </div>
 
           <h1 className="text-3xl font-bold text-stone-900 tracking-tight">
             Discover 
-            <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent"> Nightlife</span>
+              <span className="bg-linear-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent"> Clubs</span>
           </h1>
           <p className="text-stone-500 text-sm mt-1">
-            Top clubs in Goa curated for you
+            Clubs in Goa curated for you
           </p>
         </div>
       </div>
@@ -117,19 +189,12 @@ const Clubs = () => {
                   key={i}
                   src={img}
                   alt=""
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms]
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-1500
                   ${i===currentIndex ? "opacity-100 scale-100":"opacity-0 scale-105"}`}
                 />
               ))}
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30" />
-
-              <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/30 px-3 py-1.5">
-                <HiSparkles className="text-amber-300 text-xs"/>
-                <span className="text-xs font-semibold text-white">
-                  10% OFF • V EXCLUSIVE
-                </span>
-              </div>
+              <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-black/30" />
 
               <div className="absolute top-4 right-4 flex items-center gap-1 rounded-full bg-white px-2.5 py-1 shadow-lg">
                 <FaStar className="text-amber-400 text-xs" />
@@ -153,7 +218,7 @@ const Clubs = () => {
                 </div>
               </div>
 
-              <div className="absolute bottom-[110px] left-5 flex gap-1.5">
+              <div className="absolute bottom-27.5 left-5 flex gap-1.5">
                 {featuredClub.gallery.map((_,i)=>(
                   <button
                     key={i}
@@ -194,8 +259,8 @@ const Clubs = () => {
         {/* Other Clubs */}
         <section>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-bold text-stone-900">
-              More Clubs
+              <h2 className="text-lg font-bold text-stone-900">
+            More Clubs
             </h2>
             <span className="text-xs text-stone-400">
               {otherClubs.length} places
@@ -235,12 +300,6 @@ const Clubs = () => {
                     <span>{c.distance}</span>
                   </div>
 
-                  <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-orange-50 border border-orange-100 px-2 py-1">
-                    <HiSparkles className="text-orange-500 text-[10px]"/>
-                    <span className="text-[10px] font-semibold text-orange-600">
-                      10% OFF
-                    </span>
-                  </div>
                 </div>
               </div>
             ))}
