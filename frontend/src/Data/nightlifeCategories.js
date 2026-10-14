@@ -17,7 +17,7 @@ export const NIGHTLIFE_CATEGORIES = [
   },
 ];
 
-export const COMMUNITY_BAR_RESTAURANT_IDS = [11, 13];
+export const COMMUNITY_BAR_RESTAURANT_IDS = [11, 12, 13, 14];
 
 export const clubNightlifeCategoryMap = {
   1: "clubs", // SinQ Nightclub

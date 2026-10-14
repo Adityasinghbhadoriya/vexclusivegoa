@@ -46,7 +46,7 @@ const NightlifeCategories = () => {
           </div>
         </header>
 
-        <main className="flex flex-1 flex-col justify-center gap-3.5 px-5 pb-10 pt-8">
+        <main className="flex flex-1 -translate-y-24 flex-col justify-center gap-3.5 px-5 pb-10 pt-8 sm:translate-y-0">
           {NIGHTLIFE_CATEGORIES.map((category, index) => (
             <button
               key={category.id}

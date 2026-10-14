@@ -39,7 +39,6 @@ export const restaurantMealCategoryMap = {
   // Breakfast
   7: ["breakfast"], // Babka Goa
   9: ["breakfast"], // Coco Moga Bakehouse
-  10: ["breakfast"], // Pincode Bungalow
 
   // Brunch
   8: ["brunch"], // Nova Sandwich Shop
@@ -51,10 +50,9 @@ export const restaurantMealCategoryMap = {
   1: ["lunch"], // Da Luna Restaurant
   6: ["lunch"], // Burger Factory
   5: ["lunch"], // Sakana Japanese Restaurant
+  10: ["lunch"], // Pincode Bungalow
   15: ["lunch"], // Anand Sea Food Bar & Restaurant
   16: ["lunch"], // The Fisherman's Wharf
-  12: ["lunch"], // Pablos
-  14: ["lunch"], // Boilermaker
 };
 
 export const getMealCategoryById = (categoryId) =>
