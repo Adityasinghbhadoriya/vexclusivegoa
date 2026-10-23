@@ -132,6 +132,10 @@ const globalStyle = `
     0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,.45); }
     50%      { box-shadow: 0 0 0 14px rgba(251,191,36,0); }
   }
+  @keyframes glassSheen {
+    0%, 15% { background-position: 150% 0; }
+    55%, 100% { background-position: -150% 0; }
+  }
 
   .vex-font-display { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; }
   .vex-font-serif   { font-family: 'Cormorant Garamond', Georgia, serif; }
@@ -228,21 +232,32 @@ const globalStyle = `
   .vex-glass-dark {
     position: relative;
     overflow: hidden;
-    background: rgba(126, 88, 27, .94);
-    backdrop-filter: blur(28px) saturate(135%);
-    -webkit-backdrop-filter: blur(28px) saturate(135%);
-    border: 1px solid rgba(226, 203, 145, .78);
+    isolation: isolate;
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, .62);
     box-shadow:
-      inset 0 1px 0 rgba(255, 239, 194, .24),
-      inset 0 -1px 0 rgba(255, 255, 255, .08),
-      0 12px 28px rgba(38, 24, 5, .32);
+      inset 0 1px 0 rgba(255, 255, 255, .62),
+      inset 0 -1px 0 rgba(255, 255, 255, .18),
+      0 12px 28px rgba(20, 16, 10, .26);
   }
   .vex-glass-dark::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(255, 230, 166, .1), rgba(86, 55, 12, .08));
+    background: linear-gradient(135deg, rgba(255, 255, 255, .24), rgba(255, 255, 255, .05) 48%, transparent 75%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .vex-glass-dark::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.02) 40%, rgba(255,255,255,.25) 50%, rgba(255,255,255,.03) 60%, transparent 70%);
+    background-size: 250% 100%;
+    animation: glassSheen 6.5s ease-in-out infinite;
     pointer-events: none;
     z-index: 0;
   }
@@ -282,9 +297,13 @@ const globalStyle = `
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
   .vex-tilt {
-    transition: transform .4s cubic-bezier(.2,.7,.2,1);
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), filter .35s ease, border-color .35s ease;
   }
-  .vex-tilt:hover { transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-4px); }
+  .vex-tilt:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.06);
+    border-color: rgba(255, 255, 255, .52);
+  }
 
   .vex-luna-ring {
     background: conic-gradient(from 180deg at 50% 50%, #fbbf24, #f97316, #fde68a, #fbbf24);
@@ -983,13 +1002,13 @@ const Home = () => {
                 to="/restaurants"
                 onClick={() => trackCategoryClick("restaurants")}
                 className="vex-glass-dark vex-tilt"
-                style={{ textDecoration: "none", color: "#fff", borderRadius: 15, padding: 12, display: "block", minWidth: 0, flex: 1, maxWidth: 160 }}
+                style={{ textDecoration: "none", color: "#fff", background: "rgba(13, 103, 190, .9)", borderRadius: 15, padding: 12, display: "block", minWidth: 0, flex: 1, maxWidth: 160 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <div style={{
                     width: 32, height: 32, borderRadius: 9,
-                    background: "rgba(245,214,138,.18)",
-                    border: "1px solid rgba(255,237,179,.55)",
+                    background: "rgba(91, 177, 255, .34)",
+                    border: "1px solid rgba(224, 243, 255, .82)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: 17, marginBottom: 4,
                   }}>🍽</div>
@@ -1003,13 +1022,13 @@ const Home = () => {
                 to="/clubs"
                 onClick={() => trackCategoryClick("clubs")}
                 className="vex-glass-dark vex-tilt"
-                style={{ textDecoration: "none", color: "#fff", borderRadius: 15, padding: 12, display: "block", minWidth: 0, flex: 1, maxWidth: 160 }}
+                style={{ textDecoration: "none", color: "#fff", background: "rgba(170, 35, 48, .94)", borderRadius: 15, padding: 12, display: "block", minWidth: 0, flex: 1, maxWidth: 160 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <div style={{
                     width: 32, height: 32, borderRadius: 9,
-                    background: "rgba(245,214,138,.18)",
-                    border: "1px solid rgba(255,237,179,.55)",
+                    background: "rgba(255, 170, 178, .24)",
+                    border: "1px solid rgba(255, 224, 228, .84)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: 17, marginBottom: 4,
                   }}>🍸</div>
@@ -1026,13 +1045,13 @@ const Home = () => {
                 to="/spa/1"
                 onClick={() => trackCategoryClick("spa")}
                 className="vex-glass-dark vex-tilt"
-                style={{ textDecoration: "none", color: "#fff", borderRadius: 15, padding: 12, display: "block", width: "calc((100% - 14px) / 2)", maxWidth: 160 }}
+                style={{ textDecoration: "none", color: "#fff", background: "rgba(21, 126, 65, .92)", borderRadius: 15, padding: 12, display: "block", width: "calc((100% - 14px) / 2)", maxWidth: 160 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <div style={{
                     width: 32, height: 32, borderRadius: 9,
-                    background: "rgba(245,214,138,.18)",
-                    border: "1px solid rgba(255,237,179,.55)",
+                    background: "rgba(108, 231, 151, .3)",
+                    border: "1px solid rgba(222, 255, 233, .84)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: 17, marginBottom: 4,
                   }}>🧖</div>
