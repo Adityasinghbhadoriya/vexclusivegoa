@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useMemo } from "react";
+import { createElement, useState, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   FaStar,
@@ -208,8 +208,8 @@ const Restaurant = () => {
           </div>
 
           <h1 className="text-3xl font-bold text-stone-900 tracking-tight">
-            Discover 
-            <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent"> Restaurants</span>
+            Discover
+            <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent"> Restaurants in Goa</span>
           </h1>
           <p className="text-stone-500 text-sm mt-1">
             {mealCategory
@@ -266,7 +266,16 @@ const Restaurant = () => {
                 <img
                   key={i}
                   src={img}
-                  alt=""
+                  alt={
+                    i === currentIndex
+                      ? `${featuredRestaurant.name} gallery image ${i + 1}`
+                      : ""
+                  }
+                  width={1200}
+                  height={800}
+                  decoding="async"
+                  fetchPriority={i === 0 ? "high" : "low"}
+                  loading={i === 0 ? "eager" : "lazy"}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms]
                   ${i===currentIndex ? "opacity-100 scale-100":"opacity-0 scale-105"}`}
                 />
@@ -325,10 +334,10 @@ const Restaurant = () => {
 
             <div className="grid grid-cols-3 bg-white">
               {[
-                {Icon:FaDirections,label:"Directions"},
-                {Icon:FaPhoneAlt,label:"Call"},
-                {Icon:FaUtensils,label:"Menu"},
-              ].map(({Icon,label},i)=>(
+                {icon:FaDirections,label:"Directions"},
+                {icon:FaPhoneAlt,label:"Call"},
+                {icon:FaUtensils,label:"Menu"},
+              ].map(({icon,label},i)=>(
                 <button
                   key={label}
                   onClick={(e)=>e.stopPropagation()}
@@ -336,7 +345,7 @@ const Restaurant = () => {
                     i!==2 ? "border-r border-stone-100":""
                   }`}
                 >
-                  <Icon className="text-base"/>
+                  {createElement(icon, { className: "text-base", "aria-hidden": true })}
                   {label}
                 </button>
               ))}

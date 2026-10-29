@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
+import DestinationFooter from "../Components/DestinationFooter"
 import chaporaLaneImage from "../assets/chaporaLane.jpeg"
 
 /* ─── Google Fonts injected once ─────────────────────────────────── */
@@ -165,7 +165,15 @@ const ChaporaLane = () => {
       <style>{globalStyle}</style>
 
       <div className="relative h-[78vh] min-h-[560px] w-full overflow-hidden">
-        <img className="absolute inset-0 h-full w-full object-cover" src={chaporaLaneImage} alt="Chapora Lane" />
+        <img
+          className="absolute inset-0 h-full w-full object-cover"
+          src={chaporaLaneImage}
+          alt="Chapora Lane"
+          width={1080}
+          height={532}
+          decoding="async"
+          fetchPriority="high"
+        />
         <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/45 to-[#1b1408]/90" />
 
         <div className="relative z-10 flex h-full items-center justify-center px-6 py-12 text-center">
@@ -255,9 +263,7 @@ const ChaporaLane = () => {
               🗺️ View on Google Maps →
             </a>
           </div>
-          <div className="mt-6">
-            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>← Back to Home</Link>
-          </div>
+          <DestinationFooter />
         </div>
       </div>
     </div>

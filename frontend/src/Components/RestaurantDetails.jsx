@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { createElement, useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import DetailPageNav from "./DetailPageNav";
 import {
   FaArrowLeft,
   FaDirections,
@@ -16,6 +17,7 @@ import { restaurants } from "../Data/restaurant";
 
 const RestaurantDetails = () => {
   const { id } = useParams();
+  const { pathname } = useLocation();
   const restaurant = restaurants.find(r => r.id === parseInt(id));
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,20 +29,24 @@ const RestaurantDetails = () => {
     document.body.scrollTop = 0;
   }, [id]);
 
-  if (!restaurant) {
-    return (
-      <div className="min-h-screen bg-stone-50 flex items-center justify-center">
-        <p className="text-stone-600 text-lg">Restaurant not found</p>
-      </div>
-    );
-  }
-
   useEffect(() => {
+    if (!restaurant?.gallery?.length) return undefined;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % restaurant.gallery.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [restaurant.gallery.length]);
+  }, [restaurant]);
+
+  if (!restaurant) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-stone-50 px-6 text-center">
+        <div>
+          <h1 className="text-2xl font-bold text-stone-900">Restaurant not found</h1>
+          <p className="mt-2 text-stone-600">This restaurant page is unavailable.</p>
+        </div>
+      </main>
+    );
+  }
 
   const actions = [
     { icon: FaDirections, label: "Directions", sub: "Open in Maps", onClick: () => window.open(restaurant.googleLink, "_blank") },
@@ -76,7 +82,12 @@ const RestaurantDetails = () => {
           <img
             key={i}
             src={img}
-            alt={`${restaurant.name} ${i + 1}`}
+            alt={i === currentIndex ? `${restaurant.name} photo ${i + 1}` : ""}
+            width={1200}
+            height={800}
+            decoding="async"
+            fetchPriority={i === 0 ? "high" : "low"}
+            loading={i === 0 ? "eager" : "lazy"}
             className={`absolute inset-0 h-full w-full object-cover transition-all duration-[1500ms] ease-out ${
               i === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-105"
             }`}
@@ -238,7 +249,7 @@ const RestaurantDetails = () => {
             Quick Actions
           </h2>
           <div className="grid grid-cols-2 gap-3">
-            {actions.map(({ icon: Icon, label, sub, onClick }, i) => (
+            {actions.map(({ icon, label, sub, onClick }, i) => (
               <button
                 key={label}
                 onClick={onClick}
@@ -246,7 +257,7 @@ const RestaurantDetails = () => {
                 className="group relative overflow-hidden rounded-2xl bg-white border border-stone-200 p-4 text-left shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-orange-300 transition animate-fade-in-up opacity-0"
               >
                 <div className="grid place-items-center h-11 w-11 rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 text-white mb-3 group-hover:scale-110 group-hover:rotate-3 transition shadow-md">
-                  <Icon className="text-base" />
+                  {createElement(icon, { className: "text-base", "aria-hidden": true })}
                 </div>
                 <p className="text-sm font-semibold text-stone-900">{label}</p>
                 <p className="text-xs text-stone-500 mt-0.5">{sub}</p>
@@ -255,7 +266,11 @@ const RestaurantDetails = () => {
           </div>
         </div>
 
-
+        <DetailPageNav
+          pathname={pathname}
+          parentTo="/restaurants"
+          parentLabel="All restaurants"
+        />
       </div>
     </div>
   );

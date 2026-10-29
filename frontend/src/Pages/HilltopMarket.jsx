@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
+import DestinationFooter from "../Components/DestinationFooter"
 import hilltopMarketImage from "../assets/Hiltopmarket.jpg"
 
 /* ─── Google Fonts injected once ─────────────────────────────────── */
@@ -263,9 +263,7 @@ const HilltopMarket = () => {
               🗺️ View on Google Maps →
             </a>
           </div>
-          <div className="mt-6">
-            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>← Back to Home</Link>
-          </div>
+          <DestinationFooter />
         </div>
       </div>
     </div>

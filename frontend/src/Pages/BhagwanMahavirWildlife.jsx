@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
+import DestinationFooter from "../Components/DestinationFooter"
 import mahavirWaterfallImage from "../assets/MahavirWaterfall.webp"
 
 if (!document.getElementById("vex-fonts")) {
@@ -189,9 +189,7 @@ const BhagwanMahavirWildlife = () => {
             </a>
           </div>
 
-          <div className="mt-6">
-            <Link to="/" style={{ textDecoration: "none", color: "#000", fontWeight: 700 }}>← Back to Home</Link>
-          </div>
+          <DestinationFooter />
         </div>
       </div>
     </div>

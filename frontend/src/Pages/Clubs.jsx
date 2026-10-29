@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { createElement, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   FaStar,
@@ -153,11 +153,11 @@ const Clubs = () => {
           </div>
 
           <h1 className="text-3xl font-bold text-stone-900 tracking-tight">
-            Discover 
-              <span className="bg-linear-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent"> Clubs</span>
+            Discover
+              <span className="bg-linear-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent"> Nightlife in Goa</span>
           </h1>
           <p className="text-stone-500 text-sm mt-1">
-            Clubs in Goa curated for you
+            Clubs and nightlife spots curated for you
           </p>
         </div>
       </div>
@@ -188,7 +188,16 @@ const Clubs = () => {
                 <img
                   key={i}
                   src={img}
-                  alt=""
+                  alt={
+                    i === currentIndex
+                      ? `${featuredClub.name} gallery image ${i + 1}`
+                      : ""
+                  }
+                  width={1200}
+                  height={800}
+                  decoding="async"
+                  fetchPriority={i === 0 ? "high" : "low"}
+                  loading={i === 0 ? "eager" : "lazy"}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-1500
                   ${i===currentIndex ? "opacity-100 scale-100":"opacity-0 scale-105"}`}
                 />
@@ -236,10 +245,10 @@ const Clubs = () => {
 
             <div className="grid grid-cols-3 bg-white">
               {[
-                {Icon:FaDirections,label:"Directions"},
-                {Icon:FaPhoneAlt,label:"Call"},
-                {Icon:FaGlassCheers,label:"Vibe"},
-              ].map(({Icon,label},i)=>(
+                {icon:FaDirections,label:"Directions"},
+                {icon:FaPhoneAlt,label:"Call"},
+                {icon:FaGlassCheers,label:"Vibe"},
+              ].map(({icon,label},i)=>(
                 <button
                   key={label}
                   onClick={(e)=>e.stopPropagation()}
@@ -247,7 +256,7 @@ const Clubs = () => {
                     i!==2 ? "border-r border-stone-100":""
                   }`}
                 >
-                  <Icon className="text-base"/>
+                  {createElement(icon, { className: "text-base", "aria-hidden": true })}
                   {label}
                 </button>
               ))}

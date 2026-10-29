@@ -1,9 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { MEAL_CATEGORIES } from "../Data/restaurantMealCategories";
+import PageBreadcrumbs from "../Components/PageBreadcrumbs";
 
 const RestaurantCategories = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const goToBrowse = (categoryId) => {
     if (categoryId) {
@@ -86,13 +88,14 @@ const RestaurantCategories = () => {
           </div>
 
           <div className="cat-fade-up" style={{ animationDelay: "40ms" }}>
+            <PageBreadcrumbs pathname={pathname} />
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-blue-600/80">
               V Exclusive Dining
             </p>
             <h1 className="mt-2 text-[2rem] font-bold leading-tight tracking-tight text-stone-900">
-              What are you{" "}
+              Restaurants in{" "}
               <span className="bg-linear-to-r from-yellow-500 via-blue-500 to-green-600 bg-clip-text text-transparent">
-                looking for?
+                Goa
               </span>
             </h1>
             <p className="mt-2 max-w-[18rem] text-sm leading-relaxed text-stone-500">

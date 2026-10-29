@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Private analytics UI — not for search indexing
+Disallow: /admin
+
+Sitemap: https://vexclusivegoa.online/sitemap.xml

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { createElement, useState, useEffect } from "react"
+import { useParams, useLocation } from "react-router-dom"
+import DetailPageNav from "./DetailPageNav"
 import {
   FaArrowLeft,
   FaDirections,
@@ -16,19 +17,12 @@ import { spas } from "../Data/spa"
 
 const SpaDetails = () => {
   const { id } = useParams()
+  const { pathname } = useLocation()
   const spa = spas.find((s) => s.id === parseInt(id))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [liked, setLiked] = useState(false)
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
-
-  if (!spa) {
-    return (
-      <div className="min-h-screen bg-stone-50 flex items-center justify-center">
-        <p className="text-stone-600 text-lg">Spa not found</p>
-      </div>
-    )
-  }
 
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50
@@ -41,7 +35,7 @@ const SpaDetails = () => {
   const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
+    if (!spa?.gallery?.length || !touchStart || !touchEnd) return
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
@@ -56,21 +50,33 @@ const SpaDetails = () => {
   }
 
   useEffect(() => {
+    if (!spa?.gallery?.length) return undefined
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % spa.gallery.length)
     }, 4000)
     return () => clearInterval(interval)
-  }, [spa.gallery.length])
+  }, [spa])
 
   const getInstagramHandle = (url) => {
     try {
-      const pathname = new URL(url).pathname
-      const parts = pathname.split("/").filter(Boolean)
+      const path = new URL(url).pathname
+      const parts = path.split("/").filter(Boolean)
       return parts.length ? parts.pop() : "Follow us"
-    } catch (e) {
+    } catch {
       const parts = url.split("/").filter(Boolean)
       return parts.length ? parts.pop().split("?")[0] : "Follow us"
     }
+  }
+
+  if (!spa) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-stone-50 px-6 text-center">
+        <div>
+          <h1 className="text-2xl font-bold text-stone-900">Spa not found</h1>
+          <p className="mt-2 text-stone-600">This wellness page is unavailable.</p>
+        </div>
+      </main>
+    )
   }
 
   const actions = [
@@ -127,7 +133,12 @@ const SpaDetails = () => {
           <img
             key={i}
             src={img}
-            alt={`${spa.name} ${i + 1}`}
+            alt={i === currentIndex ? `${spa.name} photo ${i + 1}` : ""}
+            width={1200}
+            height={1500}
+            decoding="async"
+            fetchPriority={i === 0 ? "high" : "low"}
+            loading={i === 0 ? "eager" : "lazy"}
             className={`absolute inset-0 h-full w-full object-cover transition-all duration-[1500ms] ease-out ${
               i === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-105"
             }`}
@@ -249,7 +260,7 @@ const SpaDetails = () => {
             Quick Actions
           </h2>
           <div className="grid grid-cols-2 gap-3">
-            {actions.map(({ icon: Icon, label, sub, onClick }, i) => (
+            {actions.map(({ icon, label, sub, onClick }, i) => (
               <button
                 key={label}
                 onClick={onClick}
@@ -257,7 +268,7 @@ const SpaDetails = () => {
                 className="group relative overflow-hidden rounded-2xl bg-white border border-stone-200 p-4 text-left shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-emerald-300 transition animate-fade-in-up opacity-0"
               >
                 <div className="grid place-items-center h-11 w-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white mb-3 group-hover:scale-110 group-hover:rotate-3 transition shadow-md">
-                  <Icon className="text-base" />
+                  {createElement(icon, { className: "text-base", "aria-hidden": true })}
                 </div>
                 <p className="text-sm font-semibold text-stone-900">{label}</p>
                 <p className="text-xs text-stone-500 mt-0.5">{sub}</p>
@@ -265,6 +276,12 @@ const SpaDetails = () => {
             ))}
           </div>
         </div>
+
+        <DetailPageNav
+          pathname={pathname}
+          parentTo="/"
+          parentLabel="Back to Home"
+        />
       </div>
     </div>
   )

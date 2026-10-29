@@ -1,9 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { NIGHTLIFE_CATEGORIES } from "../Data/nightlifeCategories";
+import PageBreadcrumbs from "../Components/PageBreadcrumbs";
 
 const NightlifeCategories = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-stone-50">
@@ -34,14 +36,15 @@ const NightlifeCategories = () => {
           </button>
 
           <div className="nightlife-fade-up" style={{ animationDelay: "40ms" }}>
+            <PageBreadcrumbs pathname={pathname} />
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-700/80">
               V Exclusive Nightlife
             </p>
             <h1 className="mt-2 text-[2rem] font-bold leading-tight tracking-tight text-stone-900">
-              Find your next night out.
+              Nightlife in Goa
             </h1>
             <p className="mt-2 max-w-76 text-sm leading-relaxed text-stone-500">
-              Choose the kind of nightlife you want to explore in Goa.
+              Choose the kind of nightlife you want to explore — from community bars to clubs.
             </p>
           </div>
         </header>

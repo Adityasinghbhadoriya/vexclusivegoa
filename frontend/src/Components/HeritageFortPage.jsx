@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Link } from "react-router-dom"
+import DestinationFooter from "./DestinationFooter"
 
 const sectionIcons = ["🏰", "🌿", "📸", "🌅", "🎒"]
 
@@ -29,6 +29,10 @@ const HeritageFortPage = ({
         <img
           src={image}
           alt={title}
+          width={1600}
+          height={1067}
+          decoding="async"
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-linear-to-b from-black/65 via-black/35 to-stone-950/90" />
@@ -124,11 +128,7 @@ const HeritageFortPage = ({
           >
             🗺️ View on Google Maps →
           </a>
-          <div className="mt-6">
-            <Link to="/" className="text-sm font-bold text-stone-800 no-underline">
-              ← Back to Home
-            </Link>
-          </div>
+          <DestinationFooter />
         </section>
       </main>
     </div>

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, useMemo } from "react"
 import { Link } from "react-router-dom"
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet"
 import L from "leaflet"
+import "leaflet/dist/leaflet.css"
 import { restaurants } from "../Data/restaurant"
 import {
   FaPhoneAlt,
